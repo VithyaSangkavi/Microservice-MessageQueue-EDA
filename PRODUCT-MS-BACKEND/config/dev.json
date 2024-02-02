@@ -1,13 +1,13 @@
 {
   "server": {
-    "port": "8080",
+    "port": "4000",
     "ip": "127.0.0.1"
   },
   "db": {
     "host": "localhost",
     "userName": "root",
-    "password": "1234",
-    "db":"pl",
+    "password": "Vithya24",
+    "db":"product_db",
     "port":"3306"
   },
   "aws": {
