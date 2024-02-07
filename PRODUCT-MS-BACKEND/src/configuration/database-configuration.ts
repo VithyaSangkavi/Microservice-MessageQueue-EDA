@@ -13,7 +13,7 @@ const Connection = connectionManager.create({
   username: appConfig.getUserName(),
   password: appConfig.getPassword(),
   database: appConfig.getDataBase(),
-  synchronize: false,
+  synchronize: true,
   entities: [ProductEntity],
   logging: false,
 });
