@@ -6,7 +6,7 @@
   "db": {
     "host": "localhost",
     "userName": "root",
-    "password": "Vithya24",
+    "password": "1234",
     "db":"order_db",
     "port":"3306"
   },
@@ -36,6 +36,20 @@
     "port": "",
     "senderAddress": ""
   },
+
+  "ms": {
+    "task": "http://127.0.0.1/",
+    "userManagement": "http://127.0.0.1/",
+    "notification": "http://127.0.0.1/"
+  },
+  
+  "queue": {
+    "type" : "rabbitmq",
+    "url" : "amqp://localhost",
+    "username" : "guest",
+    "password" : "guest"
+  },
+
   "jwtSecret": "4574sfds@64537gs",
   "uploadPath": "/images/"
 }
