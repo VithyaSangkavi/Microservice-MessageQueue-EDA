@@ -1,2 +1,13 @@
 ORDER-MS-BACKEND/node_modules
 PRODUCT-MS-BACKEND/node_modules
+ORDER-MS-BACKEND/config/dev.json
+ORDER-MS-BACKEND/logs/
+ORDER-MS-BACKEND/dist
+ORDER-MS-BACKEND/upload-excel/*
+
+PRODUCT-MS-BACKEND/config/dev.json
+PRODUCT-MS-BACKEND/logs/
+PRODUCT-MS-BACKEND/dist
+PRODUCT-MS-BACKEND/upload-excel/*
+
+FRONT-END/node_modules

@@ -1,5 +1,6 @@
 import { Db, getConnection, getConnectionManager } from "typeorm";
 import { EnvironmentConfiguration } from "./environment-configuration";
+import { OrderEntity } from "../entity/master/order-entity";
 
 const connectionManager = getConnectionManager();
 const environmentConfiguration = new EnvironmentConfiguration();
@@ -12,8 +13,8 @@ const Connection = connectionManager.create({
   username: appConfig.getUserName(),
   password: appConfig.getPassword(),
   database: appConfig.getDataBase(),
-  synchronize: false,
-  entities: [],
+  synchronize: true,
+  entities: [OrderEntity],
   logging: false,
 });
 
