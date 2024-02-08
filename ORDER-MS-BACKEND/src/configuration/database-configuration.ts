@@ -14,7 +14,7 @@ const Connection = connectionManager.create({
   username: appConfig.getUserName(),
   password: appConfig.getPassword(),
   database: appConfig.getDataBase(),
-  synchronize: true,
+  synchronize: false,
   entities: [OrderEntity, OrderItemsEntity],
   logging: false,
 });

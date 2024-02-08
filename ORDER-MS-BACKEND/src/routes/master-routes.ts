@@ -6,6 +6,7 @@ const router: Router = express.Router();
 
 // order routes
 router.post("/saveOrder", orderController.save);
+router.post("/cancelOrder", orderController.cancel);
 
 //order-items routes
 router.post("/saveOrderItems", orderItemsController.save);
