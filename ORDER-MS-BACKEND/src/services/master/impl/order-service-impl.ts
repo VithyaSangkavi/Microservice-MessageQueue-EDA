@@ -32,4 +32,23 @@ export class OrderServiceImpl implements OrderService {
     }
     return cr;
   }
+
+
+  async cancel(orderId: number): Promise<CommonResponse> {
+    let cr = new CommonResponse();
+    try {
+      let deleteOrder = await this.orderDao.cancel(orderId);
+      if (deleteOrder) {
+        cr.setStatus(true);
+      } else {
+        cr.setStatus(false);
+        cr.setExtra("Not Working !");
+      }
+    } catch (error) {
+      cr.setStatus(false);
+      cr.setExtra(error);
+      ErrorHandlerSup.handleError(error);
+    }
+    return cr;
+  }
 }

@@ -16,3 +16,15 @@ exports.save = async (req: Request, res: Response, next: NextFunction) => {
     next(error);
   }
 };
+
+exports.cancel = async (req: Request, res: Response, next: NextFunction) => {
+  try{
+    let orderId = req.query.orderId;
+
+    let cr = await orderService.cancel(Number(orderId));
+
+    res.send(cr);
+  } catch (error) {
+    next (error);
+  }
+};

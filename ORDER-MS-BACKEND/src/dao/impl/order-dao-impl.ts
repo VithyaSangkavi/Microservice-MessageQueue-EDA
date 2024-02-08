@@ -20,6 +20,19 @@ export class OrderDaoImpl implements OrderDao {
   }
 
 
+  async cancel(orderId: number): Promise<OrderEntity> {
+    let orderRepo = getConnection().getRepository(OrderEntity);
+    let orderModel = await orderRepo.findOne(orderId);
+    if (orderModel) {
+      orderModel.status = Status.Offline;
+      let updatedModel = await orderRepo.save(orderModel);
+      return updatedModel;
+    } else {
+      return null;
+    }
+  }
+
+
   async prepareProductModel(orderModel: OrderEntity, orderDto: OrderDto) {
     orderModel.customerName = orderDto.getCustomerName()
     orderModel.customerPhoneNumber = orderDto.getCustomerPhoneNumber()
