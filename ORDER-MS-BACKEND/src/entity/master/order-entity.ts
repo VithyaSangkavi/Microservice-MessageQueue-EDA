@@ -1,6 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, Table } from "typeorm";
 import { Status } from "../../enum/status";
-import { OrderItemEntity } from "./order-items-entity";
 
 @Entity({
   name: "order",

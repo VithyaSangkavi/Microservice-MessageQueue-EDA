@@ -5,7 +5,7 @@ import { OrderEntity } from "../../entity/master/order-entity";
 import { OrderDao } from "../order-dao";
 
 /**
- * order data access layer
+ * orderitems data access layer
  * contain crud method
  */
 export class OrderDaoImpl implements OrderDao {
