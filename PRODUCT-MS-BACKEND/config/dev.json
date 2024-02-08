@@ -38,9 +38,7 @@
   },
 
   "ms": {
-    "task": "http://127.0.0.1/",
-    "userManagement": "http://127.0.0.1/",
-    "notification": "http://127.0.0.1/"
+    "order": "http://127.0.0.1/"
   },
   
   "queue": {
