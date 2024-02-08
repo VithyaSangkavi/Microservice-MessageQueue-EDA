@@ -21,17 +21,10 @@ export class OrderServiceImpl implements OrderService {
   async save(orderDto: OrderDto): Promise<CommonResponse> {
     let cr = new CommonResponse();
     try {
-      if (orderDto.getCustomerName()) {
-
-        // save new order
-        let newOrder = await this.orderDao.save(orderDto);
-        cr.setStatus(true);
-
-      } else {
-        return CommonResSupport.getValidationException(
-          "Order Name Cannot Be null !"
-        );
-      }
+      // save new order
+      let newOrder = await this.orderDao.save(orderDto);
+      console.log(newOrder);
+      cr.setStatus(true);
     } catch (error) {
       cr.setStatus(false);
       cr.setExtra(error);

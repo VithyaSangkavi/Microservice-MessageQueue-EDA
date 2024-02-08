@@ -106,11 +106,4 @@ export class OrderDto extends PaginationDto {
     this.status = status;
   }
 
-  
-
-  
-
-  
-
-
 }

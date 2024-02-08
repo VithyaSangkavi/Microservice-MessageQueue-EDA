@@ -17,7 +17,4 @@ export class OrderItemEntity {
   @Column()
   updatedDate: Date;
   
-  @ManyToOne(()=> OrderEntity, (order) => order.orderItem)
-  @JoinColumn({ name: "orderId" })
-  order: OrderEntity;
 }
