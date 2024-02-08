@@ -14,8 +14,23 @@ export class OrderDaoImpl implements OrderDao {
     let orderModel = new OrderEntity();
 
     orderModel.status = Status.Online;
+    this.prepareProductModel(orderModel, orderDto);
     let savedModel = await orderRepo.save(orderModel);
     return savedModel;
   }
 
+
+  async prepareProductModel(orderModel: OrderEntity, orderDto: OrderDto) {
+    orderModel.customerName = orderDto.getCustomerName()
+    orderModel.customerPhoneNumber = orderDto.getCustomerPhoneNumber()
+    orderModel.address = orderDto.getAddress()
+    orderModel.total = orderDto.getTotal()
+    orderModel.status = Status.Online;
+    orderModel.createdDate = new Date();
+    orderModel.updatedDate = new Date();
+  }
+
 }
+
+
+
