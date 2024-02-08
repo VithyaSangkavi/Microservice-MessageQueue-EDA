@@ -9,3 +9,5 @@ PRODUCT-MS-BACKEND/config/dev.json
 PRODUCT-MS-BACKEND/logs/
 PRODUCT-MS-BACKEND/dist
 PRODUCT-MS-BACKEND/upload-excel/*
+
+FRONT-END/node_modules
