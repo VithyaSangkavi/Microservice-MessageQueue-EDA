@@ -24,7 +24,6 @@ export class OrderItemsServiceImpl implements OrderItemsService {
     try {
       // save new orderItems
       let newOrderItems = await this.orderItemsDao.save(orderItemsDto);
-      console.log(newOrderItems);
 
       const connection = await amqp.connect("amqp://localhost");
       const channel = await connection.createChannel();
@@ -35,10 +34,6 @@ export class OrderItemsServiceImpl implements OrderItemsService {
       channel.sendToQueue(queue, Buffer.from(JSON.stringify(newOrderItems)));
 
       console.log("Order sent !");
-      setTimeout(() => {
-        connection.close();
-        process.exit(0);
-      }, 5000);
 
       cr.setStatus(true);
       cr.setExtra(newOrderItems);

@@ -5,6 +5,8 @@ import { ProductDto } from "../../../dto/master/product-dto";
 import { CommonResSupport } from "../../../support/common-res-sup";
 import { ErrorHandlerSup } from "../../../support/error-handler-sup";
 import { ProductService } from "../product-service";
+const amqp = require('amqplib');
+
 
 /**
  * department service layer
