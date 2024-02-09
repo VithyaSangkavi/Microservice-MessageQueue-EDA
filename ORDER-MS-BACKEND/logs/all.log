@@ -150,3 +150,35 @@
 [35m[39m
 2024-02-08 16:27:27:2727 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=1 200 46 - 97295.355 ms[39m
 [35m[39m
+2024-02-08 17:21:26:2126 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 46 - 225.346 ms[39m
+[35m[39m
+2024-02-08 17:25:54:2554 [35mhttp[39m: [35mPOST /service/master/saveOrderItems 200 46 - 48.460 ms[39m
+[35m[39m
+2024-02-08 17:30:21:3021 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 46 - 17.897 ms[39m
+[35m[39m
+2024-02-08 17:31:16:3116 [35mhttp[39m: [35mPOST /service/master/cancelOrder?id=2 200 781 - 5.437 ms[39m
+[35m[39m
+2024-02-08 17:31:31:3131 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=2 200 46 - 23.004 ms[39m
+[35m[39m
+2024-02-08 17:38:34:3834 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=2 200 46 - 152.967 ms[39m
+[35m[39m
+2024-02-08 17:39:37:3937 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 46 - 20.106 ms[39m
+[35m[39m
+2024-02-08 17:40:09:409 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=1 200 46 - 29.691 ms[39m
+[35m[39m
+2024-02-09 08:48:42:4842 [35mhttp[39m: [35mPOST /service/master/saveOrderItems 200 46 - 159.653 ms[39m
+[35m[39m
+2024-02-09 09:04:22:422 [35mhttp[39m: [35mPOST /service/master/saveOrderItems 200 46 - 44.528 ms[39m
+[35m[39m
+2024-02-09 09:07:46:746 [35mhttp[39m: [35mPOST /service/master/saveOrderItems 200 46 - 95.603 ms[39m
+[35m[39m
+2024-02-09 09:09:26:926 [35mhttp[39m: [35mPOST /service/master/saveOrderItems 200 46 - 65.089 ms[39m
+[35m[39m
+2024-02-09 09:17:48:1748 [35mhttp[39m: [35mPOST /service/master/saveOrderItems 200 46 - 50.412 ms[39m
+[35m[39m
+2024-02-09 09:31:39:3139 [35mhttp[39m: [35mPOST /service/master/saveOrderItems 200 46 - 66.916 ms[39m
+[35m[39m
+2024-02-09 09:31:58:3158 [35mhttp[39m: [35mPOST /service/master/saveOrderItems 200 46 - 19.938 ms[39m
+[35m[39m
+2024-02-09 09:39:07:397 [35mhttp[39m: [35mPOST /service/master/saveOrderItems 200 46 - 76.690 ms[39m
+[35m[39m
