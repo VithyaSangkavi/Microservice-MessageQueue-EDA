@@ -181,4 +181,33 @@
 2024-02-09 09:31:58:3158 [35mhttp[39m: [35mPOST /service/master/saveOrderItems 200 46 - 19.938 ms[39m
 [35m[39m
 2024-02-09 09:39:07:397 [35mhttp[39m: [35mPOST /service/master/saveOrderItems 200 46 - 76.690 ms[39m
+2024-02-08 16:27:44:2744 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=1 200 46 - 20.747 ms[39m
+[35m[39m
+2024-02-08 16:55:44:5544 [35mhttp[39m: [35mPOST /service/master/saveOrderItems 200 165 - 36.558 ms[39m
+[35m[39m
+2024-02-08 17:00:17:017 [35mhttp[39m: [35mPOST /service/master/saveOrderItems 200 166 - 92.898 ms[39m
+[35m[39m
+2024-02-08 17:20:13:2013 [35mhttp[39m: [35mPOST /service/master/saveOrderItems 200 217 - 13.809 ms[39m
+[35m[39m
+2024-02-08 17:20:56:2056 [35mhttp[39m: [35mPOST /service/master/saveOrderItems 200 166 - 52.383 ms[39m
+[35m[39m
+2024-02-08 17:24:47:2447 [35mhttp[39m: [35mPOST /service/master/saveOrderItems 200 166 - 50.966 ms[39m
+[35m[39m
+2024-02-08 17:25:51:2551 [35mhttp[39m: [35mPOST /service/master/saveOrderItems 200 166 - 49.360 ms[39m
+[35m[39m
+2024-02-08 17:27:16:2716 [35mhttp[39m: [35mPOST /service/master/saveOrderItems 200 166 - 47.521 ms[39m
+[35m[39m
+2024-02-08 17:27:28:2728 [35mhttp[39m: [35mPOST /service/master/saveOrderItems 200 166 - 13.174 ms[39m
+[35m[39m
+2024-02-08 17:33:30:3330 [35mhttp[39m: [35mPOST /service/master/saveOrderItems 200 166 - 11.585 ms[39m
+[35m[39m
+2024-02-08 17:33:34:3334 [35mhttp[39m: [35mPOST /service/master/saveOrderItems 200 166 - 11.777 ms[39m
+[35m[39m
+2024-02-08 17:34:35:3435 [35mhttp[39m: [35mPOST /service/master/saveOrderItems 200 167 - 10.495 ms[39m
+[35m[39m
+2024-02-08 17:34:36:3436 [35mhttp[39m: [35mPOST /service/master/saveOrderItems 200 167 - 10.990 ms[39m
+[35m[39m
+2024-02-08 17:34:38:3438 [35mhttp[39m: [35mPOST /service/master/saveOrderItems 200 167 - 14.553 ms[39m
+[35m[39m
+2024-02-08 17:34:43:3443 [35mhttp[39m: [35mPOST /service/master/saveOrderItems 200 167 - 14.255 ms[39m
 [35m[39m

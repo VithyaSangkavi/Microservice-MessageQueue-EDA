@@ -15,6 +15,8 @@ let httpReq: MicroService = new MicroServiceHttp();
 
 const environmentConfiguration = new EnvironmentConfiguration();
 const appConfig = environmentConfiguration.readAppConfiguration();
+const amqp = require('amqplib');
+
 
 /**
  * department service layer
