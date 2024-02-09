@@ -6,6 +6,5 @@ const appConfig = environmentConfiguration.readAppConfiguration();
 const PRODUCTBUCKET = appConfig.getProductDataImportBucket();
 
 export default class HttpMSServicePath {
-    static taskCreate: string = "productManagement/service/product/productDelete"; 
+    static taskCreate: string = "service/master/product-save"; 
 } 
-  

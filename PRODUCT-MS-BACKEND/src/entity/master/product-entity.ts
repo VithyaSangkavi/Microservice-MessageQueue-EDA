@@ -1,6 +1,5 @@
 import { Status } from "../../enum/status";
-import { Column, Entity, PrimaryGeneratedColumn, Table } from "typeorm";
-
+import { Column, Entity, PrimaryGeneratedColumn, Table, OneToMany } from "typeorm";
 @Entity({
   name: "product",
 })
@@ -16,6 +15,8 @@ export class ProductEntity {
 
   @Column()
   price: number;
+
+  // uuid colunm
 
   @Column()
   quantity: number;

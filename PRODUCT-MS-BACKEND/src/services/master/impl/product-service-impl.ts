@@ -5,6 +5,16 @@ import { ProductDto } from "../../../dto/master/product-dto";
 import { CommonResSupport } from "../../../support/common-res-sup";
 import { ErrorHandlerSup } from "../../../support/error-handler-sup";
 import { ProductService } from "../product-service";
+import MicroServiceHttp from "../../../support/microservice/micro-service-http-impl";
+import MicroService from "../../../support/microservice/micro-service";
+import HttpMSServicePath from "../../../support/microservice/http-service-path";
+import { Mathod } from "../../../enum/method";
+import { EnvironmentConfiguration } from "../../../configuration/environment-configuration";
+
+let httpReq: MicroService = new MicroServiceHttp();
+
+const environmentConfiguration = new EnvironmentConfiguration();
+const appConfig = environmentConfiguration.readAppConfiguration();
 
 /**
  * department service layer
@@ -21,8 +31,17 @@ export class ProductServiceImpl implements ProductService {
   async save(productDto: ProductDto): Promise<CommonResponse> {
     let cr = new CommonResponse();
     try {
-      // save new product
+
       let newProduct = await this.productDao.save(productDto);
+
+      const path = appConfig.getTaskMicroServicePath() + HttpMSServicePath.taskCreate
+
+      const a: CommonResponse = await httpReq.call(path, Mathod.GET, { productId: 1 }, null);
+
+      if(a.isStatus()) {
+        
+      }
+
       cr.setStatus(true);
     } catch (error) {
       cr.setStatus(false);

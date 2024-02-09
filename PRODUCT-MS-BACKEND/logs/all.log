@@ -50,3 +50,9 @@
 [35m[39m
 2024-02-06 16:45:19:4519 [35mhttp[39m: [35mPOST /service/master/product-delete?id=3 200 46 - 36.008 ms[39m
 [35m[39m
+2024-02-08 17:12:15:1215 [35mhttp[39m: [35mPOST /service/master/saveOrder 404 164 - 111.307 ms[39m
+[35m[39m
+2024-02-08 17:21:10:2110 [35mhttp[39m: [35mPOST /service/master/saveOrder 404 164 - 2.060 ms[39m
+[35m[39m
+2024-02-08 17:25:22:2522 [35mhttp[39m: [35mPOST /service/master/saveOrderItems 404 169 - 7.325 ms[39m
+[35m[39m
