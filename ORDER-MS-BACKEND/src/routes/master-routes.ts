@@ -9,7 +9,6 @@ router.post("/saveOrder", orderController.save);
 router.post("/cancelOrder", orderController.cancel);
 
 //order-items routes
-router.post("/saveOrderItems", orderItemsController.save);
-
+// router.post("/saveOrderItems", orderItemsController.save);
 
 module.exports = router;

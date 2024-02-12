@@ -1,15 +1,19 @@
 import { Request, Response, NextFunction } from 'express';
 import { OrderDto } from '../dto/master/order-dto';
 import { OrderServiceImpl } from '../services/master/impl/order-service-impl';
+import { OrderItemsDto } from '../dto/master/order-items-dto';
 
 let orderService = new OrderServiceImpl(); 
 
 exports.save = async (req: Request, res: Response, next: NextFunction) => {
   try {
     let orderDto = new OrderDto();
-    orderDto.filViaRequest(req.body);
+    let orderItemsDto = new OrderItemsDto();
 
-    let cr = await orderService.save(orderDto);
+    orderDto.filViaRequest(req.body);
+    orderItemsDto.filViaRequest(req.body);
+
+    let cr = await orderService.save(orderDto, orderItemsDto);
 
     res.send(cr);
   } catch (error) {
