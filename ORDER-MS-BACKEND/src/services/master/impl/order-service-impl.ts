@@ -43,8 +43,8 @@ export class OrderServiceImpl implements OrderService {
       
       console.log(quantityToReduce);
 
-      // const path = appConfig.getTaskMicroServicePath() + HttpMSServicePath.createOrder + '/:' + productId
-      const path = 'http://localhost:4000/service/master/product-decrease'
+      const path = appConfig.getTaskMicroServicePath() + HttpMSServicePath.createOrder
+      // const path = 'http://localhost:4000/service/master/product-decrease'
 
       const a: CommonResponse = await httpReq.call(path, Mathod.PUT, { quantityToReduce }, null);
 

@@ -105,11 +105,11 @@ export class ProductDaoImpl implements ProductDao {
           await getConnection().manager.save(product);
         } else {
           throw new Error(
-            `Insufficient quantity for product with UUID ${uuid}`
+            `Insufficient quantity for product`
           );
         }
       } else {
-        throw new Error(`Product with UUID ${uuid} not found`);
+        throw new Error(`Product with UUID - ${uuid} not found`);
       }
     }
   }
