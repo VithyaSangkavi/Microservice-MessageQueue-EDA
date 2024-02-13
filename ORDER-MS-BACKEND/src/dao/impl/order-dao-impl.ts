@@ -11,25 +11,30 @@ import { OrderItemsEntity } from "../../entity/master/order-items-entity";
  * contain crud method
  */
 export class OrderDaoImpl implements OrderDao {
-  async save(orderDto: OrderDto, orderItemsDto: OrderItemsDto): Promise<any> {
+  
+  async save(orderDto: OrderDto, orderItemsDto: OrderItemsDto[]): Promise<any> {
     let orderRepo = getConnection().getRepository(OrderEntity);
     let orderItemsRepo = getConnection().getRepository(OrderItemsEntity);
 
     let orderModel = new OrderEntity();
-    let orderItemsModel = new OrderItemsEntity();
-
     orderModel.status = Status.Online;
-    orderItemsModel.status = Status.Online;
-
-    this.prepareOrderModel(orderModel, orderDto, orderItemsModel, orderItemsDto);
+    this.prepareOrderModel(orderModel, orderDto);
 
     let savedOrder = await orderRepo.save(orderModel);
 
-    orderItemsModel.order = savedOrder;
+    let savedOrderItems = [];
 
-    let savedOrderItems = await orderItemsRepo.save(orderItemsModel);
+    for (let orderItemDto of orderItemsDto) {
+      let orderItemsModel = new OrderItemsEntity();
+      orderItemsModel.status = Status.Online;
+      this.prepareOrderItemsModel(orderItemsModel, orderItemDto);
+      orderItemsModel.order = savedOrder;
 
-    return { order: savedOrder, orderItems: savedOrderItems };
+      let savedOrderItem = await orderItemsRepo.save(orderItemsModel);
+      savedOrderItems.push(savedOrderItem);
+    }
+
+    return { savedOrder, savedOrderItems };
   }
 
 
@@ -55,7 +60,8 @@ export class OrderDaoImpl implements OrderDao {
     }
   }
 
-  async prepareOrderModel(orderModel: OrderEntity, orderDto: OrderDto, orderItemsModel: OrderItemsEntity, orderItemsDto: OrderItemsDto) {
+  async prepareOrderModel(orderModel: OrderEntity, orderDto: OrderDto) {
+
     orderModel.customerName = orderDto.getCustomerName()
     orderModel.customerPhoneNumber = orderDto.getCustomerPhoneNumber()
     orderModel.address = orderDto.getAddress()
@@ -63,11 +69,17 @@ export class OrderDaoImpl implements OrderDao {
     orderModel.status = Status.Online;
     orderModel.createdDate = new Date();
     orderModel.updatedDate = new Date();
-    //order items
+    
+  }
+
+  async prepareOrderItemsModel(orderItemsModel: OrderItemsEntity, orderItemsDto: OrderItemsDto) {
+
     orderItemsModel.quantity = orderItemsDto.getQuantity()
     orderItemsModel.status = Status.Online;
+    orderItemsModel.uuid = orderItemsDto.getUuid();
     orderItemsModel.createdDate = new Date();
     orderItemsModel.updatedDate = new Date();
+
   }
 
 }

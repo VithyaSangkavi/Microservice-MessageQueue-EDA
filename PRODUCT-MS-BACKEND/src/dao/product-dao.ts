@@ -9,4 +9,5 @@ export interface ProductDao {
   findById(productId: number): Promise<ProductEntity>;
   findByName(name: String): Promise<ProductEntity>;
   increaseQuantity(productId: number, quantityToAdd: number): Promise<ProductEntity | null>;
+  decreaseQuantity(quantityToReduce: any): Promise<any>;
 }

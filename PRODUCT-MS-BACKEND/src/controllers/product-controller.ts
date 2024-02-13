@@ -97,3 +97,18 @@ exports.update = async (req: Request, res: Response, next: NextFunction) => {
       next(error);
     }
   };
+
+  exports.decreaseQuantity = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const quantityToReduce = req.body.quantityToReduce;
+  
+      if (!quantityToReduce) {
+        return res.status(400).json({ error: 'Invalid quantityToReduce' });
+      }
+  
+      const cr = await ProductService.decreaseProductQuantity(quantityToReduce);
+      res.send(cr);
+    } catch (error) {
+      next(error);
+    }
+  };

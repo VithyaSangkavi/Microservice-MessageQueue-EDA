@@ -34,19 +34,10 @@ export class ProductServiceImpl implements ProductService {
     let cr = new CommonResponse();
     try {
 
-      let newProduct = await this.productDao.save(productDto);
-
-      const path = appConfig.getTaskMicroServicePath() + HttpMSServicePath.taskCreate
-
-      const a: CommonResponse = await httpReq.call(path, Mathod.POST, newProduct, null);
-
-      console.log("CR", CommonResponse);
-
-      if (a.isStatus()) {
-
-      }
+      let newProduct = await this.productDao.save(productDto)
 
       cr.setStatus(true);
+      cr.setExtra(newProduct)
     } catch (error) {
       cr.setStatus(false);
       cr.setExtra(error);
@@ -54,6 +45,7 @@ export class ProductServiceImpl implements ProductService {
     }
     return cr;
   }
+
   /**
    * update product
    * @param productDto
@@ -200,5 +192,20 @@ export class ProductServiceImpl implements ProductService {
     }
     return cr;
   }
+
+  async decreaseProductQuantity(quantityToReduce: any): Promise<CommonResponse> {
+    let cr = new CommonResponse();
+    try {
+      await this.productDao.decreaseQuantity(quantityToReduce);
+
+      cr.setStatus(true);
+    } catch (error) {
+      cr.setStatus(false);
+      cr.setExtra(error);
+      ErrorHandlerSup.handleError(error); 
+    }
+    return cr;
+  }
+
 
 }
