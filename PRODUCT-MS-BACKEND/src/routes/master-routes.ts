@@ -12,6 +12,6 @@ router.post("/product-update", productController.update);
 router.post("/product-delete", productController.delete);
 router.post("/product-find-all", productController.findAll);
 router.get("/product-find-by-id", productController.findById);
-router.put('/product-increase/:productId', productController.increaseQuantity);
+router.put('/product-increase/:productUuid', productController.increaseQuantity);
 
 module.exports = router;
