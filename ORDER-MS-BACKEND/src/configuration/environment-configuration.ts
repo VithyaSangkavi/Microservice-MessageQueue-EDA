@@ -31,6 +31,17 @@ export class EnvironmentConfiguration {
     appConfig.setAwsMediaCollectionFieldBucket(config.get("aws.mc.planogramField"));
     appConfig.setAwsMediaCollectionExpireDuration(config.get("aws.mc.expirationDuration"));
 
+    //micro service
+    appConfig.setTaskMicroServicePath(process.env.ms_task || config.get("ms.order"));
+    // appConfig.setUserManagementMicroServicePath(process.env.ms_userManagement || config.get("ms.userManagement"));
+    // appConfig.setNotificationMicroServicePath(process.env.ms_notification || config.get("ms.notification"));
+
+    //message Queue
+    appConfig.setMessageQueueServerUrl(process.env.ms_msgq || config.get("queue.url"));
+    appConfig.setMessageQueueType(process.env.msgq_type || config.get("queue.type"));
+    appConfig.setMessageQueueUsername(process.env.msgq_user || config.get("queue.username"));
+    appConfig.setMessageQueuePassword(process.env.msgq_pass || config.get("queue.password"));
+    
     return appConfig;
   }
 }
