@@ -20,7 +20,7 @@ export class ProductEntity {
   quantity: number;
 
   @Column()
-  uuid: number;
+  uuid: string;
 
   @Column({ type: "enum", enum:Status, default: Status.Online})
   status: Status;

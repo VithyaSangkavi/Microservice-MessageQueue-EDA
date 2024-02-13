@@ -64,6 +64,21 @@ export class ProductDaoImpl implements ProductDao {
     return productModel;
   }
 
+  async increaseQuantity(productId: number, quantityToAdd: number): Promise<ProductEntity | null> {
+    const productRepo = getConnection().getRepository(ProductEntity);
+    const productModel = await productRepo.findOne(productId);
+
+    if (productModel) {
+      productModel.quantity += quantityToAdd;
+      productModel.updatedDate = new Date();
+
+      const updatedProduct = await productRepo.save(productModel);
+      return updatedProduct;
+    } else {
+      return null;
+    }
+  }
+
   async prepareProductModel(productModel: ProductEntity, productDto: ProductDto) {
     productModel.name = productDto.getName();
     productModel.description = productDto.getDescription();
