@@ -29,5 +29,26 @@ async function takeOrdersfromOrder() {
   
 }
 
+async function cancelOrdersfromOrderCancellation() {
+
+  var num = 0
+
+  const connection = await amqp.connect('amqp://localhost');
+  const channel = await connection.createChannel();
+  const queue = 'order_cancellation_queue';
+
+  await channel.assertQueue(queue, { durable: true });
+
+  channel.consume(queue, (msg) => {
+      console.log('Received cancel order:', msg.content.toString());
+  
+      num = num + 1;
+      console.log(num);
+      
+  }, { noAck: true });
+  
+}
+
 takeOrdersfromOrder()
+cancelOrdersfromOrderCancellation()
 

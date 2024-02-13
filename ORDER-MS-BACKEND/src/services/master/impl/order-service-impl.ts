@@ -6,6 +6,7 @@ import { CommonResSupport } from "../../../support/common-res-sup";
 import { ErrorHandlerSup } from "../../../support/error-handler-sup";
 import { OrderService } from "../order-service";
 import amqp from "amqplib";
+import { OrderItemsDto } from "../../../dto/master/order-items-dto";
 
 /**
  * order service layer
@@ -19,11 +20,22 @@ export class OrderServiceImpl implements OrderService {
    * @param orderDto
    * @returns
    */
-  async save(orderDto: OrderDto): Promise<CommonResponse> {
+  async save(orderDto: OrderDto, orderItemsDto: OrderItemsDto): Promise<CommonResponse> {
     let cr = new CommonResponse();
     try {
       // save new order
-      let newOrder = await this.orderDao.save(orderDto);
+      let newOrder = await this.orderDao.save(orderDto, orderItemsDto);
+      
+      const connection = await amqp.connect("amqp://localhost");
+      const channel = await connection.createChannel();
+      const queue = "ordersToProduct";
+
+      await channel.assertQueue(queue, { durable: false });
+
+      channel.sendToQueue(queue, Buffer.from(JSON.stringify(newOrder)));
+
+      console.log("Order sent !");
+
       console.log(newOrder);
       cr.setStatus(true);
     } catch (error) {
@@ -43,8 +55,6 @@ export class OrderServiceImpl implements OrderService {
     try {
       let deleteOrder = await this.orderDao.cancel(orderId);
       channel.sendToQueue(queueName, Buffer.from(orderId.toString()));
-
-
 
       if (deleteOrder) {
         cr.setStatus(true);

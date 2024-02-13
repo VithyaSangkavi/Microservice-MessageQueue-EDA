@@ -81,3 +81,19 @@ exports.update = async (req: Request, res: Response, next: NextFunction) => {
       next(error);
     }
   };
+
+  exports.increaseQuantity = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const productId = parseInt(req.params.productId);
+      const canceledQuantity = parseInt(req.body.canceledQuantity);
+  
+      if (!productId || !canceledQuantity || isNaN(productId) || isNaN(canceledQuantity)) {
+        return res.status(400).json({ error: 'Invalid productId or canceledQuantity' });
+      }
+  
+      const cr = await ProductService.increaseProductQuantity(productId, canceledQuantity);
+      res.send(cr);
+    } catch (error) {
+      next(error);
+    }
+  };

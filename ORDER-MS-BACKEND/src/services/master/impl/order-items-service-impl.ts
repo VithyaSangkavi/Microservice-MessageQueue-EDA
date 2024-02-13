@@ -1,58 +1,47 @@
-import { CommonResponse } from "../../../common/dto/common-response";
-import { OrderItemsDao } from "../../../dao/order-items-dao";
-import { OrderItemsDaoImpl } from "../../../dao/impl/order-items-dao-impl";
-import { OrderItemsDto } from "../../../dto/master/order-items-dto";
-import { CommonResSupport } from "../../../support/common-res-sup";
-import { ErrorHandlerSup } from "../../../support/error-handler-sup";
-import { OrderItemsService } from "../order-items-service";
-import MicroServiceHttp from "../../../support/microservice/micro-service-http-impl";
-import MicroService from "../../../support/microservice/micro-service";
-import HttpMSServicePath from "../../../support/microservice/http-service-path";
-import { Mathod } from "../../../enum/method";
-import { EnvironmentConfiguration } from "../../../configuration/environment-configuration";
+// import { CommonResponse } from "../../../common/dto/common-response";
+// import { OrderItemsDao } from "../../../dao/order-items-dao";
+// import { OrderItemsDaoImpl } from "../../../dao/impl/order-items-dao-impl";
+// import { OrderItemsDto } from "../../../dto/master/order-items-dto";
+// import { CommonResSupport } from "../../../support/common-res-sup";
+// import { ErrorHandlerSup } from "../../../support/error-handler-sup";
+// import { OrderItemsService } from "../order-items-service";
+// const amqp = require("amqplib");
 
-let httpReq: MicroService = new MicroServiceHttp();
+// /**
+//  * orderItems service layer
+//  *
+//  */
+// export class OrderItemsServiceImpl implements OrderItemsService {
+//   orderItemsDao: OrderItemsDao = new OrderItemsDaoImpl();
 
-const environmentConfiguration = new EnvironmentConfiguration();
-const appConfig = environmentConfiguration.readAppConfiguration();
+//   /**
+//    * save new orderItems
+//    * @param orderItemsDto
+//    * @returns
+//    */
+//   async save(orderItemsDto: OrderItemsDto): Promise<CommonResponse> {
+//     let cr = new CommonResponse();
+//     try {
+//       // save new orderItems
+//       let newOrderItems = await this.orderItemsDao.save(orderItemsDto);
 
-const amqp = require("amqplib");
+//       const connection = await amqp.connect("amqp://localhost");
+//       const channel = await connection.createChannel();
+//       const queue = "ordersToProduct";
 
-/**
- * orderItems service layer
- *
- */
-export class OrderItemsServiceImpl implements OrderItemsService {
-  orderItemsDao: OrderItemsDao = new OrderItemsDaoImpl();
+//       await channel.assertQueue(queue, { durable: false });
 
-  /**
-   * save new orderItems
-   * @param orderItemsDto
-   * @returns
-   */
-  async save(orderItemsDto: OrderItemsDto): Promise<CommonResponse> {
-    let cr = new CommonResponse();
-    try {
-      // save new orderItems
-      let newOrderItems = await this.orderItemsDao.save(orderItemsDto);
+//       channel.sendToQueue(queue, Buffer.from(JSON.stringify(newOrderItems)));
 
-      const connection = await amqp.connect("amqp://localhost");
-      const channel = await connection.createChannel();
-      const queue = "ordersToProduct";
+//       console.log("Order sent !");
 
-      await channel.assertQueue(queue, { durable: false });
-
-      channel.sendToQueue(queue, Buffer.from(JSON.stringify(newOrderItems)));
-
-      console.log("Order sent !");
-
-      cr.setStatus(true);
-      cr.setExtra(newOrderItems);
-    } catch (error) {
-      cr.setStatus(false);
-      cr.setExtra(error);
-      ErrorHandlerSup.handleError(error);
-    }
-    return cr;
-  }
-}
+//       cr.setStatus(true);
+//       cr.setExtra(newOrderItems);
+//     } catch (error) {
+//       cr.setStatus(false);
+//       cr.setExtra(error);
+//       ErrorHandlerSup.handleError(error);
+//     }
+//     return cr;
+//   }
+// }

@@ -17,6 +17,9 @@ export class OrderItemsEntity {
   @Column()
   updatedDate: Date;
 
+  @Column()
+  productUuid: string;
+
   @Column({ type: "enum" ,enum:Status,default:Status.Online})
   status: Status;
 
