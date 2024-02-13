@@ -90,3 +90,11 @@
 [35m[39m
 2024-02-09 16:48:40:4840 [35mhttp[39m: [35mPOST /service/master/product-save 200 888 - 1300581.076 ms[39m
 [35m[39m
+2024-02-13 09:36:00:360 [35mhttp[39m: [35mPOST /service/master/product-save 200 811 - 218.504 ms[39m
+[35m[39m
+2024-02-13 09:36:16:3616 [35mhttp[39m: [35mPOST /service/master/product-save 200 811 - 7.401 ms[39m
+[35m[39m
+2024-02-13 09:36:18:3618 [35mhttp[39m: [35mPOST /service/master/product-save 200 811 - 9.014 ms[39m
+[35m[39m
+2024-02-13 09:36:19:3619 [35mhttp[39m: [35mPOST /service/master/product-save 200 811 - 4.941 ms[39m
+[35m[39m
