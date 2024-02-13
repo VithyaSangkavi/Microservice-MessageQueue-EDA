@@ -5,6 +5,17 @@ import { OrderItemsDto } from "../../../dto/master/order-items-dto";
 import { CommonResSupport } from "../../../support/common-res-sup";
 import { ErrorHandlerSup } from "../../../support/error-handler-sup";
 import { OrderItemsService } from "../order-items-service";
+import MicroServiceHttp from "../../../support/microservice/micro-service-http-impl";
+import MicroService from "../../../support/microservice/micro-service";
+import HttpMSServicePath from "../../../support/microservice/http-service-path";
+import { Mathod } from "../../../enum/method";
+import { EnvironmentConfiguration } from "../../../configuration/environment-configuration";
+
+let httpReq: MicroService = new MicroServiceHttp();
+
+const environmentConfiguration = new EnvironmentConfiguration();
+const appConfig = environmentConfiguration.readAppConfiguration();
+
 const amqp = require("amqplib");
 
 /**

@@ -56,3 +56,37 @@
 [35m[39m
 2024-02-08 17:25:22:2522 [35mhttp[39m: [35mPOST /service/master/saveOrderItems 404 169 - 7.325 ms[39m
 [35m[39m
+2024-02-09 16:03:44:344 [35mhttp[39m: [35mPOST /service/master/save-product 404 167 - 112.057 ms[39m
+[35m[39m
+2024-02-09 16:05:23:523 [35mhttp[39m: [35mPOST /service/master/product-save 200 633 - 54.563 ms[39m
+[35m[39m
+2024-02-09 16:05:53:553 [35mhttp[39m: [35mPOST /service/master/product-save 200 46 - 28.111 ms[39m
+[35m[39m
+2024-02-09 16:06:13:613 [35mhttp[39m: [35mPOST /service/master/product-save 200 46 - 5.410 ms[39m
+[35m[39m
+2024-02-09 16:06:14:614 [35mhttp[39m: [35mPOST /service/master/product-save 200 46 - 6.133 ms[39m
+[35m[39m
+2024-02-09 16:06:15:615 [35mhttp[39m: [35mPOST /service/master/product-save 200 46 - 3.826 ms[39m
+[35m[39m
+2024-02-09 16:06:33:633 [35mhttp[39m: [35mPOST /service/master/product-save 200 633 - 52.666 ms[39m
+[35m[39m
+2024-02-09 16:08:10:810 [35mhttp[39m: [35mPOST /service/master/product-save 200 634 - 52.661 ms[39m
+[35m[39m
+2024-02-09 16:08:30:830 [35mhttp[39m: [35mPOST /service/master/product-save 200 813 - 60.449 ms[39m
+[35m[39m
+2024-02-09 16:08:39:839 [35mhttp[39m: [35mPOST /service/master/product-save 200 813 - 8.474 ms[39m
+[35m[39m
+2024-02-09 16:09:26:926 [35mhttp[39m: [35mPOST /service/master/product-save 200 814 - 56.049 ms[39m
+[35m[39m
+2024-02-09 16:12:18:1218 [35mhttp[39m: [35mPOST /service/master/product-save 200 814 - 52.563 ms[39m
+[35m[39m
+2024-02-09 16:12:48:1248 [35mhttp[39m: [35mPOST /service/master/product-save 200 814 - 60.049 ms[39m
+[35m[39m
+2024-02-09 16:23:01:231 [35mhttp[39m: [35mPOST /service/master/product-save 200 891 - 123371.530 ms[39m
+[35m[39m
+2024-02-09 16:23:45:2345 [35mhttp[39m: [35mPOST /service/master/product-save 200 891 - 30058.279 ms[39m
+[35m[39m
+2024-02-09 16:26:39:2639 [35mhttp[39m: [35mPOST /service/master/product-save 200 888 - 31803.448 ms[39m
+[35m[39m
+2024-02-09 16:48:40:4840 [35mhttp[39m: [35mPOST /service/master/product-save 200 888 - 1300581.076 ms[39m
+[35m[39m

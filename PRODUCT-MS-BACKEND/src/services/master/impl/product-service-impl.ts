@@ -38,9 +38,13 @@ export class ProductServiceImpl implements ProductService {
 
       const path = appConfig.getTaskMicroServicePath() + HttpMSServicePath.taskCreate
 
-      const a: CommonResponse = await httpReq.call(path, Mathod.GET, { productId: 1 }, null);
+      const a: CommonResponse = await httpReq.call(path, Mathod.POST, newProduct, null);
+
+      console.log("CR", CommonResponse);
 
       if(a.isStatus()) {
+
+        console.log(a)
         
       }
 
