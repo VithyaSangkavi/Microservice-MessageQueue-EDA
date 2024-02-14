@@ -45,7 +45,7 @@ export class AppConfigurationsDto {
 
   //micro service
   private taskMicroServicePath: string;
-  private userManagementMicroServicePath: string;
+  private productMicroServicePath: string;
   private notificationMicroServicePath: string;
   private arigoMicroServicePath: string;
   private planigoMicroServicePath: string;
@@ -136,12 +136,12 @@ export class AppConfigurationsDto {
     this.AwsProductImageCashBucketFolderPath = AwsProductImageCashBucketFolderPath;
   }
 
-  public getUserManagementMicroServicePath(): string {
-    return this.userManagementMicroServicePath;
+  public getProductMicroServicePath(): string {
+    return this.productMicroServicePath;
   }
 
-  public setUserManagementMicroServicePath(userManagementMicroServicePath: string): void {
-    this.userManagementMicroServicePath = userManagementMicroServicePath;
+  public setProductMicroServicePath(productMicroServicePath: string): void {
+    this.productMicroServicePath = productMicroServicePath;
   }
 
   public getNotificationMicroServicePath(): string {

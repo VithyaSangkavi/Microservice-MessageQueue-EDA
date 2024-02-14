@@ -210,4 +210,67 @@
 2024-02-14 09:18:28:1828 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 14.528 ms[39m
 [35m[39m
 2024-02-14 09:41:57:4157 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 14.840 ms[39m
+2024-02-13 13:56:37:5637 [35mhttp[39m: [35mPUT /service/master/product-increase?orderId=1 404 170 - 4.969 ms[39m
+[35m[39m
+2024-02-13 14:04:09:49 [35mhttp[39m: [35mPUT /service/master/product-increase?orderId=1 404 170 - 2.001 ms[39m
+[35m[39m
+2024-02-13 14:21:41:2141 [35mhttp[39m: [35mPUT /service/master/product-increase/3 400 44 - 17.123 ms[39m
+[35m[39m
+2024-02-13 14:22:04:224 [35mhttp[39m: [35mPUT /service/master/product-increase/3 400 44 - 1.557 ms[39m
+[35m[39m
+2024-02-13 14:22:24:2224 [35mhttp[39m: [35mPUT /service/master/product-increase/3 400 44 - 0.629 ms[39m
+[35m[39m
+2024-02-13 14:23:15:2315 [35mhttp[39m: [35mPUT /service/master/product-increase/1 400 44 - 0.397 ms[39m
+[35m[39m
+2024-02-13 14:26:39:2639 [35mhttp[39m: [35mPUT /service/master/product-increase/1 400 44 - 22.651 ms[39m
+[35m[39m
+2024-02-13 14:27:59:2759 [35mhttp[39m: [35mPUT /service/master/product-increase/1 200 83 - 23.793 ms[39m
+[35m[39m
+2024-02-13 14:28:30:2830 [35mhttp[39m: [35mPUT /service/master/product-increase/1 200 83 - 4.476 ms[39m
+[35m[39m
+2024-02-13 14:29:04:294 [35mhttp[39m: [35mPUT /service/master/product-increase/1 200 83 - 16.442 ms[39m
+[35m[39m
+2024-02-13 14:44:59:4459 [35mhttp[39m: [35mPUT /service/master/product-increase 404 170 - 14.900 ms[39m
+[35m[39m
+2024-02-13 14:45:18:4518 [35mhttp[39m: [35mPUT /service/master/product-increase/3 400 51 - 2.785 ms[39m
+[35m[39m
+2024-02-13 14:45:32:4532 [35mhttp[39m: [35mPUT /service/master/product-increase/'3' 400 51 - 0.683 ms[39m
+[35m[39m
+2024-02-13 14:48:04:484 [35mhttp[39m: [35mPUT /service/master/1/product-increase 400 51 - 10.146 ms[39m
+[35m[39m
+2024-02-13 14:48:17:4817 [35mhttp[39m: [35mPUT /service/master/1/product-increase 200 83 - 25.130 ms[39m
+[35m[39m
+2024-02-13 14:48:48:4848 [35mhttp[39m: [35mPUT /service/master/product-increase/1 200 83 - 36.886 ms[39m
+[35m[39m
+2024-02-13 14:52:07:527 [35mhttp[39m: [35mPUT /service/master/product-increase?orderId=1 404 170 - 1.744 ms[39m
+[35m[39m
+2024-02-13 15:01:58:158 [35mhttp[39m: [35mPUT /service/master/product-increase/1 200 83 - 24.169 ms[39m
+[35m[39m
+2024-02-13 15:01:58:158 [35mhttp[39m: [35mPUT /service/master/product-increase/3 200 83 - 17.569 ms[39m
+[35m[39m
+2024-02-13 15:06:32:632 [35mhttp[39m: [35mPUT /service/master/product-increase/1 200 83 - 14.904 ms[39m
+[35m[39m
+2024-02-13 15:06:32:632 [35mhttp[39m: [35mPUT /service/master/product-increase/3 200 83 - 13.464 ms[39m
+[35m[39m
+2024-02-13 15:32:36:3236 [35mhttp[39m: [35mPUT /service/master/product-increase/1 200 83 - 35.362 ms[39m
+[35m[39m
+2024-02-13 15:32:37:3237 [35mhttp[39m: [35mPUT /service/master/product-increase/3 200 83 - 21.806 ms[39m
+[35m[39m
+2024-02-14 11:40:28:4028 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 101.803 ms[39m
+[35m[39m
+2024-02-14 11:54:56:5456 [35mhttp[39m: [35mPUT /service/master/product-increase/001 200 83 - 11.896 ms[39m
+[35m[39m
+2024-02-14 11:54:56:5456 [35mhttp[39m: [35mPUT /service/master/product-increase/002 200 83 - 5.315 ms[39m
+[35m[39m
+2024-02-14 12:03:19:319 [35mhttp[39m: [35mPUT /service/master/product-increase/001 200 83 - 8.909 ms[39m
+[35m[39m
+2024-02-14 12:04:36:436 [35mhttp[39m: [35mPUT /service/master/product-increase/001 200 83 - 5.462 ms[39m
+[35m[39m
+2024-02-14 12:04:37:437 [35mhttp[39m: [35mPUT /service/master/product-increase/001 200 83 - 5.072 ms[39m
+[35m[39m
+2024-02-14 12:04:42:442 [35mhttp[39m: [35mPUT /service/master/product-increase/001 200 83 - 5.479 ms[39m
+[35m[39m
+2024-02-14 12:06:44:644 [35mhttp[39m: [35mPUT /service/master/product-increase/001 200 83 - 7.488 ms[39m
+[35m[39m
+2024-02-14 12:06:44:644 [35mhttp[39m: [35mPUT /service/master/product-increase/002 200 83 - 7.336 ms[39m
 [35m[39m

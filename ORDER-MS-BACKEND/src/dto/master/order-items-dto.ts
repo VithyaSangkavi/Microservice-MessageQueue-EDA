@@ -20,6 +20,7 @@ export class OrderItemsDto extends PaginationDto {
     this.updatedDate = body.updatedDate;
     this.uuid = body.uuid;
     this.status = body.status;
+    this.uuid = body.uuid;
     this.orderId = body.orderId;
 
     if (body.startIndex && body.maxResult) {
@@ -35,6 +36,7 @@ export class OrderItemsDto extends PaginationDto {
     this.updatedDate = orderItemModel.updatedDate;
     this.uuid = orderItemModel.uuid
     this.status = orderItemModel.status;
+    this.uuid = orderItemModel.uuid;
     this.orderId = orderItemModel.order.id;
   }
 
@@ -93,5 +95,4 @@ export class OrderItemsDto extends PaginationDto {
   public setOrderId(orderId: number): void {
     this.orderId = orderId;
   }
-
 }
