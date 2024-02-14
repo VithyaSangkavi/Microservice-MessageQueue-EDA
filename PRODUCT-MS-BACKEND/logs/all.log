@@ -203,3 +203,11 @@
 [35m[39m
 2024-02-14 08:54:04:544 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 43.890 ms[39m
 [35m[39m
+2024-02-14 09:13:25:1325 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 51.174 ms[39m
+[35m[39m
+2024-02-14 09:18:06:186 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 16.470 ms[39m
+[35m[39m
+2024-02-14 09:18:28:1828 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 14.528 ms[39m
+[35m[39m
+2024-02-14 09:41:57:4157 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 14.840 ms[39m
+[35m[39m
