@@ -303,3 +303,43 @@
 [35m[39m
 2024-02-13 15:32:37:3237 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=1 200 46 - 147.863 ms[39m
 [35m[39m
+2024-02-14 09:38:40:3840 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=1 200 46 - 1616.435 ms[39m
+[35m[39m
+2024-02-14 09:43:59:4359 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=1 200 46 - 128.502 ms[39m
+[35m[39m
+2024-02-14 10:16:17:1617 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=1 200 46 - 483.920 ms[39m
+[35m[39m
+2024-02-14 10:23:43:2343 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=1 200 46 - 247.690 ms[39m
+[35m[39m
+2024-02-14 10:27:15:2715 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=1 200 46 - 251.643 ms[39m
+[35m[39m
+2024-02-14 10:41:53:4153 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=1 500 662 - 75.899 ms[39m
+[35m[39m
+2024-02-14 10:45:02:452 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=1 200 46 - 267.069 ms[39m
+[35m[39m
+2024-02-14 10:50:03:503 [35mhttp[39m: [35mPUT /http://localhost:4000/service/master/product-increase/1 404 194 - 28.478 ms[39m
+[35m[39m
+2024-02-14 10:50:03:503 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=1 500 662 - 220.216 ms[39m
+[35m[39m
+2024-02-14 10:54:36:5436 [35mhttp[39m: [35mPUT /http://localhost:4000/service/master/product-increase/1 404 194 - 31.306 ms[39m
+[35m[39m
+2024-02-14 10:54:36:5436 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=1 500 662 - 222.583 ms[39m
+[35m[39m
+2024-02-14 10:59:01:591 [35mhttp[39m: [35mPUT /http://localhost:4000/service/master/product-increase/1 404 194 - 21.377 ms[39m
+[35m[39m
+2024-02-14 10:59:01:591 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=1 500 662 - 199.410 ms[39m
+[35m[39m
+2024-02-14 11:01:42:142 [35mhttp[39m: [35mPUT /service/master/product-increase/1 404 172 - 52.580 ms[39m
+[35m[39m
+2024-02-14 11:01:42:142 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=1 500 662 - 370.457 ms[39m
+[35m[39m
+2024-02-14 11:06:59:659 [35mhttp[39m: [35mPUT /http://localhost:4000/service/master/product-increase/1 404 194 - 28.139 ms[39m
+[35m[39m
+2024-02-14 11:06:59:659 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=1 500 662 - 233.936 ms[39m
+[35m[39m
+2024-02-14 11:09:37:937 [35mhttp[39m: [35mPUT /service/master/product-increase/1 404 172 - 27.154 ms[39m
+[35m[39m
+2024-02-14 11:09:37:937 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=1 500 662 - 226.902 ms[39m
+[35m[39m
+2024-02-14 11:11:02:112 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=1 200 46 - 361.002 ms[39m
+[35m[39m

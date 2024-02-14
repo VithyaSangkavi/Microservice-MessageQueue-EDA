@@ -7,6 +7,17 @@ import { ErrorHandlerSup } from "../../../support/error-handler-sup";
 import { OrderService } from "../order-service";
 import amqp from "amqplib";
 import { OrderItemsDto } from "../../../dto/master/order-items-dto";
+import HttpMSServicePath from "../../../support/microservice/http-service-path";
+import axios from "axios";
+import MicroServiceHttp from "../../../support/microservice/micro-service-http-impl";
+import { Mathod } from "../../../enum/method";
+import MicroService from "../../../support/microservice/micro-service";
+import { EnvironmentConfiguration } from "../../../configuration/environment-configuration";
+
+let httpReq: MicroService = new MicroServiceHttp();
+
+const environmentConfiguration = new EnvironmentConfiguration();
+const appConfig = environmentConfiguration.readAppConfiguration();
 
 /**
  * order service layer
@@ -48,12 +59,46 @@ export class OrderServiceImpl implements OrderService {
 
 
   async cancel(orderId: number): Promise<CommonResponse> {
+    
+    const productUuidsQuantities: Record<string, number> = {};
 
     let cr = new CommonResponse();
     try {
       let deleteOrder = await this.orderDao.cancel(orderId);
 
-      console.log('product uuid: ', deleteOrder.productUuid);
+      if (deleteOrder) {
+        deleteOrder.orderItems.forEach(orderItem => {
+          let productUuid = orderItem.productUuid;
+          let quantity = orderItem.quantity;
+  
+          productUuidsQuantities[productUuid] = quantity;
+        });
+      }
+  
+      console.log('service -> Product UUIDs and Quantities: ', productUuidsQuantities);
+
+      try {
+        for (const productUuid of Object.keys(productUuidsQuantities)) {
+          const quantity = productUuidsQuantities[productUuid];
+
+          const payload = {
+            quantityToAdd: quantity
+          };
+
+          const path = `${HttpMSServicePath.orderCancellation}/${productUuid}`;
+
+          
+          //const path = appConfig.getTaskMicroServicePath() + HttpMSServicePath.orderCancellation + '/' + productUuid;
+
+          const a: CommonResponse = await httpReq.call(path, Mathod.PUT, payload, null);
+
+          // const response = await axios.put(path, payload);
+          console.log('Order cancellation microservice response:', a);
+        }
+      } catch (error) {
+        console.error('Error calling order cancellation microservice:', error);
+        throw new Error('Failed to cancel order');
+      }
 
       if (deleteOrder) {
         cr.setStatus(true);

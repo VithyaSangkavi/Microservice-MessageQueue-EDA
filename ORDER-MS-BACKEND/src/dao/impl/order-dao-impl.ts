@@ -36,23 +36,11 @@ export class OrderDaoImpl implements OrderDao {
 
 
   async cancel(orderId: number): Promise<any> {
-    const productUuidsQuantities: Record<string, number> = {};
 
     let orderRepo = getConnection().getRepository(OrderEntity);
     let orderItemsRepo = getConnection().getRepository(OrderItemsEntity);
 
     let order = await orderRepo.findOne(orderId, { relations: ["orderItems"] });
-
-    if (order) {
-      order.orderItems.forEach(orderItem => {
-        let productUuid = orderItem.productUuid;
-        let quantity = orderItem.quantity;
-
-        productUuidsQuantities[productUuid] = quantity;
-      });
-    }
-
-    console.log('Product UUIDs and Quantities: ', productUuidsQuantities);
 
     if (order) {
       order.status = Status.Offline;
@@ -64,24 +52,6 @@ export class OrderDaoImpl implements OrderDao {
       await orderRepo.save(order);
       await orderItemsRepo.save(order.orderItems);
 
-      try {
-        for (const productUuid of Object.keys(productUuidsQuantities)) {
-            const quantity = productUuidsQuantities[productUuid];
-            
-            const payload = {
-                quantityToAdd: quantity
-            };
-  
-            const path = `${HttpMSServicePath.orderCancellation}/${productUuid}`;
-    
-            const response = await axios.put(path, payload);
-            console.log('Order cancellation microservice response:', response.data);
-        }
-    } catch (error) {
-        console.error('Error calling order cancellation microservice:', error);
-        throw new Error('Failed to cancel order');
-    }
-    
       return order;
     } else {
       return null;
