@@ -6,5 +6,5 @@ const appConfig = environmentConfiguration.readAppConfiguration();
 const PRODUCTBUCKET = appConfig.getProductDataImportBucket();
 
 export default class HttpMSServicePath {
-    static taskCreate: string = "service/master/product-save"; 
-} 
+    static orderCancellation: string = "http://localhost:4000/service/master/product-increase";
+}

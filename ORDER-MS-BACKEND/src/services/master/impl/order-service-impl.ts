@@ -48,13 +48,12 @@ export class OrderServiceImpl implements OrderService {
 
 
   async cancel(orderId: number): Promise<CommonResponse> {
-    const connection = await amqp.connect('amqp://localhost');
-    const channel = await connection.createChannel();
-    const queueName = 'order_cancellation_queue';
+
     let cr = new CommonResponse();
     try {
       let deleteOrder = await this.orderDao.cancel(orderId);
-      channel.sendToQueue(queueName, Buffer.from(orderId.toString()));
+
+      console.log('product uuid: ', deleteOrder.productUuid);
 
       if (deleteOrder) {
         cr.setStatus(true);
@@ -62,17 +61,15 @@ export class OrderServiceImpl implements OrderService {
         cr.setStatus(false);
         cr.setExtra("Not Working !");
       }
+
     } catch (error) {
       cr.setStatus(false);
       cr.setExtra(error);
       ErrorHandlerSup.handleError(error);
       console.error('Error sending message to queue:', error);
       throw new Error('Failed to send message to queue');
-    }finally {
-      // Close channel and connection
-      await channel.close();
-      await connection.close();
     }
     return cr;
   }
+
 }

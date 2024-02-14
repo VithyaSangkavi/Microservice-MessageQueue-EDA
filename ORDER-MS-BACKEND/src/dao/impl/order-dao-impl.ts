@@ -5,6 +5,8 @@ import { OrderEntity } from "../../entity/master/order-entity";
 import { OrderDao } from "../order-dao";
 import { OrderItemsDto } from "../../dto/master/order-items-dto";
 import { OrderItemsEntity } from "../../entity/master/order-items-entity";
+import HttpMSServicePath from "../../support/microservice/http-service-path";
+import axios from "axios";
 
 /**
  * order data access layer
@@ -34,10 +36,23 @@ export class OrderDaoImpl implements OrderDao {
 
 
   async cancel(orderId: number): Promise<any> {
+    const productUuidsQuantities: Record<string, number> = {};
+
     let orderRepo = getConnection().getRepository(OrderEntity);
     let orderItemsRepo = getConnection().getRepository(OrderItemsEntity);
 
     let order = await orderRepo.findOne(orderId, { relations: ["orderItems"] });
+
+    if (order) {
+      order.orderItems.forEach(orderItem => {
+        let productUuid = orderItem.productUuid;
+        let quantity = orderItem.quantity;
+
+        productUuidsQuantities[productUuid] = quantity;
+      });
+    }
+
+    console.log('Product UUIDs and Quantities: ', productUuidsQuantities);
 
     if (order) {
       order.status = Status.Offline;
@@ -49,6 +64,24 @@ export class OrderDaoImpl implements OrderDao {
       await orderRepo.save(order);
       await orderItemsRepo.save(order.orderItems);
 
+      try {
+        for (const productUuid of Object.keys(productUuidsQuantities)) {
+            const quantity = productUuidsQuantities[productUuid];
+            
+            const payload = {
+                quantityToAdd: quantity
+            };
+  
+            const path = `${HttpMSServicePath.orderCancellation}/${productUuid}`;
+    
+            const response = await axios.put(path, payload);
+            console.log('Order cancellation microservice response:', response.data);
+        }
+    } catch (error) {
+        console.error('Error calling order cancellation microservice:', error);
+        throw new Error('Failed to cancel order');
+    }
+    
       return order;
     } else {
       return null;
@@ -64,10 +97,11 @@ export class OrderDaoImpl implements OrderDao {
     orderModel.createdDate = new Date();
     orderModel.updatedDate = new Date();
     //order items
-    orderItemsModel.quantity = orderItemsDto.getQuantity()
+    orderItemsModel.quantity = orderItemsDto.getQuantity();
     orderItemsModel.status = Status.Online;
     orderItemsModel.createdDate = new Date();
     orderItemsModel.updatedDate = new Date();
+    orderItemsModel.productUuid = orderItemsDto.getProductUuid();
   }
 
 }
