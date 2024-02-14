@@ -201,3 +201,5 @@
 [35m[39m
 2024-02-13 14:53:10:5310 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 0 - 15.616 ms[39m
 [35m[39m
+2024-02-14 08:54:04:544 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 43.890 ms[39m
+[35m[39m
