@@ -40,12 +40,15 @@ export class ProductDaoImpl implements ProductDao {
       return null;
     }
   }
-  
+
   async findAll(productDto: ProductDto): Promise<ProductEntity[]> {
     let productRepo = getConnection().getRepository(ProductEntity);
 
-    const query = productRepo.createQueryBuilder("product")
-      .where("product.status = :product_status", { product_status: Status.Online })
+    const query = productRepo
+      .createQueryBuilder("product")
+      .where("product.status = :product_status", {
+        product_status: Status.Online,
+      });
 
     const products = await query.getMany();
 
@@ -60,11 +63,61 @@ export class ProductDaoImpl implements ProductDao {
 
   async findByName(name: String): Promise<ProductEntity> {
     let productRepo = getConnection().getRepository(ProductEntity);
-    let productModel = await productRepo.findOne({ where: { name: name, status: Status.Online } });
+    let productModel = await productRepo.findOne({
+      where: { name: name, status: Status.Online },
+    });
     return productModel;
   }
 
-  async prepareProductModel(productModel: ProductEntity, productDto: ProductDto) {
+  async increaseQuantity(
+    productId: number,
+    quantityToAdd: number
+  ): Promise<ProductEntity | null> {
+    const productRepo = getConnection().getRepository(ProductEntity);
+    const productModel = await productRepo.findOne(productId);
+
+    if (productModel) {
+      productModel.quantity += quantityToAdd;
+      productModel.updatedDate = new Date();
+
+      const updatedProduct = await productRepo.save(productModel);
+      return updatedProduct;
+    } else {
+      return null;
+    }
+  }
+
+  async decreaseQuantity(quantityToReduce: any): Promise<any> {
+    // Loop through the array of UUIDs and quantities to reduce
+    for (let item of quantityToReduce) {
+      let uuid = item.uuid;
+      let quantity = item.quantity;
+
+      // Retrieve the product entity by UUID
+      let product = await getConnection()
+        .getRepository(ProductEntity)
+        .findOne({ where: { uuid: uuid } });
+
+      if (product) {
+        if (product.quantity >= quantity) {
+          product.quantity -= quantity;
+
+          await getConnection().manager.save(product);
+        } else {
+          throw new Error(
+            `Insufficient quantity for product`
+          );
+        }
+      } else {
+        throw new Error(`Product with UUID - ${uuid} not found`);
+      }
+    }
+  }
+
+  async prepareProductModel(
+    productModel: ProductEntity,
+    productDto: ProductDto
+  ) {
     productModel.name = productDto.getName();
     productModel.description = productDto.getDescription();
     productModel.price = productDto.getPrice();

@@ -1,20 +1,26 @@
-import { OrderItemEntity } from "../../entity/master/order-items-entity";
+import { OrderItemsEntity } from "../../entity/master/order-items-entity";
 import { PaginationDto } from "../pagination-dto";
+import { Status } from "../../enum/status";
 
-export class OrderItemDto extends PaginationDto {
-  private orderItemId: number;
+export class OrderItemsDto extends PaginationDto {
+  private orderItemsId: number;
   private quantity: number;
   private createdDate: Date;
   private updatedDate: Date;
+  private uuid: string;
+  private status: Status;
+  private orderId: number;
 
   filViaRequest(body) {
-    if (body.orderItemId) {
-      this.orderItemId = body.orderItemId;
+    if (body.orderItemsId) {
+      this.orderItemsId = body.orderItemsId;
     }
     this.quantity = body.quantity;
     this.createdDate = body.createdDate;
     this.updatedDate = body.updatedDate;
-
+    this.uuid = body.uuid;
+    this.status = body.status;
+    this.orderId = body.orderId;
 
     if (body.startIndex && body.maxResult) {
       this.setStartIndex(body.startIndex);
@@ -22,19 +28,22 @@ export class OrderItemDto extends PaginationDto {
     }
   }
 
-  filViaDbObject(orderItemModel: OrderItemEntity) {
-    this.orderItemId = orderItemModel.id;
+  filViaDbObject(orderItemModel: OrderItemsEntity) {
+    this.orderItemsId = orderItemModel.id;
     this.quantity = orderItemModel.quantity;
     this.createdDate = orderItemModel.createdDate;
     this.updatedDate = orderItemModel.updatedDate;
+    this.uuid = orderItemModel.uuid
+    this.status = orderItemModel.status;
+    this.orderId = orderItemModel.order.id;
   }
 
-  public getOrderItemId(): number {
-    return this.orderItemId;
+  public getOrderItemsId(): number {
+    return this.orderItemsId;
   }
 
-  public setOrderItemId(orderItemId: number): void {
-    this.orderItemId = orderItemId;
+  public setOrderItemsId(orderItemsId: number): void {
+    this.orderItemsId = orderItemsId;
   }
 
   public getQuantity(): number {
@@ -59,6 +68,30 @@ export class OrderItemDto extends PaginationDto {
 
   public setUpdatedDate(updatedDate: Date): void {
     this.updatedDate = updatedDate;
+  }
+
+  public getStatus(): Status {
+    return this.status;
+  }
+
+  public setStatus(status: Status): void {
+    this.status = status;
+  }
+
+  public getUuid(): string {
+    return this.uuid;
+  }
+
+  public setUuid(uuid: string): void {
+    this.uuid = uuid;
+  }
+
+  public getOrderId(): number {
+    return this.orderId;
+  }
+
+  public setOrderId(orderId: number): void {
+    this.orderId = orderId;
   }
 
 }

@@ -7,4 +7,5 @@ export interface ProductService {
   delete(productDto: ProductDto): Promise<CommonResponse>;
   find(productDto: ProductDto): Promise<CommonResponse>;
   findById(productId: number): Promise<CommonResponse>;
+  decreaseProductQuantity(quantityToReduce: any): Promise<CommonResponse>
 }

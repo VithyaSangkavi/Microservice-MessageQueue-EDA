@@ -1,6 +1,5 @@
 import { Status } from "../../enum/status";
-import { Column, Entity, PrimaryGeneratedColumn, Table } from "typeorm";
-
+import { Column, Entity, PrimaryGeneratedColumn, Table, OneToMany } from "typeorm";
 @Entity({
   name: "product",
 })
@@ -19,6 +18,9 @@ export class ProductEntity {
 
   @Column()
   quantity: number;
+
+  @Column()
+  uuid: string;
 
   @Column({ type: "enum", enum:Status, default: Status.Online})
   status: Status;

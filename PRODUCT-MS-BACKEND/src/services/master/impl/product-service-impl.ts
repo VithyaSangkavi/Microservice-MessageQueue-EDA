@@ -5,6 +5,18 @@ import { ProductDto } from "../../../dto/master/product-dto";
 import { CommonResSupport } from "../../../support/common-res-sup";
 import { ErrorHandlerSup } from "../../../support/error-handler-sup";
 import { ProductService } from "../product-service";
+import MicroServiceHttp from "../../../support/microservice/micro-service-http-impl";
+import MicroService from "../../../support/microservice/micro-service";
+import HttpMSServicePath from "../../../support/microservice/http-service-path";
+import { Mathod } from "../../../enum/method";
+import { EnvironmentConfiguration } from "../../../configuration/environment-configuration";
+
+let httpReq: MicroService = new MicroServiceHttp();
+
+const environmentConfiguration = new EnvironmentConfiguration();
+const appConfig = environmentConfiguration.readAppConfiguration();
+const amqp = require('amqplib');
+
 
 /**
  * department service layer
@@ -21,9 +33,11 @@ export class ProductServiceImpl implements ProductService {
   async save(productDto: ProductDto): Promise<CommonResponse> {
     let cr = new CommonResponse();
     try {
-      // save new product
-      let newProduct = await this.productDao.save(productDto);
+
+      let newProduct = await this.productDao.save(productDto)
+
       cr.setStatus(true);
+      cr.setExtra(newProduct)
     } catch (error) {
       cr.setStatus(false);
       cr.setExtra(error);
@@ -31,6 +45,7 @@ export class ProductServiceImpl implements ProductService {
     }
     return cr;
   }
+
   /**
    * update product
    * @param productDto
@@ -136,4 +151,61 @@ export class ProductServiceImpl implements ProductService {
     }
     return cr;
   }
+
+  /**
+ * Increase the quantity of a product by the specified amount.
+ * @param productId The ID of the product to update.
+ * @param quantityToAdd The quantity to add to the current quantity.
+ * @returns A CommonResponse indicating the success or failure of the operation.
+ */
+  async increaseProductQuantity(productId: number, quantityToAdd: number): Promise<CommonResponse> {
+    let cr = new CommonResponse();
+    try {
+      // Retrieve the product by its ID
+      const productResponse = await this.findById(productId);
+      if (!productResponse) {
+        cr.setStatus(false);
+        cr.setExtra('Product not found');
+        return cr;
+      }
+
+      // Extract the ProductDto from the response
+      const productDto: ProductDto = productResponse.getExtra() as ProductDto;
+
+      // Increment the quantity by the specified amount
+      const currentQuantity: number = productDto.getQuantity();
+      productDto.setQuantity(currentQuantity + quantityToAdd);
+
+      // Update the product with the new quantity
+      const updateResponse = await this.update(productDto);
+      if (updateResponse) {
+        cr.setStatus(true);
+        cr.setExtra('Product quantity updated successfully');
+      } else {
+        cr.setStatus(false);
+        cr.setExtra('Failed to update product quantity');
+      }
+    } catch (error) {
+      cr.setStatus(false);
+      cr.setExtra(error.message);
+      ErrorHandlerSup.handleError(error);
+    }
+    return cr;
+  }
+
+  async decreaseProductQuantity(quantityToReduce: any): Promise<CommonResponse> {
+    let cr = new CommonResponse();
+    try {
+      await this.productDao.decreaseQuantity(quantityToReduce);
+
+      cr.setStatus(true);
+    } catch (error) {
+      cr.setStatus(false);
+      cr.setExtra(error);
+      ErrorHandlerSup.handleError(error); 
+    }
+    return cr;
+  }
+
+
 }
