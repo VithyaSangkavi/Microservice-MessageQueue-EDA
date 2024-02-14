@@ -8,4 +8,5 @@ export interface ProductService {
   find(productDto: ProductDto): Promise<CommonResponse>;
   findById(productId: number): Promise<CommonResponse>;
   decreaseProductQuantity(quantityToReduce: any): Promise<CommonResponse>
+  increaseProductQuantity(uuid: string, quantityToAdd: number): Promise<CommonResponse> 
 }
