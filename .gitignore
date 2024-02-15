@@ -11,3 +11,9 @@ PRODUCT-MS-BACKEND/dist
 PRODUCT-MS-BACKEND/upload-excel/*
 
 FRONT-END/node_modules
+
+EMAIL-MS-BACKEND/node_modules
+EMAIL-MS-BACKEND/config/dev.json
+EMAIL-MS-BACKEND/logs/
+EMAIL-MS-BACKEND/dist
+EMAIL-MS-BACKEND/upload-excel/*
