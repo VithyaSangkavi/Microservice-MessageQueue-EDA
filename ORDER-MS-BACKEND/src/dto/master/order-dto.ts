@@ -1,6 +1,7 @@
 import { OrderEntity } from "../../entity/master/order-entity";
 import { PaginationDto } from "../pagination-dto";
 import { Status } from "../../enum/status";
+import { OrderStatus } from "../../enum/orderStatus";
 
 export class OrderDto extends PaginationDto {
   private orderId: number;
@@ -11,6 +12,7 @@ export class OrderDto extends PaginationDto {
   private updatedDate: Date;
   private total: number;
   private status: Status;
+  private orderStatus: OrderStatus;
 
   filViaRequest(body) {
     if (body.orderId) {
@@ -23,6 +25,7 @@ export class OrderDto extends PaginationDto {
     this.updatedDate = body.updatedDate;
     this.total = body.total;
     this.status = body.status;
+    this.orderStatus = body.orderStatus;
 
     if (body.startIndex && body.maxResult) {
       this.setStartIndex(body.startIndex);
@@ -39,6 +42,7 @@ export class OrderDto extends PaginationDto {
     this.updatedDate = orderModel.updatedDate;
     this.total = orderModel.total;
     this.status = orderModel.status;
+    this.orderStatus = orderModel.orderStatus;
   }
 
   public getOrderId(): number {
@@ -106,4 +110,11 @@ export class OrderDto extends PaginationDto {
     this.status = status;
   }
 
+  public getOrderStatus(): OrderStatus {
+    return this.orderStatus;
+  }
+
+  public setOrderStatus(orderStatus: OrderStatus): void {
+    this.orderStatus = orderStatus;
+  }
 }

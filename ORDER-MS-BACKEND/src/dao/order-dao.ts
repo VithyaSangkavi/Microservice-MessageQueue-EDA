@@ -6,5 +6,5 @@ import { OrderItemsEntity } from "../entity/master/order-items-entity";
 export interface OrderDao {
   save(orderDto: OrderDto, orderItemsDto: OrderItemsDto): Promise<any>;
   cancel(orderId: number): Promise<any>;
-
+  updateOrderStatus(orderId: number): Promise<OrderEntity> ;
 }

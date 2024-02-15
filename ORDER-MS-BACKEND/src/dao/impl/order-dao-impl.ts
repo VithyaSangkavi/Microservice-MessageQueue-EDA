@@ -7,6 +7,7 @@ import { OrderItemsDto } from "../../dto/master/order-items-dto";
 import { OrderItemsEntity } from "../../entity/master/order-items-entity";
 import HttpMSServicePath from "../../support/microservice/http-service-path";
 import axios from "axios";
+import { OrderStatus } from "../../enum/orderStatus";
 
 /**
  * order data access layer
@@ -57,6 +58,19 @@ export class OrderDaoImpl implements OrderDao {
       return null;
     }
   }
+  
+  async updateOrderStatus(orderId: number): Promise<OrderEntity> {
+    let orderRepo = getConnection().getRepository(OrderEntity);
+    let order = await orderRepo.findOne(orderId);
+
+    if (order) {
+      order.orderStatus = OrderStatus.Completed;
+      await orderRepo.save(order);
+      return order;
+    } else {
+      return null;
+    }
+  }
 
   async prepareOrderModel(orderModel: OrderEntity, orderDto: OrderDto, orderItemsModel: OrderItemsEntity, orderItemsDto: OrderItemsDto) {
     orderModel.customerName = orderDto.getCustomerName()
@@ -64,6 +78,7 @@ export class OrderDaoImpl implements OrderDao {
     orderModel.address = orderDto.getAddress()
     orderModel.total = orderDto.getTotal()
     orderModel.status = Status.Online;
+    orderModel.orderStatus = OrderStatus.Pending;
     orderModel.createdDate = new Date();
     orderModel.updatedDate = new Date();
     //order items

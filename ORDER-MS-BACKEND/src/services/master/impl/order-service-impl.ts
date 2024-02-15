@@ -117,4 +117,57 @@ export class OrderServiceImpl implements OrderService {
     return cr;
   }
 
+  // async updateOrderStatus(orderId: number): Promise<CommonResponse> {
+  //   let cr = new CommonResponse();
+  //   try {
+  //     const updatedOrder = await this.orderDao.updateOrderStatus(orderId);
+  //     if (updatedOrder) {
+  //       cr.setStatus(true);
+  //       console.log("Order status updated to Completed:", updatedOrder);
+  //     } else {
+  //       cr.setStatus(false);
+  //       cr.setExtra("Order not found!");
+  //     }
+  //   } catch (error) {
+  //     cr.setStatus(false);
+  //     cr.setExtra(error);
+  //     ErrorHandlerSup.handleError(error);
+  //     console.error('Error updating order status:', error);
+  //     throw new Error('Failed to update order status');
+  //   }
+  //   return cr;
+  // }
+
+  async updateOrderStatus(orderId: number): Promise<CommonResponse> {
+    let cr = new CommonResponse();
+    try {
+      const updatedOrder = await this.orderDao.updateOrderStatus(orderId);
+      if (updatedOrder) {
+        // Send message to queue
+        const connection = await amqp.connect("amqp://localhost");
+        const channel = await connection.createChannel();
+        const queue = "orderStatusUpdates";
+  
+        await channel.assertQueue(queue, { durable: false });
+  
+        channel.sendToQueue(queue, Buffer.from(JSON.stringify(updatedOrder)));
+  
+        console.log("Order status update message sent to queue:", updatedOrder);
+  
+        cr.setStatus(true);
+        console.log("Order status updated to Completed:", updatedOrder);
+      } else {
+        cr.setStatus(false);
+        cr.setExtra("Order not found!");
+      }
+    } catch (error) {
+      cr.setStatus(false);
+      cr.setExtra(error);
+      ErrorHandlerSup.handleError(error);
+      console.error('Error updating order status:', error);
+      throw new Error('Failed to update order status');
+    }
+    return cr;
+  }
+  
 }

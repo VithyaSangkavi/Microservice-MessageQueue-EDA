@@ -343,3 +343,21 @@
 [35m[39m
 2024-02-14 11:11:02:112 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=1 200 46 - 361.002 ms[39m
 [35m[39m
+2024-02-14 12:19:06:196 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 46 - 361.316 ms[39m
+[35m[39m
+2024-02-14 12:19:31:1931 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 46 - 80.266 ms[39m
+[35m[39m
+2024-02-14 12:19:52:1952 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 46 - 59.088 ms[39m
+[35m[39m
+2024-02-14 12:21:02:212 [35mhttp[39m: [35mPUT /service/master/updateOrderStatus/1 200 46 - 50.562 ms[39m
+[35m[39m
+2024-02-14 14:44:27:4427 [35mhttp[39m: [35mPUT /service/master/updateOrderStatus/1 200 46 - 109.597 ms[39m
+[35m[39m
+2024-02-15 09:09:37:937 [35mhttp[39m: [35mPUT /service/master/updateOrderStatus/1 200 46 - 536.879 ms[39m
+[35m[39m
+2024-02-15 09:13:22:1322 [35mhttp[39m: [35mPUT /service/master/updateOrderStatus/1 200 46 - 44.982 ms[39m
+[35m[39m
+2024-02-15 09:14:47:1447 [35mhttp[39m: [35mPUT /service/master/updateOrderStatus/1 200 46 - 41.795 ms[39m
+[35m[39m
+2024-02-15 09:18:54:1854 [35mhttp[39m: [35mPUT /service/master/updateOrderStatus/1 200 46 - 46.983 ms[39m
+[35m[39m

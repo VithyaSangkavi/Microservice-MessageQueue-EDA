@@ -32,3 +32,15 @@ exports.cancel = async (req: Request, res: Response, next: NextFunction) => {
     next (error);
   }
 };
+
+exports.updateOrderStatus = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    let orderId = req.params.orderId;
+
+    let cr = await orderService.updateOrderStatus(Number(orderId));
+
+    res.send(cr);
+  } catch (error) {
+    next(error);
+  }
+};
