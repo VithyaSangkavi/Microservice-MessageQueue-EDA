@@ -274,3 +274,41 @@
 [35m[39m
 2024-02-14 12:06:44:644 [35mhttp[39m: [35mPUT /service/master/product-increase/002 200 83 - 7.336 ms[39m
 [35m[39m
+2024-02-14 16:16:38:1638 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 41.700 ms[39m
+[35m[39m
+2024-02-14 16:16:39:1639 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 12.929 ms[39m
+[35m[39m
+2024-02-14 16:16:39:1639 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 11.962 ms[39m
+[35m[39m
+2024-02-14 16:16:40:1640 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 10.600 ms[39m
+[35m[39m
+2024-02-14 16:16:41:1641 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 11.553 ms[39m
+[35m[39m
+2024-02-14 16:16:41:1641 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 14.458 ms[39m
+[35m[39m
+2024-02-14 16:16:42:1642 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 12.574 ms[39m
+[35m[39m
+2024-02-14 17:09:03:93 [35mhttp[39m: [35mPUT /service/master/product-increase/undefined 400 51 - 6.464 ms[39m
+[35m[39m
+2024-02-14 17:13:51:1351 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 47.668 ms[39m
+[35m[39m
+2024-02-14 17:13:53:1353 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 16.688 ms[39m
+[35m[39m
+2024-02-14 17:13:54:1354 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 12.781 ms[39m
+[35m[39m
+2024-02-14 17:13:55:1355 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 15.787 ms[39m
+[35m[39m
+2024-02-14 17:13:56:1356 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 13.534 ms[39m
+[35m[39m
+2024-02-14 17:13:56:1356 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 9.441 ms[39m
+[35m[39m
+2024-02-14 17:13:57:1357 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 8.910 ms[39m
+[35m[39m
+2024-02-14 17:18:40:1840 [35mhttp[39m: [35mPUT /service/master/product-increase/001 200 83 - 44.713 ms[39m
+[35m[39m
+2024-02-14 17:18:40:1840 [35mhttp[39m: [35mPUT /service/master/product-increase/002 200 83 - 32.301 ms[39m
+[35m[39m
+2024-02-14 17:19:06:196 [35mhttp[39m: [35mPUT /service/master/product-increase/001 200 83 - 15.915 ms[39m
+[35m[39m
+2024-02-14 17:19:06:196 [35mhttp[39m: [35mPUT /service/master/product-increase/002 200 83 - 16.353 ms[39m
+[35m[39m

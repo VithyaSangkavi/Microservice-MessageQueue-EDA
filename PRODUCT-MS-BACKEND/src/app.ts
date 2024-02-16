@@ -2,6 +2,17 @@ import { NodeApplication } from "./decorators/custom-decorators";
 import "reflect-metadata";
 const amqp = require('amqplib');
 const nodemailer = require('nodemailer');
+import HttpMSServicePath from "../src/support/microservice/http-service-path";
+import axios from "axios";
+import MicroServiceHttp from "../src/support/microservice/micro-service-http-impl";
+import { Mathod } from "../src/enum/method";
+import MicroService from "../src/support/microservice/micro-service";
+import { EnvironmentConfiguration } from "../src/configuration/environment-configuration"
+
+let httpReq: MicroService = new MicroServiceHttp();
+
+const environmentConfiguration = new EnvironmentConfiguration();
+const appConfig = environmentConfiguration.readAppConfiguration();
 
 
 const transporter = nodemailer.createTransport({
@@ -69,12 +80,26 @@ async function cancelOrdersfromAdmin() {
 
   await channel.assertQueue(queue, { durable: false });
 
-  channel.consume(queue, (msg) => {
-      console.log('Received cancel order - Product:', msg.content.toString());
-      let products = msg.content.toString();      
-  }, { noAck: true });
+  channel.consume(queue, async (msg) => {
+    
+      let products = JSON.parse(msg.content.toString());
+      let uuid = products.uuid;
 
-  
+      const payload = {
+        quantityToAdd: products.quantityToAdd,
+      };
+
+      console.log(products);
+
+      const path = `${HttpMSServicePath.orderCancellation}/${uuid}`;
+      const a = await httpReq.call(
+          path,
+          Mathod.PUT,
+          payload,
+          null
+        );
+
+  }, { noAck: true });
 }
 
 async function cancelOrdersfromEmail() {
@@ -96,7 +121,6 @@ async function cancelOrdersfromEmail() {
 
 async function sendEmail(orderId) {
   try {
-      // Send mail with defined transport object
       let info = await transporter.sendMail({
           from: 'divlinkapp@gmail.com',
           to: "thanujadha20@gmail.com",
@@ -116,4 +140,6 @@ takeOrdersfromOrder()
 cancelOrdersfromOrderCancellation()
 cancelOrdersfromAdmin()
 cancelOrdersfromEmail()
+
+
 

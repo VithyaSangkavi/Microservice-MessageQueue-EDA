@@ -101,6 +101,7 @@ export class OrderServiceImpl implements OrderService {
 
           const payload = {
             quantityToAdd: quantity,
+            uuid: uuid
           };
 
           // const path = `${HttpMSServicePath.orderCancellation}/${uuid}`;
