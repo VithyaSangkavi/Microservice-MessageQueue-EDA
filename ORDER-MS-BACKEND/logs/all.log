@@ -548,3 +548,139 @@
 [35m[39m
 2024-02-14 17:19:06:196 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=65 200 46 - 37.186 ms[39m
 [35m[39m
+2024-02-15 12:25:56:2556 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=68 200 46 - 62.829 ms[39m
+[35m[39m
+2024-02-15 12:26:36:2636 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=69 200 46 - 22.451 ms[39m
+[35m[39m
+2024-02-15 12:27:13:2713 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=70 200 46 - 19.101 ms[39m
+[35m[39m
+2024-02-15 12:28:38:2838 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=71 200 46 - 19.624 ms[39m
+[35m[39m
+2024-02-15 12:33:08:338 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=72 200 46 - 23.567 ms[39m
+[35m[39m
+2024-02-15 12:34:32:3432 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=73 200 46 - 24.413 ms[39m
+[35m[39m
+2024-02-15 12:35:08:358 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=74 200 46 - 22.012 ms[39m
+[35m[39m
+2024-02-15 12:35:27:3527 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=75 200 46 - 16.994 ms[39m
+[35m[39m
+2024-02-15 12:35:43:3543 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=76 200 46 - 18.856 ms[39m
+[35m[39m
+2024-02-15 12:35:52:3552 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=77 200 46 - 17.459 ms[39m
+[35m[39m
+2024-02-15 12:35:58:3558 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=78 200 46 - 18.342 ms[39m
+[35m[39m
+2024-02-15 12:36:04:364 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 965 - 164.288 ms[39m
+[35m[39m
+2024-02-15 12:36:05:365 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 965 - 24.273 ms[39m
+[35m[39m
+2024-02-15 12:36:06:366 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 965 - 28.823 ms[39m
+[35m[39m
+2024-02-15 12:36:08:368 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 965 - 22.427 ms[39m
+[35m[39m
+2024-02-15 12:36:09:369 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 965 - 33.513 ms[39m
+[35m[39m
+2024-02-15 12:36:10:3610 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 965 - 23.758 ms[39m
+[35m[39m
+2024-02-15 12:36:12:3612 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 965 - 24.744 ms[39m
+[35m[39m
+2024-02-15 12:36:14:3614 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 965 - 20.794 ms[39m
+[35m[39m
+2024-02-15 12:36:15:3615 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 965 - 22.901 ms[39m
+[35m[39m
+2024-02-15 12:36:19:3619 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 965 - 20.442 ms[39m
+[35m[39m
+2024-02-15 12:40:40:4040 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=79 200 46 - 21.072 ms[39m
+[35m[39m
+2024-02-15 12:44:06:446 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=80 200 46 - 16.043 ms[39m
+[35m[39m
+2024-02-15 12:48:04:484 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=81 200 46 - 22.049 ms[39m
+[35m[39m
+2024-02-15 12:50:54:5054 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=82 200 46 - 27.248 ms[39m
+[35m[39m
+2024-02-15 12:58:52:5852 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=83 200 46 - 23.235 ms[39m
+[35m[39m
+2024-02-15 13:00:25:025 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=84 200 46 - 17.688 ms[39m
+[35m[39m
+2024-02-15 13:16:33:1633 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=83 200 46 - 19.329 ms[39m
+[35m[39m
+2024-02-15 13:17:25:1725 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=84 200 46 - 15.825 ms[39m
+[35m[39m
+2024-02-15 13:41:39:4139 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=85 200 46 - 17.020 ms[39m
+[35m[39m
+2024-02-15 13:44:07:447 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=86 200 46 - 14.019 ms[39m
+[35m[39m
+2024-02-15 14:49:53:4953 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=87 200 46 - 29.089 ms[39m
+[35m[39m
+2024-02-15 14:50:13:5013 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=88 200 46 - 14.610 ms[39m
+[35m[39m
+2024-02-15 15:25:34:2534 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=89 200 46 - 33.033 ms[39m
+[35m[39m
+2024-02-15 15:27:26:2726 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=90 200 46 - 77.073 ms[39m
+[35m[39m
+2024-02-15 15:29:26:2926 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=90 200 46 - 12.879 ms[39m
+[35m[39m
+2024-02-15 15:30:55:3055 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=90 200 46 - 11.732 ms[39m
+[35m[39m
+2024-02-15 15:32:09:329 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=90 200 46 - 23.049 ms[39m
+[35m[39m
+2024-02-15 15:33:40:3340 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 676 - 25715.674 ms[39m
+[35m[39m
+2024-02-15 15:33:40:3340 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 676 - 27626.898 ms[39m
+[35m[39m
+2024-02-15 15:34:38:3438 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=91 200 46 - 13.452 ms[39m
+[35m[39m
+2024-02-15 15:35:35:3535 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=91 200 46 - 14.456 ms[39m
+[35m[39m
+2024-02-15 15:36:03:363 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=91 200 46 - 15.458 ms[39m
+[35m[39m
+2024-02-15 15:36:48:3648 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=91 200 46 - 9.864 ms[39m
+[35m[39m
+2024-02-15 15:37:01:371 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=92 200 46 - 19.627 ms[39m
+[35m[39m
+2024-02-15 15:37:42:3742 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 965 - 48.530 ms[39m
+[35m[39m
+2024-02-15 15:37:42:3742 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 965 - 23.510 ms[39m
+[35m[39m
+2024-02-15 15:37:43:3743 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 965 - 21.446 ms[39m
+[35m[39m
+2024-02-15 15:37:44:3744 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 965 - 25.366 ms[39m
+[35m[39m
+2024-02-15 15:37:44:3744 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 965 - 22.581 ms[39m
+[35m[39m
+2024-02-15 15:37:45:3745 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 965 - 25.430 ms[39m
+[35m[39m
+2024-02-15 15:37:45:3745 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 965 - 19.363 ms[39m
+[35m[39m
+2024-02-15 15:37:49:3749 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 968 - 18.412 ms[39m
+[35m[39m
+2024-02-15 15:37:49:3749 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 968 - 24.775 ms[39m
+[35m[39m
+2024-02-15 15:37:50:3750 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 968 - 21.404 ms[39m
+[35m[39m
+2024-02-15 15:37:50:3750 [35mhttp[39m: [35mPOST /service/master/saveOrder - - - - ms[39m
+[35m[39m
+2024-02-15 15:37:51:3751 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 968 - 23.391 ms[39m
+[35m[39m
+2024-02-15 15:37:51:3751 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 968 - 19.502 ms[39m
+[35m[39m
+2024-02-15 15:37:52:3752 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 968 - 23.359 ms[39m
+[35m[39m
+2024-02-15 15:37:52:3752 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 968 - 19.917 ms[39m
+[35m[39m
+2024-02-15 15:37:59:3759 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=93 200 46 - 17.239 ms[39m
+[35m[39m
+2024-02-15 15:38:36:3836 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=94 200 46 - 18.574 ms[39m
+[35m[39m
+2024-02-15 15:43:32:4332 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=95 200 46 - 21.272 ms[39m
+[35m[39m
+2024-02-15 16:49:07:497 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=96 200 46 - 43.002 ms[39m
+[35m[39m
+2024-02-15 16:49:26:4926 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=97 200 46 - 36.429 ms[39m
+[35m[39m
+2024-02-15 17:09:37:937 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=98 200 46 - 17.831 ms[39m
+[35m[39m
+2024-02-15 17:16:42:1642 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=99 200 46 - 17.294 ms[39m
+[35m[39m
+2024-02-16 09:24:35:2435 [35mhttp[39m: [35mPOST /service/master/cancelOrder?orderId=100 200 46 - 151.817 ms[39m
+[35m[39m

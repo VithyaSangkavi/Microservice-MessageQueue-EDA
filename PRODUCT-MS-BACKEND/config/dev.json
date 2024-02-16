@@ -45,7 +45,9 @@
     "type" : "rabbitmq",
     "url" : "amqp://localhost",
     "username" : "guest",
-    "password" : "guest"
+    "password" : "guest",
+    "toEmail" : "toEmail",
+    "toProduct" : "toProduct"
   },
   
   "jwtSecret": "4574sfds@64537gs",
