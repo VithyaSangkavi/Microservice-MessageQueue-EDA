@@ -1,7 +1,8 @@
 
 //import { store } from '../store/store';
 
-const basePath = process.env.REACT_APP_BASEPATH; //cp.monoroc.com/back
+const basePath_product = process.env.REACT_APP_BASEPATH_PRODUCT; //cp.monoroc.com/back
+const basePath_order = process.env.REACT_APP_BASEPATH_ORDER;
 const cversion = "1.0.0";
 const langList = [{code:"en",text:"English (US)"},{code:"ta",text:"Tamil"},{code:"ar",text:"Arabic"}];
 const pageLength = 10;
@@ -121,4 +122,4 @@ const grantPermission = (requestedRoles) => {
     return (requestedRoles?(checkfltrlist && checkfltrlist.length>0?true:false):true);
 };
 
-export { pageLength, getPager, convertDateTime, convertDate, convertTime, camelizeTxt, grantPermission, usrRoles, alertTimeout, basePath, cversion, objToQueryParam, btnPressedKeyCode, langList, persistRootName};
+export { pageLength, getPager, convertDateTime, convertDate, convertTime, camelizeTxt, grantPermission, usrRoles, alertTimeout, basePath_order, basePath_product, cversion, objToQueryParam, btnPressedKeyCode, langList, persistRootName};
