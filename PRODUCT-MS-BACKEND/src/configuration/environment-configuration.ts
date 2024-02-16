@@ -38,6 +38,8 @@ export class EnvironmentConfiguration {
 
     //message Queue
     appConfig.setMessageQueueServerUrl(process.env.ms_msgq || config.get("queue.url"));
+    appConfig.setMessageQueueNameEmail(process.env.ms_msgq || config.get("queue.toEmail"));
+    appConfig.setMessageQueueNameProduct(process.env.ms_msgq || config.get("queue.toProduct"));
     appConfig.setMessageQueueType(process.env.msgq_type || config.get("queue.type"));
     appConfig.setMessageQueueUsername(process.env.msgq_user || config.get("queue.username"));
     appConfig.setMessageQueuePassword(process.env.msgq_pass || config.get("queue.password"));

@@ -3,6 +3,8 @@ import { ProductDao } from "../../../dao/product-dao";
 import { ProductDaoImpl } from "../../../dao/impl/product-dao-impl";
 import { ProductDto } from "../../../dto/master/product-dto";
 import { CommonResSupport } from "../../../support/common-res-sup";
+const nodemailer = require('nodemailer');
+
 import { ErrorHandlerSup } from "../../../support/error-handler-sup";
 import { ProductService } from "../product-service";
 import MicroServiceHttp from "../../../support/microservice/micro-service-http-impl";
@@ -17,6 +19,14 @@ const environmentConfiguration = new EnvironmentConfiguration();
 const appConfig = environmentConfiguration.readAppConfiguration();
 const amqp = require('amqplib');
 
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'divlinkapp@gmail.com',
+    pass: 'nybz nunm lzyy ljwy'
+  }
+});
+
 
 /**
  * department service layer
@@ -24,6 +34,11 @@ const amqp = require('amqplib');
  */
 export class ProductServiceImpl implements ProductService {
   productDao: ProductDao = new ProductDaoImpl();
+
+  // constructor() {
+  //   // Call the cancelOrdersfromAdmin function every 5 seconds
+  //   setInterval(this.cancelOrdersfromAdmin, 30000);
+  // }
 
   /**
    * save new department
@@ -152,68 +167,110 @@ export class ProductServiceImpl implements ProductService {
     return cr;
   }
 
-//   /**
-//  * Increase the quantity of a product by the specified amount.
-//  * @param productId The ID of the product to update.
-//  * @param quantityToAdd The quantity to add to the current quantity.
-//  * @returns A CommonResponse indicating the success or failure of the operation.
-//  */
-//   async increaseProductQuantity(productId: number, quantityToAdd: number): Promise<CommonResponse> {
-//     let cr = new CommonResponse();
-//     try {
-//       // Retrieve the product by its ID
-//       const productResponse = await this.findById(productId);
-//       if (!productResponse) {
-//         cr.setStatus(false);
-//         cr.setExtra('Product not found');
-//         return cr;
-//       }
+  // async cancelOrdersfromAdmin() {
+  //   try {
+  //     const connection = await amqp.connect('amqp://localhost');
+  //     const channel = await connection.createChannel();
+  //     const queue = 'toProduct';
 
-//       // Extract the ProductDto from the response
-//       const productDto: ProductDto = productResponse.getExtra() as ProductDto;
+  //     await channel.assertQueue(queue, { durable: false });
 
-//       // Increment the quantity by the specified amount
-//       const currentQuantity: number = productDto.getQuantity();
-//       productDto.setQuantity(currentQuantity + quantityToAdd);
+  //     channel.consume(queue, async (msg) => {
+  //       try {
+  //         let products = JSON.parse(msg.content.toString());
+  //         let uuid = products.uuid;
+  //         let quantityToAdd = products.quantityToAdd;
 
-//       // Update the product with the new quantity
-//       const updateResponse = await this.update(productDto);
-//       if (updateResponse) {
-//         cr.setStatus(true);
-//         cr.setExtra('Product quantity updated successfully');
-//       } else {
-//         cr.setStatus(false);
-//         cr.setExtra('Failed to update product quantity');
-//       }
-//     } catch (error) {
-//       cr.setStatus(false);
-//       cr.setExtra(error.message);
-//       ErrorHandlerSup.handleError(error);
-//     }
-//     return cr;
-//   }
+  //         console.log(products);
+
+  //         // Assuming productDao is an instance property or injected dependency
+  //         const updatedProduct = await this.productDao.increaseQuantity(uuid, quantityToAdd);
+  //         console.log(updatedProduct);
+
+  //       } catch (error) {
+  //         console.error('Error processing message:', error);
+  //       }
+  //     }, { noAck: true });
+  //   } catch (error) {
+  //     console.error('Error connecting to RabbitMQ:', error);
+  //   }
+  // }
+
+  async productQueue(channel: any): Promise<CommonResponse> {
+    let cr = new CommonResponse();
+    try {
+
+      const queue = appConfig.getMessageQueueNameProduct();
+
+      await channel.assertQueue(queue, { durable: false });
+
+      channel.consume(queue, async (msg) => {
+
+        let products = JSON.parse(msg.content.toString());
+        let uuid = products.uuid;
+        let quantityToAdd = products.quantityToAdd;
+
+        await this.increaseProductQuantity(uuid, quantityToAdd);
+
+      }, { noAck: true });
+      cr.setStatus(true)
+    } catch (error) {
+      cr.setStatus(false);
+      cr.setExtra(error.message);
+      ErrorHandlerSup.handleError(error);
+    }
+    return cr;
+  }
+
+
+  async emailQueue(channel: any): Promise<CommonResponse> {
+    let cr = new CommonResponse();
+    try {
+
+      const queue = appConfig.getMessageQueueNameEmail();
+
+      await channel.assertQueue(queue, { durable: false });
+
+      channel.consume(queue, async (msg) => {
+
+        console.log('Received cancel order - Email:', msg.content.toString());
+        let orderId = msg.content.toString()
+        
+        await this.sendEmail(orderId)
+
+      }, { noAck: true });
+      cr.setStatus(true)
+    } catch (error) {
+      cr.setStatus(false);
+      cr.setExtra(error.message);
+      ErrorHandlerSup.handleError(error);
+    }
+    return cr;
+  }
+
 
 
   async increaseProductQuantity(uuid: string, quantityToAdd: number): Promise<CommonResponse> {
     let cr = new CommonResponse();
     try {
-        // Call the DAO method with the UUID
-        const updatedProduct = await this.productDao.increaseQuantity(uuid, quantityToAdd);
+      // Call the DAO method with the UUID
+      const updatedProduct = await this.productDao.increaseQuantity(uuid, quantityToAdd);
 
-        if (updatedProduct) {
-            cr.setStatus(true);
-            cr.setExtra('Product quantity updated successfully');
-        } else {
-            cr.setStatus(false);
-            cr.setExtra('Product not found');
-        }
-    } catch (error) {
+      if (updatedProduct) {
+        cr.setStatus(true);
+        cr.setExtra('Product quantity updated successfully');
+      } else {
         cr.setStatus(false);
-        cr.setExtra(error.message);
-        ErrorHandlerSup.handleError(error);
+        cr.setExtra('Product not found');
+      }
+    } catch (error) {
+      cr.setStatus(false);
+      cr.setExtra(error.message);
+      ErrorHandlerSup.handleError(error);
     }
     return cr;
-}
+  }
+
 
   async decreaseProductQuantity(quantityToReduce: any): Promise<CommonResponse> {
     let cr = new CommonResponse();
@@ -224,10 +281,28 @@ export class ProductServiceImpl implements ProductService {
     } catch (error) {
       cr.setStatus(false);
       cr.setExtra(error);
-      ErrorHandlerSup.handleError(error); 
+      ErrorHandlerSup.handleError(error);
     }
     return cr;
   }
+
+
+  async sendEmail(orderId) {
+    try {
+      let info = await transporter.sendMail({
+        from: 'divlinkapp@gmail.com',
+        to: "thanujadha20@gmail.com",
+        subject: 'Oder Rejected !',
+        text: 'Welcome to our service! Your order with order id - ' + orderId + ' canceled by owner.',
+      });
+
+      console.log('Email sent:', info.messageId);
+    } catch (error) {
+      console.error('Error sending email:', error);
+    }
+  }
+
+
 
 
 }

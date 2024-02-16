@@ -312,3 +312,69 @@
 [35m[39m
 2024-02-14 17:19:06:196 [35mhttp[39m: [35mPUT /service/master/product-increase/002 200 83 - 16.353 ms[39m
 [35m[39m
+2024-02-15 12:25:57:2557 [35mhttp[39m: [35mPUT /service/master/product-increase/001 200 83 - 164.812 ms[39m
+[35m[39m
+2024-02-15 12:25:57:2557 [35mhttp[39m: [35mPUT /service/master/product-increase/002 200 83 - 34.633 ms[39m
+[35m[39m
+2024-02-15 12:26:40:2640 [35mhttp[39m: [35mPUT /service/master/product-increase/001 200 83 - 36.654 ms[39m
+[35m[39m
+2024-02-15 12:26:40:2640 [35mhttp[39m: [35mPUT /service/master/product-increase/002 200 83 - 31.127 ms[39m
+[35m[39m
+2024-02-15 12:27:13:2713 [35mhttp[39m: [35mPUT /service/master/product-increase/001 200 83 - 14.253 ms[39m
+[35m[39m
+2024-02-15 12:27:13:2713 [35mhttp[39m: [35mPUT /service/master/product-increase/002 200 83 - 14.326 ms[39m
+[35m[39m
+2024-02-15 12:29:16:2916 [35mhttp[39m: [35mPUT /service/master/product-increase/001 200 83 - 35.456 ms[39m
+[35m[39m
+2024-02-15 12:29:16:2916 [35mhttp[39m: [35mPUT /service/master/product-increase/002 200 83 - 27.506 ms[39m
+[35m[39m
+2024-02-15 12:36:04:364 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 34.532 ms[39m
+[35m[39m
+2024-02-15 12:36:05:365 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 11.513 ms[39m
+[35m[39m
+2024-02-15 12:36:06:366 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 12.478 ms[39m
+[35m[39m
+2024-02-15 12:36:08:368 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 9.291 ms[39m
+[35m[39m
+2024-02-15 12:36:09:369 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 13.871 ms[39m
+[35m[39m
+2024-02-15 12:36:10:3610 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 9.741 ms[39m
+[35m[39m
+2024-02-15 12:36:12:3612 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 10.124 ms[39m
+[35m[39m
+2024-02-15 12:36:14:3614 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 8.435 ms[39m
+[35m[39m
+2024-02-15 12:36:15:3615 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 9.442 ms[39m
+[35m[39m
+2024-02-15 12:36:19:3619 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 8.555 ms[39m
+[35m[39m
+2024-02-15 15:37:42:3742 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 34.768 ms[39m
+[35m[39m
+2024-02-15 15:37:42:3742 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 11.051 ms[39m
+[35m[39m
+2024-02-15 15:37:43:3743 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 9.318 ms[39m
+[35m[39m
+2024-02-15 15:37:44:3744 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 11.364 ms[39m
+[35m[39m
+2024-02-15 15:37:44:3744 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 9.503 ms[39m
+[35m[39m
+2024-02-15 15:37:45:3745 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 12.679 ms[39m
+[35m[39m
+2024-02-15 15:37:45:3745 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 7.495 ms[39m
+[35m[39m
+2024-02-15 15:37:49:3749 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 7.184 ms[39m
+[35m[39m
+2024-02-15 15:37:49:3749 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 13.200 ms[39m
+[35m[39m
+2024-02-15 15:37:50:3750 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 8.011 ms[39m
+[35m[39m
+2024-02-15 15:37:50:3750 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 14.440 ms[39m
+[35m[39m
+2024-02-15 15:37:51:3751 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 9.196 ms[39m
+[35m[39m
+2024-02-15 15:37:51:3751 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 7.351 ms[39m
+[35m[39m
+2024-02-15 15:37:52:3752 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 10.343 ms[39m
+[35m[39m
+2024-02-15 15:37:52:3752 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 9.860 ms[39m
+[35m[39m
