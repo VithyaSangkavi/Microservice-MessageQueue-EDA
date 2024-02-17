@@ -25,6 +25,7 @@ import ConfirmationPassword from './components/resetPassword/ConfirmationPasswor
 import DashboardComponent from './components/dashboard/dashboard';
 
 import DisplayProducts  from './components/create_order/displayProducts'
+import adminOrderView from './components/admin_order_view/adminOrderView';
 
 import { loginAction } from './actions/auth/login_action';
 import { languageAction } from './actions/auth/login_action';
@@ -108,6 +109,8 @@ class App extends React.Component {
         <Switch>
           <RoleBasedRouting path="/resetPassword"><ResetPassword /></RoleBasedRouting>
           <RoleBasedRouting path="/confirmation"><ConfirmationPassword /></RoleBasedRouting>
+          <RoleBasedRouting path="/adminoderview"><adminOrderView /></RoleBasedRouting>
+
 
           <RoleBasedRouting path="/dashboard" exact roles={[usrRoles.CM]}><DashboardComponent/></RoleBasedRouting>
           <RoleBasedRouting path="/landing"><LandingPage handleLangObj={this.handleLangObj} langobj={this.props.langState}/></RoleBasedRouting>
