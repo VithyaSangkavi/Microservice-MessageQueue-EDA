@@ -10,6 +10,8 @@ exports.save = async (req: Request, res: Response, next: NextFunction) => {
     let orderDto = new OrderDto();
     let orderItemsDtoArray = [];
 
+    console.log("From FE : ", req.body.order)
+
     orderDto.filViaRequest(req.body.order);
 
     if (Array.isArray(req.body.orderItems) && req.body.orderItems.length > 0) {

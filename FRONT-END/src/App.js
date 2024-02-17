@@ -24,8 +24,12 @@ import ResetPassword from './components/resetPassword/ResetPassword';
 import ConfirmationPassword from './components/resetPassword/ConfirmationPassword';
 import DashboardComponent from './components/dashboard/dashboard';
 
+import DisplayProducts  from './components/create_order/displayProducts'
+
 import { loginAction } from './actions/auth/login_action';
 import { languageAction } from './actions/auth/login_action';
+
+
 
 
 class App extends React.Component {
@@ -107,8 +111,10 @@ class App extends React.Component {
 
           <RoleBasedRouting path="/dashboard" exact roles={[usrRoles.CM]}><DashboardComponent/></RoleBasedRouting>
           <RoleBasedRouting path="/landing"><LandingPage handleLangObj={this.handleLangObj} langobj={this.props.langState}/></RoleBasedRouting>
-          <RoleBasedRouting exact path="/"><SignInComponent langobj={this.props.langState} handleSignObj={this.handleSignObj}/></RoleBasedRouting>
+          <RoleBasedRouting exact path="/"><DisplayProducts langobj={this.props.langState} handleSignObj={this.handleSignObj}/></RoleBasedRouting>
           <RoleBasedRouting><NoMatchComponent signedobj={this.props.signState} /></RoleBasedRouting>
+
+          <RoleBasedRouting exact path="/"><DisplayProducts langobj={this.props.langState} handleSignObj={this.handleSignObj}/></RoleBasedRouting>
         </Switch>
         
       </div> 

@@ -1,11 +1,14 @@
 import { alertService } from './alert.service';
-import { basePath } from './common.service';
+import { basePath_product } from './common.service';
+import { basePath_order } from './common.service';
 import { persistService } from './persist.service';
 import { validateSets } from '../components/UiComponents/ValidateSets';
 
 const submitCollection = {
-    checkstat: { ptype: "GET", url: basePath+"/service/system/Health", queryparam: false, data: false },
-    signin:{ ptype: "POST", url: basePath+"/service/login/signIn", queryparam: false, data: true },
+    // checkstat: { ptype: "GET", url: basePath+"/service/system/Health", queryparam: false, data: false },
+    // signin:{ ptype: "POST", url: basePath+"/service/login/signIn", queryparam: false, data: true },
+
+    displayproducts: { ptype: "GET", url: basePath_product+"/service/master/product-find-all", queryparam: false, data:true, auth: true },
     
 }
 

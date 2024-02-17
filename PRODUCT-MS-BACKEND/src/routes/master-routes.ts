@@ -10,7 +10,7 @@ const router: Router = express.Router();
 router.post("/product-save", productController.save);
 router.post("/product-update", productController.update);
 router.post("/product-delete", productController.delete);
-router.post("/product-find-all", productController.findAll);
+router.get("/product-find-all", productController.findAll);
 router.get("/product-find-by-id", productController.findById);
 router.put('/product-decrease', productController.decreaseQuantity);
 router.put('/product-increase/:uuid', productController.increaseQuantity);

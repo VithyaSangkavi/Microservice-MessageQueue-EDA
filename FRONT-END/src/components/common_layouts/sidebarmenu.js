@@ -5,7 +5,6 @@ import { HomeIcon, } from '@primer/octicons-react';
 
 import { cversion } from '../../_services/common.service';
 
-//import planigologo from '../../assets/img/logo_wt.png';
 import placeuser from '../../assets/img/place_user.jpg';
 
 function SidebarMenu(props) {
