@@ -672,3 +672,7 @@
 [35m[39m
 2024-02-16 15:02:56:256 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 90.461 ms[39m
 [35m[39m
+2024-02-17 08:47:37:4737 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 21.454 ms[39m
+[35m[39m
+2024-02-17 08:50:18:5018 [35mhttp[39m: [35mPUT /service/master/product-decrease 200 46 - 39.518 ms[39m
+[35m[39m

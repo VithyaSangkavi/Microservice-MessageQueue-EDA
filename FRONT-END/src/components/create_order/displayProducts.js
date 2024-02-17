@@ -46,27 +46,31 @@ function DisplayProducts() {
   }, []);
 
 
-
-  // Function to handle adding a product to the selected products
   const handleAddToCart = (product) => {
-    const isAlreadyInCart = selectedProducts.find(item => item.productId === product.productId);
+    if (product.quantitySelected > 0) {
+      const existingProductIndex = selectedProducts.findIndex(
+        (item) => item.productId === product.productId
+      );
 
-    if (isAlreadyInCart) {
-      // If the product is already in the cart, update its quantity
-      const updatedProducts = selectedProducts.map(item => {
-        if (item.productId === product.productId) {
-          return { ...item, quantity: item.quantity + 1 };
-        }
-        return item;
-      });
-      setSelectedProducts(updatedProducts);
+      if (existingProductIndex !== -1) {
+        // Product already exists in the cart, update the quantity
+        const updatedProducts = [...selectedProducts];
+        updatedProducts[existingProductIndex].quantity += product.quantitySelected;
+        setSelectedProducts(updatedProducts);
+      } else {
+        // Product does not exist in the cart, add it
+        setSelectedProducts([
+          ...selectedProducts,
+          { ...product, quantity: product.quantitySelected },
+        ]);
+      }
+
+      setTotalPrice(totalPrice + product.price * product.quantitySelected);
     } else {
-      // If the product is not in the cart, add it with quantity 1
-      setSelectedProducts([...selectedProducts, { ...product, quantity: 1 }]);
+      alertService.error("Please select a quantity.");
     }
-
-    setTotalPrice(totalPrice + product.price);
   };
+  ;
 
   return (
     <div>
@@ -91,7 +95,17 @@ function DisplayProducts() {
                   <h3>{product.name}</h3>
                   <p className="price">MRP - Rs.{product.price}</p>
                   <p className="description">{product.description}</p>
-                  <button className="buy-button" onClick={() => handleAddToCart(product)}>Add to Order</button>
+                  <div>
+                    <input
+                      type="number"
+                      min="1"
+                      defaultValue="0"
+                      onChange={(e) => product.quantitySelected = parseInt(e.target.value)}
+                      className="input-field"
+                    />
+
+                    <button className="buy-button" onClick={() => handleAddToCart(product)}>Add to Order</button>
+                  </div>
                 </div>
               </div>
             ))}
