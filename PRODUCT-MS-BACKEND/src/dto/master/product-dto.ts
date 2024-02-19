@@ -11,7 +11,8 @@ export class ProductDto extends PaginationDto {
   private status: Status;
   private createdDate: Date;
   private updatedDate: Date;
-
+  private uuid : string;
+  private image: string;
   filViaRequest(body) {
 
     if (body.productId) {
@@ -23,6 +24,8 @@ export class ProductDto extends PaginationDto {
     this.quantity = body.quantity;
     this.createdDate = body.createdDate;
     this.updatedDate = body.updatedDate;
+    this.uuid = body.uuid
+    this.image = body.image
 
     if (body.startIndex && body.maxResult) {
       this.setStartIndex(body.startIndex);
@@ -39,6 +42,8 @@ export class ProductDto extends PaginationDto {
     this.status = productModel.status;
     this.createdDate = productModel.createdDate;
     this.updatedDate = productModel.updatedDate;
+    this.uuid = productModel.uuid;
+    this.image = productModel.image;
   }
 
   public getProductId(): number {
@@ -95,6 +100,22 @@ export class ProductDto extends PaginationDto {
 
   public setUpdatedDate(updatedDate: Date): void {
     this.updatedDate = updatedDate;
+  }
+
+  public getUuid(): string {
+    return this.uuid;
+  }
+
+  public setUuid(uuid: string): void {
+    this.uuid = uuid;
+  }
+
+  public getImage(): string {
+    return this.image;
+  }
+
+  public setImage(image: string): void {
+    this.image = image;
   }
 
   public getStatus(): Status {

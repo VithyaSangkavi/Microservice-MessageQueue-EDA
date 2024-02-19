@@ -60,6 +60,8 @@ export class AppConfigurationsDto {
   private messageQueueType: string;
   private messageQueueUsername: string;
   private messageQueuePassword: string;
+  private messageQueueNameEmail: string;
+  private messageQueueNameProduct: string;
 
   //redis
   private redisPort:number;
@@ -109,6 +111,22 @@ export class AppConfigurationsDto {
 
   public setMessageQueueServerUrl(messageQueueServerUrl: string): void {
     this.messageQueueServerUrl = messageQueueServerUrl;
+  }
+
+  public getMessageQueueNameEmail(): string {
+    return this.messageQueueNameEmail;;
+  }
+
+  public setMessageQueueNameEmail(messageQueueNameEmail: string): void {
+    this.messageQueueNameEmail = messageQueueNameEmail;
+  }
+
+  public getMessageQueueNameProduct(): string {
+    return this.messageQueueNameProduct;
+  }
+
+  public setMessageQueueNameProduct(messageQueueNameProduct: string): void {
+    this.messageQueueNameProduct = messageQueueNameProduct;
   }
 
   public getAwsProductCashImageURL(): string {

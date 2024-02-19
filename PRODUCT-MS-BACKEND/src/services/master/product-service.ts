@@ -9,4 +9,9 @@ export interface ProductService {
   findById(productId: number): Promise<CommonResponse>;
   increaseProductQuantity(uuid: string, quantityToAdd: number): Promise<CommonResponse>;
   decreaseProductQuantity(uuid: string, quantityToDecrease: number): Promise<CommonResponse>;
+  decreaseProductQuantity(quantityToReduce: any): Promise<CommonResponse>;
+  increaseProductQuantity(uuid: string, quantityToAdd: number): Promise<CommonResponse>;
+  productQueue(channel: any): Promise<CommonResponse>
+  emailQueue(channel: any): Promise<CommonResponse>
+  // cancelOrdersfromAdmin();
 }

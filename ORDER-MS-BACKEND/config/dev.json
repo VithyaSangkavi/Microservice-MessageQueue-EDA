@@ -6,7 +6,7 @@
   "db": {
     "host": "localhost",
     "userName": "root",
-    "password": "Vithya24",
+    "password": "1234",
     "db":"order_db",
     "port":"3306"
   },
@@ -39,7 +39,7 @@
 
   "ms": {
     "order": "http://localhost:4000/",
-    "product": "http://localhost:4001/",
+    "userManagement": "http://127.0.0.1/",
     "notification": "http://127.0.0.1/"
   },
   

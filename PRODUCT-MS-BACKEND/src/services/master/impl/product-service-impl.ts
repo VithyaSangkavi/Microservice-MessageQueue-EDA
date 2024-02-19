@@ -3,6 +3,8 @@ import { ProductDao } from "../../../dao/product-dao";
 import { ProductDaoImpl } from "../../../dao/impl/product-dao-impl";
 import { ProductDto } from "../../../dto/master/product-dto";
 import { CommonResSupport } from "../../../support/common-res-sup";
+const nodemailer = require('nodemailer');
+
 import { ErrorHandlerSup } from "../../../support/error-handler-sup";
 import { ProductService } from "../product-service";
 import MicroServiceHttp from "../../../support/microservice/micro-service-http-impl";
@@ -17,6 +19,14 @@ const environmentConfiguration = new EnvironmentConfiguration();
 const appConfig = environmentConfiguration.readAppConfiguration();
 const amqp = require('amqplib');
 
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'divlinkapp@gmail.com',
+    pass: 'nybz nunm lzyy ljwy'
+  }
+});
+
 
 /**
  * department service layer
@@ -24,6 +34,11 @@ const amqp = require('amqplib');
  */
 export class ProductServiceImpl implements ProductService {
   productDao: ProductDao = new ProductDaoImpl();
+
+  // constructor() {
+  //   // Call the cancelOrdersfromAdmin function every 5 seconds
+  //   setInterval(this.cancelOrdersfromAdmin, 30000);
+  // }
 
   /**
    * save new department
@@ -34,17 +49,10 @@ export class ProductServiceImpl implements ProductService {
     let cr = new CommonResponse();
     try {
 
-      let newProduct = await this.productDao.save(productDto);
-
-      const path = appConfig.getTaskMicroServicePath() + HttpMSServicePath.taskCreate
-
-      const a: CommonResponse = await httpReq.call(path, Mathod.GET, { productId: 1 }, null);
-
-      if (a.isStatus()) {
-
-      }
+      let newProduct = await this.productDao.save(productDto)
 
       cr.setStatus(true);
+      cr.setExtra(newProduct)
     } catch (error) {
       cr.setStatus(false);
       cr.setExtra(error);
@@ -52,6 +60,7 @@ export class ProductServiceImpl implements ProductService {
     }
     return cr;
   }
+
   /**
    * update product
    * @param productDto
@@ -199,6 +208,90 @@ export class ProductServiceImpl implements ProductService {
   //     return cr;
   //   }
 
+  //     await channel.assertQueue(queue, { durable: false });
+
+  //     channel.consume(queue, async (msg) => {
+  //       try {
+  //         let products = JSON.parse(msg.content.toString());
+  //         let uuid = products.uuid;
+  //         let quantityToAdd = products.quantityToAdd;
+
+  //         console.log(products);
+
+  //         // Assuming productDao is an instance property or injected dependency
+  //         const updatedProduct = await this.productDao.increaseQuantity(uuid, quantityToAdd);
+  //         console.log(updatedProduct);
+
+  //       } catch (error) {
+  //         console.error('Error processing message:', error);
+  //       }
+  //     }, { noAck: true });
+  //   } catch (error) {
+  //     console.error('Error connecting to RabbitMQ:', error);
+  //   }
+  // }
+
+  async productQueue(channel: any): Promise<CommonResponse> {
+    let cr = new CommonResponse();
+    try {
+      // Call the DAO method with the UUID
+      const updatedProduct = await this.productDao.increaseQuantity(uuid, quantityToAdd);
+
+      if (updatedProduct) {
+        cr.setStatus(true);
+        cr.setExtra('Product quantity updated successfully');
+      } else {
+        cr.setStatus(false);
+        cr.setExtra('Product not found');
+      }
+
+      const queue = appConfig.getMessageQueueNameProduct();
+
+      await channel.assertQueue(queue, { durable: false });
+
+      channel.consume(queue, async (msg) => {
+
+        let products = JSON.parse(msg.content.toString());
+        let uuid = products.uuid;
+        let quantityToAdd = products.quantityToAdd;
+
+        await this.increaseProductQuantity(uuid, quantityToAdd);
+
+      }, { noAck: true });
+      cr.setStatus(true)
+    } catch (error) {
+      cr.setStatus(false);
+      cr.setExtra(error.message);
+      ErrorHandlerSup.handleError(error);
+    }
+    return cr;
+  }
+
+
+  async emailQueue(channel: any): Promise<CommonResponse> {
+    let cr = new CommonResponse();
+    try {
+
+      const queue = appConfig.getMessageQueueNameEmail();
+
+      await channel.assertQueue(queue, { durable: false });
+
+      channel.consume(queue, async (msg) => {
+
+        console.log('Received cancel order - Email:', msg.content.toString());
+        let orderId = msg.content.toString()
+        
+        await this.sendEmail(orderId)
+
+      }, { noAck: true });
+      cr.setStatus(true)
+    } catch (error) {
+      cr.setStatus(false);
+      cr.setExtra(error.message);
+      ErrorHandlerSup.handleError(error);
+    }
+    return cr;
+  }
 
   async increaseProductQuantity(uuid: string, quantityToAdd: number): Promise<CommonResponse> {
     let cr = new CommonResponse();
@@ -221,25 +314,38 @@ export class ProductServiceImpl implements ProductService {
     return cr;
   }
 
-  async decreaseProductQuantity(uuid: string, quantityToDecrease: number): Promise<CommonResponse> {
+
+  async decreaseProductQuantity(quantityToReduce: any): Promise<CommonResponse> {
     let cr = new CommonResponse();
     try {
-      // Call the DAO method with the UUID
-      const updatedProduct = await this.productDao.productQuantityDecrease(uuid, quantityToDecrease);
+      await this.productDao.decreaseQuantity(quantityToReduce);
 
-      if (updatedProduct) {
-        cr.setStatus(true);
-        cr.setExtra('Product quantity updated successfully');
-      } else {
-        cr.setStatus(false);
-        cr.setExtra('Product not found');
-      }
+      cr.setStatus(true);
     } catch (error) {
       cr.setStatus(false);
-      cr.setExtra(error.message);
+      cr.setExtra(error);
       ErrorHandlerSup.handleError(error);
     }
     return cr;
   }
+
+
+  async sendEmail(orderId) {
+    try {
+      let info = await transporter.sendMail({
+        from: 'divlinkapp@gmail.com',
+        to: "thanujadha20@gmail.com",
+        subject: 'Oder Rejected !',
+        text: 'Welcome to our service! Your order with order id - ' + orderId + ' canceled by owner.',
+      });
+
+      console.log('Email sent:', info.messageId);
+    } catch (error) {
+      console.error('Error sending email:', error);
+    }
+  }
+
+
+
 
 }

@@ -101,16 +101,16 @@ exports.update = async (req: Request, res: Response, next: NextFunction) => {
   exports.increaseQuantity = async (req: Request, res: Response, next: NextFunction) => {
     try {
         // Extract the UUID and quantity to add from the request
-        const productUuid = req.params.productUuid;
+        const uuid = req.params.uuid;
         const quantityToAdd = parseInt(req.body.quantityToAdd);
 
         // Validate the input
-        if (!productUuid || !quantityToAdd || isNaN(quantityToAdd)) {
+        if (!uuid || !quantityToAdd || isNaN(quantityToAdd)) {
             return res.status(400).json({ error: 'Invalid product UUID or quantity to add' });
         }
 
         // Call the service layer to increase the product quantity
-        const response = await ProductService.increaseProductQuantity(productUuid, quantityToAdd);
+        const response = await ProductService.increaseProductQuantity(uuid, quantityToAdd);
 
         // Send the response back to the client
         res.json(response);
