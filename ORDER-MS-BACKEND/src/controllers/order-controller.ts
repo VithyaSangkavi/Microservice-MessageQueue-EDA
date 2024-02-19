@@ -44,3 +44,14 @@ exports.cancel = async (req: Request, res: Response, next: NextFunction) => {
     next(error);
   }
 };
+
+exports.fetchOrders = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    let cr = await orderService.fetchAllOrders();
+
+    res.send(cr);
+  } catch (error) {
+    next(error);
+  }
+};
+

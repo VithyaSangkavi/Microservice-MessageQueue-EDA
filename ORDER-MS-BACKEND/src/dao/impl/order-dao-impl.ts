@@ -13,7 +13,7 @@ import axios from "axios";
  * contain crud method
  */
 export class OrderDaoImpl implements OrderDao {
-  
+
   async save(orderDto: OrderDto, orderItemsDto: OrderItemsDto[]): Promise<any> {
     let orderRepo = getConnection().getRepository(OrderEntity);
     let orderItemsRepo = getConnection().getRepository(OrderItemsEntity);
@@ -38,6 +38,25 @@ export class OrderDaoImpl implements OrderDao {
 
     return { savedOrder, savedOrderItems };
   }
+
+
+  async findAllOrders(): Promise<any> {
+    try {
+      const orders = await getConnection()
+      .getRepository(OrderEntity)
+      .createQueryBuilder("order")
+      .leftJoinAndSelect("order.orderItems", "orderItem")
+      .where("order.status = :status", { status: Status.Online }) 
+      .orderBy("order.createdDate", "DESC") 
+      .getMany();
+  
+      return orders;
+    } catch (error) {
+      throw new Error(`Error fetching orders: ${error.message}`);
+    }
+  }
+  
+
 
 
   async cancel(orderId: number): Promise<any> {
@@ -72,7 +91,7 @@ export class OrderDaoImpl implements OrderDao {
     orderModel.status = Status.Online;
     orderModel.createdDate = new Date();
     orderModel.updatedDate = new Date();
-    
+
   }
 
   async prepareOrderItemsModel(orderItemsModel: OrderItemsEntity, orderItemsDto: OrderItemsDto) {

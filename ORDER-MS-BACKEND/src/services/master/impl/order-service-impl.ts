@@ -68,6 +68,23 @@ export class OrderServiceImpl implements OrderService {
     return cr;
   }
 
+  async fetchAllOrders(): Promise<CommonResponse> {
+    let cr = new CommonResponse();
+    try {
+      const allOrders = await this.orderDao.findAllOrders();
+
+      cr.setStatus(true);
+      cr.setExtra(allOrders);
+    } catch (error) {
+      cr.setStatus(false);
+      cr.setExtra(error);
+      ErrorHandlerSup.handleError(error);
+      throw error;
+    }
+    return cr;
+  }
+
+
   async cancel(orderId: number): Promise<CommonResponse> {
     const queues = ["toProduct", "toEmail"];
     const uuidsQuantities: Record<string, number> = {};

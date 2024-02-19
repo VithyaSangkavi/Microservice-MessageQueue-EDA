@@ -4,6 +4,7 @@ import { OrderEntity } from "../entity/master/order-entity";
 import { OrderItemsEntity } from "../entity/master/order-items-entity";
 
 export interface OrderDao {
+  findAllOrders(): Promise<any>;
   save(orderDto: OrderDto, orderItemsDto: OrderItemsDto[]): Promise<any>;
   cancel(orderId: number): Promise<any>;
 
