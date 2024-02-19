@@ -7,8 +7,8 @@ export class OrderItemsDto extends PaginationDto {
   private quantity: number;
   private createdDate: Date;
   private updatedDate: Date;
+  private uuid: string;
   private status: Status;
-  private productUuid: string;
   private orderId: number;
 
   filViaRequest(body) {
@@ -18,8 +18,9 @@ export class OrderItemsDto extends PaginationDto {
     this.quantity = body.quantity;
     this.createdDate = body.createdDate;
     this.updatedDate = body.updatedDate;
+    this.uuid = body.uuid;
     this.status = body.status;
-    this.productUuid = body.productUuid;
+    this.uuid = body.uuid;
     this.orderId = body.orderId;
 
     if (body.startIndex && body.maxResult) {
@@ -33,8 +34,9 @@ export class OrderItemsDto extends PaginationDto {
     this.quantity = orderItemModel.quantity;
     this.createdDate = orderItemModel.createdDate;
     this.updatedDate = orderItemModel.updatedDate;
+    this.uuid = orderItemModel.uuid
     this.status = orderItemModel.status;
-    this.productUuid = orderItemModel.productUuid;
+    this.uuid = orderItemModel.uuid;
     this.orderId = orderItemModel.order.id;
   }
 
@@ -78,12 +80,12 @@ export class OrderItemsDto extends PaginationDto {
     this.status = status;
   }
 
-  public getProductUuid(): string {
-    return this.productUuid;
+  public getUuid(): string {
+    return this.uuid;
   }
 
-  public setProductUuid(productUuid: string): void{
-    this.productUuid = productUuid;
+  public setUuid(uuid: string): void {
+    this.uuid = uuid;
   }
 
   public getOrderId(): number {

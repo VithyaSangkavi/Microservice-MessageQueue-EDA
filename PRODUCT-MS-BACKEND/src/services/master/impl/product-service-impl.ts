@@ -17,7 +17,6 @@ const environmentConfiguration = new EnvironmentConfiguration();
 const appConfig = environmentConfiguration.readAppConfiguration();
 const amqp = require('amqplib');
 
-
 /**
  * department service layer
  *
@@ -198,7 +197,6 @@ export class ProductServiceImpl implements ProductService {
   //     }
   //     return cr;
   //   }
-
 
   async increaseProductQuantity(uuid: string, quantityToAdd: number): Promise<CommonResponse> {
     let cr = new CommonResponse();

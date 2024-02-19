@@ -57,7 +57,6 @@ export class OrderServiceImpl implements OrderService {
     return cr;
   }
 
-
   async cancel(orderId: number): Promise<CommonResponse> {
 
     const productUuidsQuantities: Record<string, number> = {};
@@ -86,7 +85,6 @@ export class OrderServiceImpl implements OrderService {
           };
 
           const path = `${HttpMSServicePath.orderCancellation}/${productUuid}`;
-
 
           //const path = appConfig.getTaskMicroServicePath() + HttpMSServicePath.orderCancellation + '/' + productUuid;
 
@@ -246,6 +244,5 @@ export class OrderServiceImpl implements OrderService {
     }
     return cr;
   }
-
 
 }

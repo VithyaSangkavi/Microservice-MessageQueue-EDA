@@ -30,4 +30,7 @@ export class ProductEntity {
 
   @Column()
   updatedDate: Date;
+
+  @Column()
+  image: string;
 }

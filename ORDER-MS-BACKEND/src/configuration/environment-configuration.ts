@@ -33,7 +33,7 @@ export class EnvironmentConfiguration {
 
     //micro service
     appConfig.setTaskMicroServicePath(process.env.ms_task || config.get("ms.order"));
-    appConfig.setProductMicroServicePath(process.env.ms_userManagement || config.get("ms.product"));
+    // appConfig.setProductMicroServicePath(process.env.ms_userManagement || config.get("ms.product"));
     // appConfig.setNotificationMicroServicePath(process.env.ms_notification || config.get("ms.notification"));
 
     //message Queue

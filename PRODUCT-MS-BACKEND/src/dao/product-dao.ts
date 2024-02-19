@@ -8,6 +8,7 @@ export interface ProductDao {
   findAll(productDto: ProductDto): Promise<ProductEntity[]>;
   findById(productId: number): Promise<ProductEntity>;
   findByName(name: String): Promise<ProductEntity>;
+  decreaseQuantity(quantityToReduce: any): Promise<any>;
   increaseQuantity(uuid: string, quantityToAdd: number): Promise<ProductEntity | null>;
   productQuantityDecrease(uuid: string, quantityToDecrease: number): Promise<ProductEntity | null>
 }

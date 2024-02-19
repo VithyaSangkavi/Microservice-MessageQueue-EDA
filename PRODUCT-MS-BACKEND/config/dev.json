@@ -6,7 +6,7 @@
   "db": {
     "host": "localhost",
     "userName": "root",
-    "password": "Vithya24",
+    "password": "1234",
     "db":"product_db",
     "port":"3306"
   },
@@ -45,7 +45,9 @@
     "type" : "rabbitmq",
     "url" : "amqp://localhost",
     "username" : "guest",
-    "password" : "guest"
+    "password" : "guest",
+    "toEmail" : "toEmail",
+    "toProduct" : "toProduct"
   },
   
   "jwtSecret": "4574sfds@64537gs",
