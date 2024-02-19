@@ -306,3 +306,9 @@
 [35m[39m
 2024-02-16 14:35:05:355 [35mhttp[39m: [35mPUT /service/master/product-decrease/1 200 83 - 12.569 ms[39m
 [35m[39m
+2024-02-19 12:52:06:526 [35mhttp[39m: [35mPUT /service/master/product-increase/1 400 51 - 61.828 ms[39m
+[35m[39m
+2024-02-19 12:53:30:5330 [35mhttp[39m: [35mPUT /service/master/product-increase/1 400 51 - 1.245 ms[39m
+[35m[39m
+2024-02-19 12:58:34:5834 [35mhttp[39m: [35mPUT /service/master/product-increase/1 400 51 - 2.261 ms[39m
+[35m[39m
