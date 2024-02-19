@@ -14,7 +14,6 @@ let httpReq: MicroService = new MicroServiceHttp();
 const environmentConfiguration = new EnvironmentConfiguration();
 const appConfig = environmentConfiguration.readAppConfiguration();
 
-
 const transporter = nodemailer.createTransport({
   service: 'gmail', 
   auth: {
@@ -26,8 +25,6 @@ const transporter = nodemailer.createTransport({
   }
 
 });
-
-
 @NodeApplication
 export class Application {
   public run(port: Number): void {
@@ -35,111 +32,7 @@ export class Application {
   }
 }
 
-async function takeOrdersfromOrder() {
-
-  var num = 0
-
-  const connection = await amqp.connect('amqp://localhost');
-  const channel = await connection.createChannel();
-  const queue = 'ordersToProduct';
-
-  await channel.assertQueue(queue, { durable: false });
-
-  channel.consume(queue, (msg) => {
-      console.log('Received order:', msg.content.toString());
-  
-      num = num + 1;
-      console.log(num);
-      
-  }, { noAck: true });
-  
-}
-
-async function cancelOrdersfromOrderCancellation() {
-
-  var num = 0
-
-  const connection = await amqp.connect('amqp://localhost');
-  const channel = await connection.createChannel();
-  const queue = 'order_cancellation_queue';
-
-  await channel.assertQueue(queue, { durable: true });
-
-  channel.consume(queue, (msg) => {
-      console.log('Received cancel order:', msg.content.toString());
-  
-      num = num + 1;
-      console.log(num);
-      
-  }, { noAck: true });
-  
-}
-
-async function cancelOrdersfromAdmin() {
-
-
-  const connection = await amqp.connect('amqp://localhost');
-  const channel = await connection.createChannel();
-  const queue = 'toProduct';
-
-  await channel.assertQueue(queue, { durable: false });
-
-  channel.consume(queue, async (msg) => {
-    
-      let products = JSON.parse(msg.content.toString());
-      let uuid = products.uuid;
-
-      const payload = {
-        quantityToAdd: products.quantityToAdd,
-      };
-
-      console.log(products);
-
-      const path = `${HttpMSServicePath.orderCancellation}/${uuid}`;
-      const a = await httpReq.call(
-          path,
-          Mathod.PUT,
-          payload,
-          null
-        );
-
-  }, { noAck: true });
-}
-
-async function cancelOrdersfromEmail() {
-
-
-  const connection = await amqp.connect('amqp://localhost');
-  const channel = await connection.createChannel();
-  const queue = 'toEmail';
-
-  await channel.assertQueue(queue, { durable: false });
-
-  channel.consume(queue, (msg) => {
-      console.log('Received cancel order - Email:', msg.content.toString());
-      let orderId = msg.content.toString()
-      sendEmail(orderId)
-  }, { noAck: true });
-  
-}
-
-async function sendEmail(orderId) {
-  try {
-      let info = await transporter.sendMail({
-          from: 'divlinkapp@gmail.com',
-          to: "thanujadha20@gmail.com",
-          subject: 'Oder Rejected !',
-          text: 'Welcome to our service! Your order with order id - ' + orderId + ' canceled by owner.', 
-      });
-
-      console.log('Email sent:', info.messageId);
-  } catch (error) {
-      console.error('Error sending email:', error);
-  }
-}
-
 async function confirmOrderEmail() {
-
 
   const connection = await amqp.connect('amqp://localhost');
   const channel = await connection.createChannel();
@@ -152,20 +45,28 @@ async function confirmOrderEmail() {
       let orderInfo = JSON.parse(msg.content.toString());
       let orderId = orderInfo.id;
       let totalAmount = orderInfo.total;
+      let emailAddress = orderInfo.email;
+      let name = orderInfo.customerName;
       console.log('order id -> app.ts: ', orderId)
-      sendEmailOrderConfirmation(orderId, totalAmount)
+      sendEmailOrderConfirmation(orderId, totalAmount, emailAddress, name)
   }, { noAck: true });
   
 }
 
-
-async function sendEmailOrderConfirmation(orderId, totalAmount) {
+async function sendEmailOrderConfirmation(orderId, totalAmount, emailAddress, name) {
   try {
       let info = await transporter.sendMail({
           from: 'divlinkapp@gmail.com',
-          to: "vithyasangkavi@gmail.com",
+          to: emailAddress,
           subject: 'Order Confirmation !',
-          text: 'Welcome to our service! Your order with order id ' + orderId + ' has been confirmed successfully. The total amount for your order is Rs. ' + totalAmount + '.00', 
+          // text: 'Welcome to our service! Your order with order id ' + orderId + ' has been confirmed successfully. The total amount for your order is Rs. ' + totalAmount + '.00', 
+          html: `
+              <p>Dear ${name},</p>
+              <p>Welcome to our service!</p>
+              <p>Your order with <strong>order id ${orderId}</strong> has been confirmed successfully.</p>
+              <p>The total amount for your order is <strong>Rs.${totalAmount}.00</strong>.</p>
+              <p>Thank you for choosing us!</p>
+          `,
       });
 
       console.log('Email sent:', info.messageId);
@@ -174,9 +75,4 @@ async function sendEmailOrderConfirmation(orderId, totalAmount) {
   }
 }
 
-
-takeOrdersfromOrder()
-cancelOrdersfromOrderCancellation()
-cancelOrdersfromAdmin()
-cancelOrdersfromEmail()
-confirmOrderEmail()
+confirmOrderEmail();

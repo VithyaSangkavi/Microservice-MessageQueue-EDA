@@ -119,3 +119,25 @@ exports.update = async (req: Request, res: Response, next: NextFunction) => {
         next(error);
     }
 };
+
+exports.decreaseProductQuantity = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+      // Extract the UUID and quantity to add from the request
+      const productUuid = req.params.productUuid;
+      const quantityToDecrease = parseInt(req.body.quantityToDecrease);
+
+      // Validate the input
+      if (!productUuid || !quantityToDecrease || isNaN(quantityToDecrease)) {
+          return res.status(400).json({ error: 'Invalid product UUID or quantity to add' });
+      }
+
+      // Call the service layer to increase the product quantity
+      const response = await ProductService.decreaseProductQuantity(productUuid, quantityToDecrease);
+
+      // Send the response back to the client
+      res.json(response);
+  } catch (error) {
+      // Pass the error to the error handling middleware
+      next(error);
+  }
+};

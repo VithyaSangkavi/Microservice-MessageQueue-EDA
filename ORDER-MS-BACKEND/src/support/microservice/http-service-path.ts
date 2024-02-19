@@ -7,4 +7,5 @@ const PRODUCTBUCKET = appConfig.getProductDataImportBucket();
 
 export default class HttpMSServicePath {
     static orderCancellation: string = "http://localhost:4000/service/master/product-increase";
+    static confirmOrder: string ="http://localhost:4000/service/master/product-decrease";
 }

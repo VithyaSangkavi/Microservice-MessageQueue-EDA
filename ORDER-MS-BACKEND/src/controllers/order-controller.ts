@@ -44,3 +44,15 @@ exports.updateOrderStatus = async (req: Request, res: Response, next: NextFuncti
     next(error);
   }
 };
+
+exports.confirmOrder = async (req: Request, res: Response, next: NextFunction) => {
+  try{
+    let orderId = req.query.orderId;
+
+    let cr = await orderService.confirmOrder(Number(orderId));
+
+    res.send(cr);
+  } catch (error) {
+    next (error);
+  }
+};

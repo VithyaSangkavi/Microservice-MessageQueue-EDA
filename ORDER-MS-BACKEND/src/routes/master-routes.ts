@@ -8,5 +8,6 @@ const router: Router = express.Router();
 router.post("/saveOrder", orderController.save);
 router.post("/cancelOrder", orderController.cancel);
 router.put("/updateOrderStatus/:orderId", orderController.updateOrderStatus);
+router.post("/confirmOrder", orderController.confirmOrder);
 
 module.exports = router;

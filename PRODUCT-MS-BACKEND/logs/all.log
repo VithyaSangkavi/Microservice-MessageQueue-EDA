@@ -146,3 +146,25 @@
 [35m[39m
 2024-02-14 11:11:02:112 [35mhttp[39m: [35mPUT /service/master/product-increase/3 200 83 - 16.754 ms[39m
 [35m[39m
+2024-02-15 12:41:10:4110 [35mhttp[39m: [35mPUT /service/master/product-increase/1 200 83 - 148.313 ms[39m
+[35m[39m
+2024-02-15 12:41:10:4110 [35mhttp[39m: [35mPUT /service/master/product-increase/3 200 83 - 11.742 ms[39m
+[35m[39m
+2024-02-16 10:51:02:512 [35mhttp[39m: [35mPUT /service/master/product-decrease/1 200 83 - 62.634 ms[39m
+[35m[39m
+2024-02-16 10:51:52:5152 [35mhttp[39m: [35mPUT /service/master/product-decrease/1 200 83 - 40.847 ms[39m
+[35m[39m
+2024-02-16 10:56:01:561 [35mhttp[39m: [35mPUT /service/master/product-decrease/1 200 83 - 41.248 ms[39m
+[35m[39m
+2024-02-16 14:23:24:2324 [35mhttp[39m: [35mPUT /service/master/product-decrese/2 404 171 - 194.269 ms[39m
+[35m[39m
+2024-02-16 14:30:15:3015 [35mhttp[39m: [35mPUT /service/master/product-decrese/2 404 171 - 3.614 ms[39m
+[35m[39m
+2024-02-16 14:32:22:3222 [35mhttp[39m: [35mPUT /service/master/product-decrease/2 200 83 - 193.576 ms[39m
+[35m[39m
+2024-02-16 14:32:23:3223 [35mhttp[39m: [35mPUT /service/master/product-decrease/1 200 83 - 26.064 ms[39m
+[35m[39m
+2024-02-16 14:35:05:355 [35mhttp[39m: [35mPUT /service/master/product-decrease/2 200 83 - 12.083 ms[39m
+[35m[39m
+2024-02-16 14:35:05:355 [35mhttp[39m: [35mPUT /service/master/product-decrease/1 200 83 - 12.569 ms[39m
+[35m[39m
