@@ -32,10 +32,43 @@ export class OrderServiceImpl implements OrderService {
    * @param orderDto
    * @returns
    */
-  async save(
-    orderDto: OrderDto,
-    orderItemsDto: OrderItemsDto[]
-  ): Promise<CommonResponse> {
+  // async save(
+  //   orderDto: OrderDto,
+  //   orderItemsDto: OrderItemsDto[]
+  // ): Promise<CommonResponse> {
+  //   let cr = new CommonResponse();
+  //   try {
+  //     // save new order
+  //     let newOrder = await this.orderDao.save(orderDto, orderItemsDto);
+
+  //     const connection = await amqp.connect("amqp://localhost");
+  //     const channel = await connection.createChannel();
+  //     const queue = "ordersToProduct";
+
+  //     console.log(quantityToReduce);
+
+  //     const path =
+  //       appConfig.getTaskMicroServicePath() + HttpMSServicePath.createOrder;
+  //     // const path = 'http://localhost:4000/service/master/product-decrease'
+
+  //     const a: CommonResponse = await httpReq.call(
+  //       path,
+  //       Mathod.PUT,
+  //       { quantityToReduce },
+  //       null
+  //     );
+
+  //     cr.setStatus(true);
+  //     cr.setExtra(newOrder);
+  //   } catch (error) {
+  //     cr.setStatus(false);
+  //     cr.setExtra(error);
+  //     ErrorHandlerSup.handleError(error);
+  //   }
+  //   return cr;
+  // }
+
+  async save(orderDto: OrderDto, orderItemsDto: OrderItemsDto): Promise<CommonResponse> {
     let cr = new CommonResponse();
     try {
       // save new order
@@ -45,21 +78,14 @@ export class OrderServiceImpl implements OrderService {
       const channel = await connection.createChannel();
       const queue = "ordersToProduct";
 
-      console.log(quantityToReduce);
+      await channel.assertQueue(queue, { durable: false });
 
-      const path =
-        appConfig.getTaskMicroServicePath() + HttpMSServicePath.createOrder;
-      // const path = 'http://localhost:4000/service/master/product-decrease'
+      channel.sendToQueue(queue, Buffer.from(JSON.stringify(newOrder)));
 
-      const a: CommonResponse = await httpReq.call(
-        path,
-        Mathod.PUT,
-        { quantityToReduce },
-        null
-      );
+      console.log("Order sent !");
 
+      console.log(newOrder);
       cr.setStatus(true);
-      cr.setExtra(newOrder);
     } catch (error) {
       cr.setStatus(false);
       cr.setExtra(error);
@@ -77,8 +103,8 @@ export class OrderServiceImpl implements OrderService {
       let deleteOrder = await this.orderDao.cancel(orderId);
 
       if (deleteOrder) {
-        deleteOrder.orderItems.forEach((orderItem) => {
-          let uuid = orderItem.uuid;
+        deleteOrder.orderItems.forEach(orderItem => {
+          let productUuid = orderItem.productUuid;
           let quantity = orderItem.quantity;
 
           productUuidsQuantities[productUuid] = quantity;
@@ -88,42 +114,25 @@ export class OrderServiceImpl implements OrderService {
       console.log('service -> Product UUIDs and Quantities: ', productUuidsQuantities);
 
       try {
-        const connection = await amqp.connect("amqp://localhost")
-        const channel = await connection.createChannel();
-
-        await Promise.all(queues.map(async (queueName) => {
-          await channel.assertQueue(queueName, { durable: false });
-          console.log(`Queue '${queueName}' created.`);
-        }));
-
-        for (const uuid of Object.keys(uuidsQuantities)) {
-          const quantity = uuidsQuantities[uuid];
+        for (const productUuid of Object.keys(productUuidsQuantities)) {
+          const quantity = productUuidsQuantities[productUuid];
 
           const payload = {
-            quantityToAdd: quantity,
-            uuid: uuid
+            quantityToAdd: quantity
           };
 
-          // const path = `${HttpMSServicePath.orderCancellation}/${uuid}`;
-
+          const path = `${HttpMSServicePath.orderCancellation}/${productUuid}`;
 
           //const path = appConfig.getTaskMicroServicePath() + HttpMSServicePath.orderCancellation + '/' + productUuid;
 
-          // const a: CommonResponse = await httpReq.call(
-          //   path,
-          //   Mathod.PUT,
-          //   payload,
-          //   null
-          // );
+          const a: CommonResponse = await httpReq.call(path, Mathod.PUT, payload, null);
 
-          // // const response = await axios.put(path, payload);
-          // console.log("Order cancellation microservice response:", a);
-          channel.sendToQueue('toProduct', Buffer.from(JSON.stringify(payload)), { persistent: true });
+          // const response = await axios.put(path, payload);
+          console.log('Order cancellation microservice response:', a);
         }
-        channel.sendToQueue('toEmail', Buffer.from(JSON.stringify(orderId)), { persistent: true });
       } catch (error) {
-        console.error("Error calling order cancellation microservice:", error);
-        throw new Error("Failed to cancel order");
+        console.error('Error calling order cancellation microservice:', error);
+        throw new Error('Failed to cancel order');
       }
 
       if (deleteOrder) {
@@ -132,12 +141,13 @@ export class OrderServiceImpl implements OrderService {
         cr.setStatus(false);
         cr.setExtra("Not Working !");
       }
+
     } catch (error) {
       cr.setStatus(false);
       cr.setExtra(error);
       ErrorHandlerSup.handleError(error);
-      console.error("Error sending message to queue:", error);
-      throw new Error("Failed to send message to queue");
+      console.error('Error sending message to queue:', error);
+      throw new Error('Failed to send message to queue');
     }
     return cr;
   }
@@ -271,6 +281,4 @@ export class OrderServiceImpl implements OrderService {
     }
     return cr;
   }
-
-
 }

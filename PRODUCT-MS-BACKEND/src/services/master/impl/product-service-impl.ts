@@ -235,15 +235,15 @@ export class ProductServiceImpl implements ProductService {
     let cr = new CommonResponse();
     try {
       // Call the DAO method with the UUID
-      const updatedProduct = await this.productDao.increaseQuantity(uuid, quantityToAdd);
+      // const updatedProduct = await this.productDao.increaseQuantity(uuid, quantityToAdd);
 
-      if (updatedProduct) {
-        cr.setStatus(true);
-        cr.setExtra('Product quantity updated successfully');
-      } else {
-        cr.setStatus(false);
-        cr.setExtra('Product not found');
-      }
+      // if (updatedProduct) {
+      //   cr.setStatus(true);
+      //   cr.setExtra('Product quantity updated successfully');
+      // } else {
+      //   cr.setStatus(false);
+      //   cr.setExtra('Product not found');
+      // }
 
       const queue = appConfig.getMessageQueueNameProduct();
 
@@ -315,15 +315,22 @@ export class ProductServiceImpl implements ProductService {
   }
 
 
-  async decreaseProductQuantity(quantityToReduce: any): Promise<CommonResponse> {
+  async decreaseProductQuantity(uuid: string, quantityToDecrease: number): Promise<CommonResponse> {
     let cr = new CommonResponse();
     try {
-      await this.productDao.decreaseQuantity(quantityToReduce);
+      // Call the DAO method with the UUID
+      const updatedProduct = await this.productDao.productQuantityDecrease(uuid, quantityToDecrease);
 
-      cr.setStatus(true);
+      if (updatedProduct) {
+        cr.setStatus(true);
+        cr.setExtra('Product quantity updated successfully');
+      } else {
+        cr.setStatus(false);
+        cr.setExtra('Product not found');
+      }
     } catch (error) {
       cr.setStatus(false);
-      cr.setExtra(error);
+      cr.setExtra(error.message);
       ErrorHandlerSup.handleError(error);
     }
     return cr;
