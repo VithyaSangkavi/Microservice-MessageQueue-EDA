@@ -66,19 +66,6 @@ export class OrderDaoImpl implements OrderDao {
   
   async updateOrderStatus(orderId: number): Promise<OrderEntity> {
     let orderRepo = getConnection().getRepository(OrderEntity);
-    let order = await orderRepo.findOne(orderId, { relations: ["orderItems"] });
-
-    if (order) {
-      order.orderStatus = OrderStatus.Completed;
-      await orderRepo.save(order);
-      return order;
-    } else {
-      return null;
-    }
-  }
-
-  async confirmOrder(orderId: number): Promise<OrderEntity> {
-    let orderRepo = getConnection().getRepository(OrderEntity);
     let order = await orderRepo.findOne(orderId);
 
     if (order) {
@@ -95,7 +82,6 @@ export class OrderDaoImpl implements OrderDao {
     orderModel.customerName = orderDto.getCustomerName()
     orderModel.customerPhoneNumber = orderDto.getCustomerPhoneNumber()
     orderModel.address = orderDto.getAddress()
-    orderModel.email = orderDto.getEmail();
     orderModel.total = orderDto.getTotal()
     orderModel.status = Status.Online;
     orderModel.orderStatus = OrderStatus.Pending;

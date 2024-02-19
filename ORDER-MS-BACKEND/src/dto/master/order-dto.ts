@@ -8,7 +8,6 @@ export class OrderDto extends PaginationDto {
   private customerName: string;
   private customerPhoneNumber: number;
   private address: string;
-  private email: string;
   private createdDate: Date;
   private updatedDate: Date;
   private total: number;
@@ -22,7 +21,6 @@ export class OrderDto extends PaginationDto {
     this.customerName = body.customerName;
     this.customerPhoneNumber = body.customerPhoneNumber;
     this.address = body.address;
-    this.email = body.email;
     this.createdDate = body.createdDate;
     this.updatedDate = body.updatedDate;
     this.total = body.total;
@@ -40,7 +38,6 @@ export class OrderDto extends PaginationDto {
     this.customerName = orderModel.customerName;
     this.customerPhoneNumber = orderModel.customerPhoneNumber;
     this.address = orderModel.address;
-    this.email = orderModel.email;
     this.createdDate = orderModel.createdDate;
     this.updatedDate = orderModel.updatedDate;
     this.total = orderModel.total;
@@ -80,13 +77,6 @@ export class OrderDto extends PaginationDto {
     this.address = address;
   }
 
-  public getEmail(): string {
-    return this.email;
-  }
-
-  public setEmail(email: string): void {
-    this.email = email;
-  }
   
   public getcreatedDate(): Date {
     return this.createdDate;

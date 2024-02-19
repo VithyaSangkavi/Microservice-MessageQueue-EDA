@@ -13,7 +13,6 @@ router.post("/product-delete", productController.delete);
 router.post("/product-find-all", productController.findAll);
 router.get("/product-find-by-id", productController.findById);
 router.put('/product-increase/:productUuid', productController.increaseQuantity);
-router.put('/product-decrease/:productUuid', productController.decreaseProductQuantity);
 
 module.exports = router;
 

@@ -20,9 +20,6 @@ export class OrderEntity {
   address: string;
 
   @Column()
-  email: string;
-
-  @Column()
   createdDate: Date;
 
   @Column()

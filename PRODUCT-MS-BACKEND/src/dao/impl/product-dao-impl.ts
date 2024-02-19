@@ -40,7 +40,7 @@ export class ProductDaoImpl implements ProductDao {
       return null;
     }
   }
-
+  
   async findAll(productDto: ProductDto): Promise<ProductEntity[]> {
     let productRepo = getConnection().getRepository(ProductEntity);
 
@@ -89,30 +89,15 @@ export class ProductDaoImpl implements ProductDao {
     const productModel = await productRepo.findOne({ where: { uuid: uuid } });
 
     if (productModel) {
-      productModel.quantity += quantityToAdd;
-      productModel.updatedDate = new Date();
+        productModel.quantity += quantityToAdd;
+        productModel.updatedDate = new Date();
 
-      const updatedProduct = await productRepo.save(productModel);
-      return updatedProduct;
+        const updatedProduct = await productRepo.save(productModel);
+        return updatedProduct;
     } else {
-      return null;
+        return null;
     }
-  }
-
-  async productQuantityDecrease(uuid: string, quantityToDecrease: number): Promise<ProductEntity | null> {
-    const productRepo = getConnection().getRepository(ProductEntity);
-    const productModel = await productRepo.findOne({ where: { uuid: uuid } });
-
-    if (productModel) {
-      productModel.quantity = productModel.quantity - quantityToDecrease;
-      productModel.updatedDate = new Date();
-
-      const updatedProduct = await productRepo.save(productModel);
-      return updatedProduct;
-    } else {
-      return null;
-    }
-  }
+}
 
   async decreaseQuantity(quantityToReduce: any): Promise<any> {
     // Loop through the array of UUIDs and quantities to reduce

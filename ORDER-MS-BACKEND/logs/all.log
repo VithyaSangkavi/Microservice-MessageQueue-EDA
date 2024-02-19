@@ -469,6 +469,7 @@
 [35m[39m
 2024-02-15 09:18:54:1854 [35mhttp[39m: [35mPUT /service/master/updateOrderStatus/1 200 46 - 46.983 ms[39m
 [35m[39m
+<<<<<<< HEAD
 2024-02-15 12:35:35:3535 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 46 - 107.156 ms[39m
 [35m[39m
 2024-02-15 12:36:19:3619 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 46 - 38.592 ms[39m
@@ -774,3 +775,5 @@
 2024-02-16 16:47:23:4723 [35mhttp[39m: [35mPOST /service/master/saveOrder 200 1321 - 83.384 ms[39m
 >>>>>>> 779d94243d62e8a138be71a9acc55ef81bb10d59
 [35m[39m
+=======
+>>>>>>> parent of 29ded14 (Did the proceed to checking part with message queue and microservice)
