@@ -48,6 +48,18 @@ exports.cancel = async (req: Request, res: Response, next: NextFunction) => {
 exports.fetchOrders = async (req: Request, res: Response, next: NextFunction) => {
   try {
     let cr = await orderService.fetchAllOrders();
+    res.send(cr);
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+exports.updateOrderStatus = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    let orderId = req.params.orderId;
+
+    let cr = await orderService.updateOrderStatus(Number(orderId));
 
     res.send(cr);
   } catch (error) {
@@ -55,3 +67,14 @@ exports.fetchOrders = async (req: Request, res: Response, next: NextFunction) =>
   }
 };
 
+exports.confirmOrder = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    let orderId = req.query.orderId;
+
+    let cr = await orderService.confirmOrder(Number(orderId));
+
+    res.send(cr);
+  } catch (error) {
+    next(error);
+  }
+};

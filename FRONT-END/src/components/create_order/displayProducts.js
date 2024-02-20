@@ -39,18 +39,49 @@ function DisplayProducts() {
 
   useEffect(async () => {
 
-    const response = await axios.get('http://localhost:4000/service/master/product-find-all');
-    console.log(response.data.extra);
-    setProducts(response.data.extra);
+    fetchData()
+
+    const interval = setInterval(() => {
+      fetchData();
+    }, 30000);
+
+    return () => clearInterval(interval);
 
   }, []);
 
 
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('http://localhost:4000/service/master/product-find-all');
+      console.log(response.data.extra);
+      setProducts(response.data.extra);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+
   const handleAddToCart = (product) => {
+
+    let productId = product.productId
+
+    let productNeed = products.find(product => product.productId === productId);
+
+    console.log(productNeed)
+    console.log(product.quantitySelected)
+
+    if (productNeed.quantity < product.quantitySelected){
+      alertService.error("Selected quantity exceeds available quantity.")
+      return
+    }
+
+
     if (product.quantitySelected > 0) {
       const existingProductIndex = selectedProducts.findIndex(
         (item) => item.productId === product.productId
       );
+      
+
 
       if (existingProductIndex !== -1) {
         // Product already exists in the cart, update the quantity
@@ -70,7 +101,6 @@ function DisplayProducts() {
       alertService.error("Please select a quantity.");
     }
   };
-  ;
 
   return (
     <div>
@@ -105,6 +135,11 @@ function DisplayProducts() {
                     />
 
                     <button className="buy-button" onClick={() => handleAddToCart(product)}>Add to Order</button>
+
+                    <p style={{ marginTop: '10px', color: product.quantity < 10 ? 'red' : 'green', fontSize: '12px', fontStyle: 'italic' }}>
+                      Available Quantity: {product.quantity}
+                    </p>
+
                   </div>
                 </div>
               </div>
@@ -142,13 +177,14 @@ function DisplayProducts() {
       "customerName": "Thanuja",
       "customerPhoneNumber": 785429634,
       "address": "Kaduwela",
-      "total": totalPrice
+      "total": totalPrice,
+      "email": "example@gmail.com"
     };
 
     const orderItems = selectedProducts.map(product => {
       return {
         "quantity": product.quantity,
-        "uuid": product.uuid
+        "productUuid": product.uuid
       };
     });
 
@@ -164,6 +200,12 @@ function DisplayProducts() {
       const response = await axios.post('http://localhost:4001/service/master/saveOrder', payload);
       console.log(response);
       alertService.success("Order Placed Successfully!")
+      fetchData()
+
+      document.querySelectorAll('.input-field').forEach(input => {
+        input.value = '0';
+      });
+
 
       setSelectedProducts([]);
       setTotalPrice(0);

@@ -9,6 +9,11 @@ router.post("/saveOrder", orderController.save);
 router.post("/cancelOrder", orderController.cancel);
 router.get("/fetchOrder", orderController.fetchOrders);
 
+router.put("/updateOrderStatus/:orderId", orderController.updateOrderStatus);
+router.post("/confirmOrder", orderController.confirmOrder);
+router.get("/fetchOrder", orderController.cancel);
+
+
 //order-items routes
 // router.post("/saveOrderItems", orderItemsController.save);
 

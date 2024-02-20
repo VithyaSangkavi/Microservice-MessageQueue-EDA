@@ -118,19 +118,41 @@ exports.update = async (req: Request, res: Response, next: NextFunction) => {
         // Pass the error to the error handling middleware
         next(error);
     }
-  };
+};
 
-  exports.decreaseQuantity = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const quantityToReduce = req.body.quantityToReduce;
-  
-      if (!quantityToReduce) {
-        return res.status(400).json({ error: 'Invalid quantityToReduce' });
+exports.decreaseProductQuantity = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+      // Extract the UUID and quantity to add from the request
+      const productUuid = req.params.productUuid;
+      const quantityToDecrease = parseInt(req.body.quantityToDecrease);
+
+      // Validate the input
+      if (!productUuid || !quantityToDecrease || isNaN(quantityToDecrease)) {
+          return res.status(400).json({ error: 'Invalid product UUID or quantity to add' });
       }
-  
-      const cr = await ProductService.decreaseProductQuantity(quantityToReduce);
-      res.send(cr);
-    } catch (error) {
+
+      // Call the service layer to increase the product quantity
+      const response = await ProductService.decreaseProductQuantity(productUuid, quantityToDecrease);
+
+      // Send the response back to the client
+      res.json(response);
+  } catch (error) {
+      // Pass the error to the error handling middleware
       next(error);
+  }
+};
+
+exports.decreaseQuantity = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const quantityToReduce = req.body.quantityToReduce;
+
+    if (!quantityToReduce) {
+      return res.status(400).json({ error: 'Invalid quantityToReduce' });
     }
-  };
+
+    const cr = await ProductService.decreaseProductQuantityOrder(quantityToReduce);
+    res.send(cr);
+  } catch (error) {
+    next(error);
+  }
+};

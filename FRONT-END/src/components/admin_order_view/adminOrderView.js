@@ -51,18 +51,40 @@ function AdminOrderView() {
           <h2 style={{ marginTop: '5%', color: 'white', backgroundColor: '#2c3e50', padding: '10px', borderRadius: '10px', marginBottom: '2%', fontFamily: 'initial' }}>Placed Orders</h2>
 
           <br />
+
           {orders.map(order => (
             <>
-
-              <div key={order.id} className="order-summary">
-                <p>Order ID - {order.id}</p>
-                <p>Customer Name - {order.customerName}</p>
-                <p style={{ fontSize: '20px', fontStyle: 'oblique', fontWeight: 'bold' }}>Total - {order.total}</p>
-                <button style={{backgroundColor: '#f76331'}} className="checkout-button" onClick={() => cancelOrder(order.id)}>Cancel Order</button>
-              </div><br />
-
+              <div key={order.id} className="order-summary" style={{ position: 'relative' }}>
+                {/* Status indicator */}
+                <div style={{ position: 'absolute', top: 0, right: 0, display: 'flex', alignItems: 'center', marginRight: '20px', marginTop: '15px' }}>
+                  {order.status === 'online' ? (
+                    <>
+                      <div style={{ width: '10px', height: '10px', backgroundColor: 'green', borderRadius: '50%', marginRight: '5px' }}></div>
+                      <p style={{ color: 'green', marginBottom: '0' }}>Online</p>
+                    </>
+                  ) : (
+                    <>
+                      <div style={{ width: '10px', height: '10px', backgroundColor: 'red', borderRadius: '50%', marginRight: '5px' }}></div>
+                      <p style={{ color: 'red', marginBottom: '0' }}>Offline</p>
+                    </>
+                  )}
+                </div>
+                <div>
+                  <p>Order ID - {order.id}</p>
+                  <p>Customer Name - {order.customerName}</p>
+                  <p style={{ fontSize: '20px', fontStyle: 'oblique', fontWeight: 'bold' }}>Total - {order.total}</p>
+                </div>
+                <button
+                  style={{ backgroundColor: '#f76331' }}
+                  className="checkout-button"
+                  onClick={() => cancelOrder(order.id)}
+                  disabled={order.orderStatus == 'completed'}
+                >Cancel Order</button>
+              </div>
+              <br />
             </>
           ))}
+
 
         </div>
       </div>
