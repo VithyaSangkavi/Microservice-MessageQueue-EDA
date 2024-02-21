@@ -87,6 +87,25 @@ export class OrderDaoImpl implements OrderDao {
 
 
 
+  async  viewOrderItem(orderId: number): Promise<any[]> {
+    try {
+      const orderItemsRepository = getConnection().getRepository(OrderItemsEntity);
+      const orderItems = await orderItemsRepository.find({
+        where: { order: { id: orderId } },
+        select: ["productUuid", "quantity"],
+      });
+  
+      console.log(orderItems);
+  
+      return orderItems;
+    } catch (error) {
+      throw new Error(`Error fetching order items: ${error.message}`);
+    }
+  }
+
+
+
+
 
 
   async cancel(orderId: number): Promise<any> {

@@ -8,6 +8,7 @@ const router: Router = express.Router();
 router.post("/saveOrder", orderController.save);
 router.post("/cancelOrder", orderController.cancel);
 router.get("/fetchOrder", orderController.fetchOrders);
+router.get("/viewOrderItem", orderController.viewOrderItem);
 
 router.put("/updateOrderStatus/:orderId", orderController.updateOrderStatus);
 router.post("/confirmOrder", orderController.confirmOrder);

@@ -13,6 +13,8 @@ import { Mathod } from "../../../enum/method";
 import MicroService from "../../../support/microservice/micro-service";
 import { EnvironmentConfiguration } from "../../../configuration/environment-configuration";
 
+import 'core-js';
+
 let httpReq: MicroService = new MicroServiceHttp();
 
 const environmentConfiguration = new EnvironmentConfiguration();
@@ -111,8 +113,48 @@ export class OrderServiceImpl implements OrderService {
     return cr;
   }
 
+  async viewOrderItem(orderId): Promise<CommonResponse> {
+    let cr = new CommonResponse();
+    try {
+
+      const orderItemsuuids = await this.orderDao.viewOrderItem(orderId);
+      const productUuids = orderItemsuuids.map(orderItem => orderItem.productUuid);
+
+
+      const path = appConfig.getTaskMicroServicePath() + HttpMSServicePath.getproductdetails + productUuids;
+
+      const response = await httpReq.call(
+        path,
+        Mathod.GET,
+        {},
+        null
+      );
+
+      const data = response.data.extra
+
+      const mergedItems = orderItemsuuids.map(orderItem => {
+        const matchedData = data.find(item => item.uuid === orderItem.productUuid);
+        return {
+            ...orderItem,
+            ...matchedData
+        };
+    });
+
+      cr.setStatus(true);
+      cr.setExtra(mergedItems);
+    } catch (error) {
+      cr.setStatus(false);
+      cr.setExtra(error);
+      ErrorHandlerSup.handleError(error);
+      throw error;
+    }
+    return cr;
+  }
+
 
   async cancel(orderId: number): Promise<CommonResponse> {
+
+    const queues = ["toProduct", "toEmail"];
 
     const productUuidsQuantities: Record<string, number> = {};
 
@@ -132,6 +174,15 @@ export class OrderServiceImpl implements OrderService {
       console.log('service -> Product UUIDs and Quantities: ', productUuidsQuantities);
 
       try {
+
+        const connection = await amqp.connect("amqp://localhost")
+        const channel = await connection.createChannel();
+
+        await Promise.all(queues.map(async (queueName) => {
+          await channel.assertQueue(queueName, { durable: false });
+          console.log(`Queue '${queueName}' created.`);
+        }));
+
         for (const productUuid of Object.keys(productUuidsQuantities)) {
           const quantity = productUuidsQuantities[productUuid];
 
@@ -147,7 +198,10 @@ export class OrderServiceImpl implements OrderService {
 
           // const response = await axios.put(path, payload);
           console.log('Order cancellation microservice response:', a);
+          channel.sendToQueue('toProduct', Buffer.from(JSON.stringify(payload)), { persistent: true });
         }
+        channel.sendToQueue('toEmail', Buffer.from(JSON.stringify(orderId)), { persistent: true });
+
       } catch (error) {
         console.error('Error calling order cancellation microservice:', error);
         throw new Error('Failed to cancel order');

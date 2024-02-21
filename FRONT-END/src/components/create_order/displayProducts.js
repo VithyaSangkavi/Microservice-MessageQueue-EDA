@@ -70,7 +70,7 @@ function DisplayProducts() {
     console.log(productNeed)
     console.log(product.quantitySelected)
 
-    if (productNeed.quantity < product.quantitySelected){
+    if (productNeed.quantity < product.quantitySelected) {
       alertService.error("Selected quantity exceeds available quantity.")
       return
     }
@@ -80,7 +80,7 @@ function DisplayProducts() {
       const existingProductIndex = selectedProducts.findIndex(
         (item) => item.productId === product.productId
       );
-      
+
 
 
       if (existingProductIndex !== -1) {
@@ -101,6 +101,15 @@ function DisplayProducts() {
       alertService.error("Please select a quantity.");
     }
   };
+
+  const handleRemoveFromCart = (productId, price, quantity) => {
+    const updatedProducts = selectedProducts.filter(item => item.productId !== productId);
+    setSelectedProducts(updatedProducts);
+
+    const totalPriceReduction = price * quantity;
+    setTotalPrice(totalPrice - totalPriceReduction);
+  };
+
 
   return (
     <div>
@@ -136,7 +145,7 @@ function DisplayProducts() {
 
                     <button className="buy-button" onClick={() => handleAddToCart(product)}>Add to Order</button>
 
-                    <p style={{ marginTop: '10px', color: product.quantity < 10 ? 'red' : 'green', fontSize: '12px', fontStyle: 'italic' }}>
+                    <p style={{ marginTop: '10px', color: product.quantity < 10 ? 'red' : 'green', fontSize: '12.5px', fontStyle: 'italic' }}>
                       Available Quantity: {product.quantity}
                     </p>
 
@@ -152,9 +161,41 @@ function DisplayProducts() {
             <h2>Order Summary</h2>
             <ul>
               {selectedProducts.map(product => (
-                <div key={`Rs.{product.id}-Rs.{product.category}`}>
-                  <span className="summary-item">{product.quantity} x {product.name} - </span>
-                  <span className="summary-price">Rs.{(product.price * product.quantity).toFixed(2)}</span>
+                <div className='product' style={{
+                  backgroundColor: '#afdbe3',
+                  marginBottom: '1%',
+                  borderRadius: '10px',
+                  paddingLeft: '1%',
+                  width: '97%',
+                  position: 'relative',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  paddingBottom: '1%',
+                  paddingTop: '1%',
+                }}>                  <div key={`Rs.{product.id}-Rs.{product.category}`}>
+                    <span className="summary-item">{product.quantity} x {product.name} - </span>
+                    <span className="summary-price">Rs.{(product.price * product.quantity).toFixed(2)}</span>
+                    <button
+                      className="remove-button"
+                      onClick={() => handleRemoveFromCart(product.productId, product.price, product.quantity)}
+                      style={{
+                        padding: '5px 10px',
+                        background: '#f44336',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '4px',
+                        cursor: 'pointer',
+                        position: 'absolute',
+                        top: '50%',
+                        right: '5px',
+                        transform: 'translateY(-50%)',
+                      }}
+                    >
+                      Remove
+                    </button>
+
+                  </div>
                 </div>
               ))}
             </ul>

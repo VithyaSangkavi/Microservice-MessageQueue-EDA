@@ -3,6 +3,8 @@ import { ProductDto } from "../../dto/master/product-dto";
 import { Status } from "../../enum/status";
 import { ProductEntity } from "../../entity/master/product-entity";
 import { ProductDao } from "../product-dao";
+import { In } from 'typeorm';
+
 
 /**
  * department data access layer
@@ -61,6 +63,17 @@ export class ProductDaoImpl implements ProductDao {
     return productModel;
   }
 
+
+  async findByUuids(uuids: string[]): Promise<ProductEntity[]> {
+    let productRepo = getConnection().getRepository(ProductEntity);
+    let products = await productRepo.find({
+      where: { uuid: In(uuids) },
+      select: ["uuid", "name", "price"]
+    });
+    return products;
+  }
+
+
   async findByName(name: String): Promise<ProductEntity> {
     let productRepo = getConnection().getRepository(ProductEntity);
     let productModel = await productRepo.findOne({
@@ -86,7 +99,7 @@ export class ProductDaoImpl implements ProductDao {
 
   async increaseQuantity(productUuid: string, quantityToAdd: number): Promise<ProductEntity | null> {
     const productRepo = getConnection().getRepository(ProductEntity);
-    const productModel = await productRepo.findOne({ where: { productUuid: productUuid } });
+    const productModel = await productRepo.findOne({ where: { uuid: productUuid } });
 
     if (productModel) {
       productModel.quantity += quantityToAdd;

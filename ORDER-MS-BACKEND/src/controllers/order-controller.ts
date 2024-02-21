@@ -54,6 +54,18 @@ exports.fetchOrders = async (req: Request, res: Response, next: NextFunction) =>
   }
 };
 
+exports.viewOrderItem = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+
+    let orderId = req.query.orderId;
+
+    let cr = await orderService.viewOrderItem(Number(orderId));
+    res.send(cr);
+  } catch (error) {
+    next(error);
+  }
+};
+
 
 exports.updateOrderStatus = async (req: Request, res: Response, next: NextFunction) => {
   try {

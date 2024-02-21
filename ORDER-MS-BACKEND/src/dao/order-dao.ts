@@ -9,4 +9,5 @@ export interface OrderDao {
   cancel(orderId: number): Promise<any>;
   updateOrderStatus(orderId: number): Promise<OrderEntity> ;
   confirmOrder(orderId: number): Promise<OrderEntity> ;
+  viewOrderItem(orderId: number): Promise<OrderEntity[]>
 }

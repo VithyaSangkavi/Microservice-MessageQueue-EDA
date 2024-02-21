@@ -12,6 +12,7 @@ router.post("/product-update", productController.update);
 router.post("/product-delete", productController.delete);
 router.get("/product-find-all", productController.findAll);
 router.get("/product-find-by-id", productController.findById);
+router.get("/product-find-by-uuid", productController.findByUuid);
 router.put('/product-increase/:uuid', productController.increaseQuantity);
 router.put('/product-decrease/:productUuid', productController.decreaseProductQuantity);
 router.put('/product-decrease', productController.decreaseQuantity);

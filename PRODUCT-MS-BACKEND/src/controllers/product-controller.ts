@@ -82,6 +82,25 @@ exports.update = async (req: Request, res: Response, next: NextFunction) => {
     }
   };
 
+  exports.findByUuid = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        let uuidsParam = req.query.uuids as string;
+        
+        if (!uuidsParam) {
+            return res.status(400).send("No UUIDs provided");
+        }
+
+        let uuids = uuidsParam.split(',').map(uuid => (uuid.trim()));
+
+        let cr = await ProductService.findByUuids(uuids);
+
+        res.send(cr);
+    } catch (error) {
+        next(error);
+    }
+};
+
+
   // exports.increaseQuantity = async (req: Request, res: Response, next: NextFunction) => {
   //   try {
   //     const productId = parseInt(req.params.productId);
