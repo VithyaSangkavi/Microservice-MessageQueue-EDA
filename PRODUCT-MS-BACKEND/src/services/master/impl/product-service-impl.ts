@@ -167,6 +167,36 @@ export class ProductServiceImpl implements ProductService {
     return cr;
   }
 
+
+  async findByUuids(uuids: string[]): Promise<CommonResponse> {
+    let cr = new CommonResponse();
+    try {
+        let products = await this.productDao.findByUuids(uuids);
+
+        let productDtos: ProductDto[] = [];
+
+        for (let product of products) {
+            let productDto = new ProductDto();
+            productDto.filViaDbObject(product);
+            productDtos.push(productDto);
+        }
+
+        console.log(productDtos);
+
+        cr.setStatus(true);
+        cr.setExtra(productDtos);
+    } catch (error) {
+        cr.setStatus(false);
+        cr.setExtra(error);
+        ErrorHandlerSup.handleError(error);
+    }
+    return cr;
+}
+
+
+
+  
+
   //   /**
   //  * Increase the quantity of a product by the specified amount.
   //  * @param productId The ID of the product to update.
@@ -331,6 +361,20 @@ export class ProductServiceImpl implements ProductService {
     } catch (error) {
       cr.setStatus(false);
       cr.setExtra(error.message);
+      ErrorHandlerSup.handleError(error);
+    }
+    return cr;
+  }
+
+  async decreaseProductQuantityOrder(quantityToReduce: any): Promise<CommonResponse> {
+    let cr = new CommonResponse();
+    try {
+      await this.productDao.decreaseQuantity(quantityToReduce);
+
+      cr.setStatus(true);
+    } catch (error) {
+      cr.setStatus(false);
+      cr.setExtra(error);
       ErrorHandlerSup.handleError(error);
     }
     return cr;

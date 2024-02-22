@@ -39,18 +39,49 @@ function DisplayProducts() {
 
   useEffect(async () => {
 
-    const response = await axios.get('http://localhost:4000/service/master/product-find-all');
-    console.log(response.data.extra);
-    setProducts(response.data.extra);
+    fetchData()
+
+    const interval = setInterval(() => {
+      fetchData();
+    }, 30000);
+
+    return () => clearInterval(interval);
 
   }, []);
 
 
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('http://localhost:4000/service/master/product-find-all');
+      console.log(response.data.extra);
+      setProducts(response.data.extra);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+
   const handleAddToCart = (product) => {
+
+    let productId = product.productId
+
+    let productNeed = products.find(product => product.productId === productId);
+
+    console.log(productNeed)
+    console.log(product.quantitySelected)
+
+    if (productNeed.quantity < product.quantitySelected) {
+      alertService.error("Selected quantity exceeds available quantity.")
+      return
+    }
+
+
     if (product.quantitySelected > 0) {
       const existingProductIndex = selectedProducts.findIndex(
         (item) => item.productId === product.productId
       );
+
+
 
       if (existingProductIndex !== -1) {
         // Product already exists in the cart, update the quantity
@@ -70,7 +101,15 @@ function DisplayProducts() {
       alertService.error("Please select a quantity.");
     }
   };
-  ;
+
+  const handleRemoveFromCart = (productId, price, quantity) => {
+    const updatedProducts = selectedProducts.filter(item => item.productId !== productId);
+    setSelectedProducts(updatedProducts);
+
+    const totalPriceReduction = price * quantity;
+    setTotalPrice(totalPrice - totalPriceReduction);
+  };
+
 
   return (
     <div>
@@ -105,6 +144,11 @@ function DisplayProducts() {
                     />
 
                     <button className="buy-button" onClick={() => handleAddToCart(product)}>Add to Order</button>
+
+                    <p style={{ marginTop: '10px', color: product.quantity < 10 ? 'red' : 'green', fontSize: '12.5px', fontStyle: 'italic' }}>
+                      Available Quantity: {product.quantity}
+                    </p>
+
                   </div>
                 </div>
               </div>
@@ -117,9 +161,41 @@ function DisplayProducts() {
             <h2>Order Summary</h2>
             <ul>
               {selectedProducts.map(product => (
-                <div key={`Rs.{product.id}-Rs.{product.category}`}>
-                  <span className="summary-item">{product.quantity} x {product.name} - </span>
-                  <span className="summary-price">Rs.{(product.price * product.quantity).toFixed(2)}</span>
+                <div className='product' style={{
+                  backgroundColor: '#afdbe3',
+                  marginBottom: '1%',
+                  borderRadius: '10px',
+                  paddingLeft: '1%',
+                  width: '97%',
+                  position: 'relative',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  paddingBottom: '1%',
+                  paddingTop: '1%',
+                }}>                  <div key={`Rs.{product.id}-Rs.{product.category}`}>
+                    <span className="summary-item">{product.quantity} x {product.name} - </span>
+                    <span className="summary-price">Rs.{(product.price * product.quantity).toFixed(2)}</span>
+                    <button
+                      className="remove-button"
+                      onClick={() => handleRemoveFromCart(product.productId, product.price, product.quantity)}
+                      style={{
+                        padding: '5px 10px',
+                        background: '#f44336',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '4px',
+                        cursor: 'pointer',
+                        position: 'absolute',
+                        top: '50%',
+                        right: '5px',
+                        transform: 'translateY(-50%)',
+                      }}
+                    >
+                      Remove
+                    </button>
+
+                  </div>
                 </div>
               ))}
             </ul>
@@ -142,13 +218,14 @@ function DisplayProducts() {
       "customerName": "Thanuja",
       "customerPhoneNumber": 785429634,
       "address": "Kaduwela",
-      "total": totalPrice
+      "total": totalPrice,
+      "email": "example@gmail.com"
     };
 
     const orderItems = selectedProducts.map(product => {
       return {
         "quantity": product.quantity,
-        "uuid": product.uuid
+        "productUuid": product.uuid
       };
     });
 
@@ -164,6 +241,12 @@ function DisplayProducts() {
       const response = await axios.post('http://localhost:4001/service/master/saveOrder', payload);
       console.log(response);
       alertService.success("Order Placed Successfully!")
+      fetchData()
+
+      document.querySelectorAll('.input-field').forEach(input => {
+        input.value = '0';
+      });
+
 
       setSelectedProducts([]);
       setTotalPrice(0);

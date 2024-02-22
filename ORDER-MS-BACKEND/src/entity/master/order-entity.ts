@@ -39,4 +39,5 @@ export class OrderEntity {
 
   @OneToMany(() => OrderItemsEntity, (orderItems) => orderItems.order)
   orderItems: OrderItemsEntity[];
+  productUuid: any;
 }

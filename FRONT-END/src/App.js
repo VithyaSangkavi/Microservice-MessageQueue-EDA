@@ -25,7 +25,9 @@ import ConfirmationPassword from './components/resetPassword/ConfirmationPasswor
 import DashboardComponent from './components/dashboard/dashboard';
 
 import DisplayProducts  from './components/create_order/displayProducts'
-import adminOrderView from './components/admin_order_view/adminOrderView';
+import AdminOrderView from './components/admin_order_view/adminOrderView';
+import Home from './components/home/home';
+import Navbar from './components/navbar/navbar';
 
 import { loginAction } from './actions/auth/login_action';
 import { languageAction } from './actions/auth/login_action';
@@ -107,12 +109,11 @@ class App extends React.Component {
         {/* <NavbarTop dmode={this.state.dmode} signedobj={this.props.signState} handleSignObj={this.handleSignObj} dmodeToggle={this.dmodeToggle}/>
         <SidebarMenu dmode={this.state.dmode} signedobj={this.props.signState}/> */}
         <LazyLoading setProdList={this.props.setProdList}/>
+        {/* <Navbar dmode={this.state.dmode} signedobj={this.props.signState} handleSignObj={this.handleSignObj} dmodeToggle={this.dmodeToggle}/> */}
+
         <Switch>
           <RoleBasedRouting path="/resetPassword"><ResetPassword /></RoleBasedRouting>
           <RoleBasedRouting path="/confirmation"><ConfirmationPassword /></RoleBasedRouting>
-          <RoleBasedRouting path="/adminoderview"><adminOrderView /></RoleBasedRouting>
-          <RoleBasedRouting path="/displayOrders"><DisplayOrders /></RoleBasedRouting>
-          <RoleBasedRouting exact path="/displayProducts"><DisplayProducts/></RoleBasedRouting>
 
           <RoleBasedRouting path="/dashboard" exact roles={[usrRoles.CM]}><DashboardComponent/></RoleBasedRouting>
           <RoleBasedRouting path="/landing"><LandingPage handleLangObj={this.handleLangObj} langobj={this.props.langState}/></RoleBasedRouting>
@@ -121,6 +122,16 @@ class App extends React.Component {
 
           {/* <RoleBasedRouting exact path="/"><DisplayProducts langobj={this.props.langState} handleSignObj={this.handleSignObj}/></RoleBasedRouting> */}
           <RoleBasedRouting exact path="/"><DisplayProducts/></RoleBasedRouting>
+          <RoleBasedRouting path="/adminoderview"><AdminOrderView /></RoleBasedRouting>
+          <RoleBasedRouting path="/displayproducts"><DisplayProducts /></RoleBasedRouting>
+          <RoleBasedRouting path="/displayOrders"><DisplayOrders /></RoleBasedRouting>
+
+          <RoleBasedRouting path="/dashboard" exact roles={[usrRoles.CM]}><DashboardComponent/></RoleBasedRouting>
+         
+          <RoleBasedRouting exact path="/"><Home langobj={this.props.langState} handleSignObj={this.handleSignObj}/></RoleBasedRouting>
+
+          <RoleBasedRouting><NoMatchComponent signedobj={this.props.signState} /></RoleBasedRouting>
+
         </Switch>
         
       </div> 

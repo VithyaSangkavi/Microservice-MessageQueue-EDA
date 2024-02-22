@@ -5,49 +5,33 @@ import { OrderItemsDto } from "../dto/master/order-items-dto";
 
 let orderService = new OrderServiceImpl();
 
-// exports.save = async (req: Request, res: Response, next: NextFunction) => {
-//   try {
-//     let orderDto = new OrderDto();
-//     let orderItemsDtoArray = [];
-
-//     console.log("From FE : ", req.body.order)
-
-//     orderDto.filViaRequest(req.body.order);
-
-//     if (Array.isArray(req.body.orderItems) && req.body.orderItems.length > 0) {
-//       // Fill order items into the array
-//       req.body.orderItems.forEach((item: any) => {
-//         let orderItemsDto = new OrderItemsDto();
-//         orderItemsDto.filViaRequest(item);
-//         orderItemsDtoArray.push(orderItemsDto);
-//       });
-//     } else {
-//       throw new Error("Order items are either not provided or are empty.");
-//     }
-
-//     let cr = await orderService.save(orderDto, orderItemsDtoArray);
-
-//     res.send(cr);
-//   } catch (error) {
-//     next(error);
-//   }
-// };
 exports.save = async (req: Request, res: Response, next: NextFunction) => {
   try {
     let orderDto = new OrderDto();
-    let orderItemsDto = new OrderItemsDto();
+    let orderItemsDtoArray = [];
 
-    orderDto.filViaRequest(req.body);
-    orderItemsDto.filViaRequest(req.body);
+    console.log("From FE : ", req.body.order)
 
-    let cr = await orderService.save(orderDto, orderItemsDto);
+    orderDto.filViaRequest(req.body.order);
+
+    if (Array.isArray(req.body.orderItems) && req.body.orderItems.length > 0) {
+      // Fill order items into the array
+      req.body.orderItems.forEach((item: any) => {
+        let orderItemsDto = new OrderItemsDto();
+        orderItemsDto.filViaRequest(item);
+        orderItemsDtoArray.push(orderItemsDto);
+      });
+    } else {
+      throw new Error("Order items are either not provided or are empty.");
+    }
+
+    let cr = await orderService.save(orderDto, orderItemsDtoArray);
 
     res.send(cr);
   } catch (error) {
     next(error);
   }
 };
-
 
 exports.cancel = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -60,6 +44,28 @@ exports.cancel = async (req: Request, res: Response, next: NextFunction) => {
     next(error);
   }
 };
+
+exports.fetchOrders = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    let cr = await orderService.fetchAllOrders();
+    res.send(cr);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.viewOrderItem = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+
+    let orderId = req.query.orderId;
+
+    let cr = await orderService.viewOrderItem(Number(orderId));
+    res.send(cr);
+  } catch (error) {
+    next(error);
+  }
+};
+
 
 exports.updateOrderStatus = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -74,14 +80,14 @@ exports.updateOrderStatus = async (req: Request, res: Response, next: NextFuncti
 };
 
 exports.confirmOrder = async (req: Request, res: Response, next: NextFunction) => {
-  try{
+  try {
     let orderId = req.query.orderId;
 
     let cr = await orderService.confirmOrder(Number(orderId));
 
     res.send(cr);
   } catch (error) {
-    next (error);
+    next(error);
   }
 };
 

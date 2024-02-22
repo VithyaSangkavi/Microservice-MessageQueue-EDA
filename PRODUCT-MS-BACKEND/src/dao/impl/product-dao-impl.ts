@@ -3,6 +3,8 @@ import { ProductDto } from "../../dto/master/product-dto";
 import { Status } from "../../enum/status";
 import { ProductEntity } from "../../entity/master/product-entity";
 import { ProductDao } from "../product-dao";
+import { In } from 'typeorm';
+
 
 /**
  * department data access layer
@@ -61,6 +63,17 @@ export class ProductDaoImpl implements ProductDao {
     return productModel;
   }
 
+
+  async findByUuids(uuids: string[]): Promise<ProductEntity[]> {
+    let productRepo = getConnection().getRepository(ProductEntity);
+    let products = await productRepo.find({
+      where: { uuid: In(uuids) },
+      select: ["uuid", "name", "price"]
+    });
+    return products;
+  }
+
+
   async findByName(name: String): Promise<ProductEntity> {
     let productRepo = getConnection().getRepository(ProductEntity);
     let productModel = await productRepo.findOne({
@@ -69,9 +82,9 @@ export class ProductDaoImpl implements ProductDao {
     return productModel;
   }
 
-  // async increaseQuantity(uuid: number, quantityToAdd: number): Promise<ProductEntity | null> {
+  // async increaseQuantity(productUuid: number, quantityToAdd: number): Promise<ProductEntity | null> {
   //   const productRepo = getConnection().getRepository(ProductEntity);
-  //   const productModel = await productRepo.findOne(uuid);
+  //   const productModel = await productRepo.findOne(productUuid);
 
   //   if (productModel) {
   //     productModel.quantity += quantityToAdd;
@@ -84,9 +97,9 @@ export class ProductDaoImpl implements ProductDao {
   //   }
   // }
 
-  async increaseQuantity(uuid: string, quantityToAdd: number): Promise<ProductEntity | null> {
+  async increaseQuantity(productUuid: string, quantityToAdd: number): Promise<ProductEntity | null> {
     const productRepo = getConnection().getRepository(ProductEntity);
-    const productModel = await productRepo.findOne({ where: { uuid: uuid } });
+    const productModel = await productRepo.findOne({ where: { uuid: productUuid } });
 
     if (productModel) {
       productModel.quantity += quantityToAdd;
@@ -99,9 +112,9 @@ export class ProductDaoImpl implements ProductDao {
     }
   }
 
-  async productQuantityDecrease(uuid: string, quantityToDecrease: number): Promise<ProductEntity | null> {
+  async productQuantityDecrease(productUuid: string, quantityToDecrease: number): Promise<ProductEntity | null> {
     const productRepo = getConnection().getRepository(ProductEntity);
-    const productModel = await productRepo.findOne({ where: { uuid: uuid } });
+    const productModel = await productRepo.findOne({ where: { productUuid: productUuid } });
 
     if (productModel) {
       productModel.quantity = productModel.quantity - quantityToDecrease;
@@ -115,15 +128,16 @@ export class ProductDaoImpl implements ProductDao {
   }
 
   async decreaseQuantity(quantityToReduce: any): Promise<any> {
-    // Loop through the array of UUIDs and quantities to reduce
+    console.log(quantityToReduce)
+    // Loop through the array of productUuids and quantities to reduce
     for (let item of quantityToReduce) {
-      let uuid = item.uuid;
+      let productUuid = item.productUuid;
       let quantity = item.quantity;
 
-      // Retrieve the product entity by UUID
+      // Retrieve the product entity by productUuid
       let product = await getConnection()
         .getRepository(ProductEntity)
-        .findOne({ where: { uuid: uuid } });
+        .findOne({ where: { uuid: productUuid } });
 
       if (product) {
         if (product.quantity >= quantity) {
@@ -136,7 +150,7 @@ export class ProductDaoImpl implements ProductDao {
           );
         }
       } else {
-        throw new Error(`Product with UUID - ${uuid} not found`);
+        throw new Error(`Product with productUuid - ${productUuid} not found`);
       }
     }
   }

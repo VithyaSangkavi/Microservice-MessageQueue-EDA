@@ -26,4 +26,5 @@ export class OrderItemsEntity {
   @ManyToOne(()=> OrderEntity, (order) => order.orderItems)
   @JoinColumn({ name: "orderId" })
   order: OrderEntity;
+  uuid: string;
 }

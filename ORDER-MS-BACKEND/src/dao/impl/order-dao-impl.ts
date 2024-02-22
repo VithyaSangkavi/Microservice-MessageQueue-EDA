@@ -14,53 +14,94 @@ import { OrderStatus } from "../../enum/orderStatus";
  * contain crud method
  */
 export class OrderDaoImpl implements OrderDao {
-  
-  // async save(orderDto: OrderDto, orderItemsDto: OrderItemsDto[]): Promise<any> {
-  //   let orderRepo = getConnection().getRepository(OrderEntity);
-  //   let orderItemsRepo = getConnection().getRepository(OrderItemsEntity);
 
-  //   let orderModel = new OrderEntity();
-  //   orderModel.status = Status.Online;
-  //   this.prepareOrderModel(orderModel, orderDto);
 
-  //   let savedOrder = await orderRepo.save(orderModel);
-
-  //   let savedOrderItems = [];
-
-  //   for (let orderItemDto of orderItemsDto) {
-  //     let orderItemsModel = new OrderItemsEntity();
-  //     orderItemsModel.status = Status.Online;
-  //     this.prepareOrderItemsModel(orderItemsModel, orderItemDto);
-  //     orderItemsModel.order = savedOrder;
-
-  //     let savedOrderItem = await orderItemsRepo.save(orderItemsModel);
-  //     savedOrderItems.push(savedOrderItem);
-  //   }
-
-  //   return { savedOrder, savedOrderItems };
-  // }
-
-  async save(orderDto: OrderDto, orderItemsDto: OrderItemsDto): Promise<any> {
+  async save(orderDto: OrderDto, orderItemsDto: OrderItemsDto[]): Promise<any> {
     let orderRepo = getConnection().getRepository(OrderEntity);
     let orderItemsRepo = getConnection().getRepository(OrderItemsEntity);
 
     let orderModel = new OrderEntity();
-    let orderItemsModel = new OrderItemsEntity();
 
     orderModel.status = Status.Online;
-    orderItemsModel.status = Status.Online;
 
-    this.prepareOrderModel(orderModel, orderDto, orderItemsModel, orderItemsDto);
+    await this.prepareOrderModel1(orderModel, orderDto);
 
     let savedOrder = await orderRepo.save(orderModel);
 
-    orderItemsModel.order = savedOrder;
+    let savedOrderItems = [];
 
-    let savedOrderItems = await orderItemsRepo.save(orderItemsModel);
+    for (let orderItemDto of orderItemsDto) {
+      let orderItemsModel = new OrderItemsEntity();
+
+      orderItemsModel.status = Status.Online;
+      orderItemsModel.order = savedOrder;
+      await this.prepareOrderItemsModel(orderItemsModel, orderItemDto);
+
+      let savedOrderItem = await orderItemsRepo.save(orderItemsModel);
+      savedOrderItems.push(savedOrderItem);
+    }
 
     return { order: savedOrder, orderItems: savedOrderItems };
   }
 
+  async prepareOrderModel1(orderModel: OrderEntity, orderDto: OrderDto) {
+
+    orderModel.customerName = orderDto.getCustomerName()
+    orderModel.customerPhoneNumber = orderDto.getCustomerPhoneNumber()
+    orderModel.address = orderDto.getAddress()
+    orderModel.email = orderDto.getEmail();
+    orderModel.total = orderDto.getTotal()
+    orderModel.status = Status.Online;
+    orderModel.orderStatus = OrderStatus.Pending;
+    orderModel.createdDate = new Date();
+    orderModel.updatedDate = new Date();
+
+  }
+
+  async prepareOrderItemsModel(orderItemsModel: OrderItemsEntity, orderItemsDto: OrderItemsDto) {
+
+    orderItemsModel.quantity = orderItemsDto.getQuantity()
+    orderItemsModel.status = Status.Online;
+    orderItemsModel.productUuid = orderItemsDto.getProductUuid();
+    orderItemsModel.createdDate = new Date();
+    orderItemsModel.updatedDate = new Date();
+  }
+
+
+
+
+  async findAllOrders(): Promise<any> {
+    try {
+      const orders = await getConnection()
+        .getRepository(OrderEntity)
+        .createQueryBuilder("order")
+        .leftJoinAndSelect("order.orderItems", "orderItem")
+        .orderBy("CASE WHEN order.status = 'online' THEN 0 ELSE 1 END, order.createdDate", "DESC")
+        .getMany();
+
+      return orders;
+    } catch (error) {
+      throw new Error(`Error fetching orders: ${error.message}`);
+    }
+  }
+
+
+
+  async  viewOrderItem(orderId: number): Promise<any[]> {
+    try {
+      const orderItemsRepository = getConnection().getRepository(OrderItemsEntity);
+      const orderItems = await orderItemsRepository.find({
+        where: { order: { id: orderId } },
+        select: ["productUuid", "quantity"],
+      });
+  
+      console.log(orderItems);
+  
+      return orderItems;
+    } catch (error) {
+      throw new Error(`Error fetching order items: ${error.message}`);
+    }
+  }
 
   async cancel(orderId: number): Promise<any> {
 
@@ -84,7 +125,7 @@ export class OrderDaoImpl implements OrderDao {
       return null;
     }
   }
-  
+
   async updateOrderStatus(orderId: number): Promise<OrderEntity> {
     let orderRepo = getConnection().getRepository(OrderEntity);
     let order = await orderRepo.findOne(orderId, { relations: ["orderItems"] });
@@ -110,29 +151,6 @@ export class OrderDaoImpl implements OrderDao {
       return null;
     }
   }
-
-  // async prepareOrderModel(orderModel: OrderEntity, orderDto: OrderDto) {
-
-  //   orderModel.customerName = orderDto.getCustomerName()
-  //   orderModel.customerPhoneNumber = orderDto.getCustomerPhoneNumber()
-  //   orderModel.address = orderDto.getAddress()
-  //   orderModel.email = orderDto.getEmail();
-  //   orderModel.total = orderDto.getTotal()
-  //   orderModel.status = Status.Online;
-  //   orderModel.orderStatus = OrderStatus.Pending;
-  //   orderModel.createdDate = new Date();
-  //   orderModel.updatedDate = new Date();
-    
-  // }
-
-  // async prepareOrderItemsModel(orderItemsModel: OrderItemsEntity, orderItemsDto: OrderItemsDto) {
-
-  //   orderItemsModel.quantity = orderItemsDto.getQuantity()
-  //   orderItemsModel.status = Status.Online;
-  //   orderItemsModel.productUuid = orderItemsDto.getUuid();
-  //   orderItemsModel.createdDate = new Date();
-  //   orderItemsModel.updatedDate = new Date();
-  // }
 
   async findAll(orderDto: OrderDto, orderItemsDto: OrderItemsDto): Promise<any[]> {
     let orderRepo = getConnection().getRepository(OrderEntity);

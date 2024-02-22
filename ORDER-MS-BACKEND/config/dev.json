@@ -6,7 +6,7 @@
   "db": {
     "host": "localhost",
     "userName": "root",
-    "password": "Vithya24",
+    "password": "1234",
     "db":"order_db",
     "port":"3306"
   },
