@@ -134,6 +134,21 @@ export class OrderDaoImpl implements OrderDao {
   //   orderItemsModel.updatedDate = new Date();
   // }
 
+  async findAll(orderDto: OrderDto, orderItemsDto: OrderItemsDto): Promise<any[]> {
+    let orderRepo = getConnection().getRepository(OrderEntity);
+
+    const query = orderRepo
+      .createQueryBuilder("order")
+      .leftJoinAndSelect("order.orderItems", "orderItems")
+      .where("order.status = :order_status", {
+        order_status: Status.Online,
+      });
+
+    const orders = await query.getMany();
+
+    return orders;
+  }
+
   async prepareOrderModel(orderModel: OrderEntity, orderDto: OrderDto, orderItemsModel: OrderItemsEntity, orderItemsDto: OrderItemsDto) {
     orderModel.customerName = orderDto.getCustomerName()
     orderModel.customerPhoneNumber = orderDto.getCustomerPhoneNumber()

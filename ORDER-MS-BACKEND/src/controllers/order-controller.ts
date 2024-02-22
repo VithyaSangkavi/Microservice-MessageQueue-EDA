@@ -84,3 +84,19 @@ exports.confirmOrder = async (req: Request, res: Response, next: NextFunction) =
     next (error);
   }
 };
+
+exports.findAll = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    console.log('Reached the /order-find-all endpoint');
+    let orderDto = new OrderDto();
+    let orderItemsDto = new OrderItemsDto();
+    orderDto.filViaRequest(req.body);
+    orderItemsDto.filViaRequest(req.body);
+
+    let cr = await orderService.find(orderDto, orderItemsDto);
+
+    res.send(cr);
+  } catch (error) {
+    next(error);
+  }
+};

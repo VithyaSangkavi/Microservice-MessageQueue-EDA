@@ -8,4 +8,5 @@ export interface OrderDao {
   cancel(orderId: number): Promise<any>;
   updateOrderStatus(orderId: number): Promise<OrderEntity> ;
   confirmOrder(orderId: number): Promise<OrderEntity> ;
+  findAll(orderDto: OrderDto, orderItemsDto: OrderItemsDto): Promise<any[]>;
 }

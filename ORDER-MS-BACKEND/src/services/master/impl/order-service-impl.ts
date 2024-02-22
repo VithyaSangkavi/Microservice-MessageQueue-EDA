@@ -281,4 +281,31 @@ export class OrderServiceImpl implements OrderService {
     }
     return cr;
   }
+
+  async find(orderDto: OrderDto, orderItemsDto: OrderItemsDto): Promise<CommonResponse> {
+    let cr = new CommonResponse();
+    try {
+      // find department
+      let orders = await this.orderDao.findAll(orderDto, orderItemsDto);
+      let orderDtoList = new Array();
+      let orderItemsDtoList = new Array();
+
+      console.log('order -----------> ', orders)
+      for (const orderModel of orders) {
+        const orderItems = orderModel.orderItems;
+        console.log('inside loop order items: ', orderItems)
+        let orderDto = new OrderDto();
+        orderDto.filViaDbObject2(orderModel);
+        orderDtoList.push(orderDto);
+      }
+      
+      cr.setStatus(true);
+      cr.setExtra(orderDtoList);
+    } catch (error) {
+      cr.setStatus(false);
+      cr.setExtra(error);
+      ErrorHandlerSup.handleError(error);
+    }
+    return cr;
+  }
 }
