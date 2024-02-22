@@ -10,19 +10,35 @@ import { alertService } from '../../_services/alert.service';
 function DisplayOrders() {
 
   const [orders, setOrders] = useState([]);
-  const [customerNames, setCustomerNames] = useState([]);
+  const [orderId, setOrderId] = useState([]);
   const [selectedCustomer, setSelectedCustomer] = useState('');
+  const [orderItems, setOrderItems] = useState([]);
+  const [isExpanded, setIsExpanded] = useState({});
+  const [expandedOrderId, setExpandedOrderId] = useState(null)
 
-  useEffect(async () => {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:4001/service/master/order-find-all');
+        console.log('orders -> ', response.data.extra);
+        const orders = response.data.extra;
+        setOrders(orders);
 
-    const response = await axios.get('http://localhost:4001/service/master/order-find-all');
-    console.log('orders -> ', response.data.extra);
-    setOrders(response.data.extra);
+        const orderIds = orders.map(order => order.id);
+        setOrderId(orderIds);
 
-    const uniqueCustomerNames = [...new Set(response.data.extra.map(order => order.customerName))];
-    setCustomerNames(uniqueCustomerNames);
+        // Call ViewOrderItems for each order ID
+        orderIds.forEach(orderId => {
+          ViewOrderItems(orderId);
+        });
+      } catch (error) {
+        console.error('Error fetching orders:', error);
+      }
+    };
 
+    fetchData();
   }, []);
+
 
   const filterOrdersByCustomer = (customerName) => {
     setSelectedCustomer(customerName);
@@ -70,6 +86,36 @@ function DisplayOrders() {
     }
   };
 
+  const ViewOrderItems = async (orderId) => {
+    try {
+      if (expandedOrderId === orderId) {
+        setExpandedOrderId(null)
+        setIsExpanded(prevState => ({
+          ...prevState,
+          [orderId]: !prevState[orderId]
+        }));
+      } else {
+        setExpandedOrderId(orderId)
+        const response = await axios.get(`http://localhost:4001/service/master/viewOrderItem?orderId=${orderId}`);
+        if (response) {
+          console.log('Order view successfully');
+          setOrderItems(response.data.extra)
+          console.log(response.data.extra);
+          setIsExpanded(prevState => ({
+            ...prevState,
+            [orderId]: !prevState[orderId]
+          }));
+
+        } else {
+          console.error('Failed to view order');
+        }
+      }
+    } catch (error) {
+      console.error('Error view order:', error);
+
+    }
+  };
+
   return (
     <div>
       <Navbar />
@@ -85,14 +131,18 @@ function DisplayOrders() {
                   <p className="price">Total Amount- Rs.{order.total}</p>
                   <p className="price">Created Date - {order.createdDate}</p>
 
-                  <h5>Ordered Items:</h5>
-                  <ul>
-                    {order.orderItems.map(item => (
-                      <li key={item.id}>
-                        Product UUID: {item.productUuid}, Quantity: {item.quantity}
-                      </li>
-                    ))}
-                  </ul>
+                  <button className="view-button" onClick={() => ViewOrderItems(order.orderId)}>View Ordered Items</button> <br/>
+
+                  {isExpanded[order.orderId] && (
+                      <div style={{ marginBottom: '3%', marginTop: '3%',  backgroundColor: 'red', padding: '20px', backgroundColor: '#afdbe3', borderRadius: '10px', fontWeight: 'bold' }}>
+                        {orderItems.map((orderItem, index) => (
+                          <div key={index}>
+                            <p style={{ marginBottom: '0.5%' }}>{orderItem.quantity} x {orderItem.name} - Rs. {orderItem.quantity * orderItem.price}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
                   <button className="cancel-button" onClick={() => cancelOrder(order.orderId, order.orderStatus)}>Cancel Order</button>
                   <button className="checkout-button" onClick={() => proceedToCheckout(order.orderId, order.orderStatus)}>Proceed to Checkout</button>
                 </div>
