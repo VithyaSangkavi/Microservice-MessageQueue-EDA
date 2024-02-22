@@ -29,6 +29,7 @@ import adminOrderView from './components/admin_order_view/adminOrderView';
 
 import { loginAction } from './actions/auth/login_action';
 import { languageAction } from './actions/auth/login_action';
+import DisplayOrders from './components/view_order/display-orders';
 
 
 
@@ -103,21 +104,23 @@ class App extends React.Component {
           </div></div>
         )} />
 
-        <NavbarTop dmode={this.state.dmode} signedobj={this.props.signState} handleSignObj={this.handleSignObj} dmodeToggle={this.dmodeToggle}/>
-        <SidebarMenu dmode={this.state.dmode} signedobj={this.props.signState}/>
+        {/* <NavbarTop dmode={this.state.dmode} signedobj={this.props.signState} handleSignObj={this.handleSignObj} dmodeToggle={this.dmodeToggle}/>
+        <SidebarMenu dmode={this.state.dmode} signedobj={this.props.signState}/> */}
         <LazyLoading setProdList={this.props.setProdList}/>
         <Switch>
           <RoleBasedRouting path="/resetPassword"><ResetPassword /></RoleBasedRouting>
           <RoleBasedRouting path="/confirmation"><ConfirmationPassword /></RoleBasedRouting>
           <RoleBasedRouting path="/adminoderview"><adminOrderView /></RoleBasedRouting>
-
+          <RoleBasedRouting path="/displayOrders"><DisplayOrders /></RoleBasedRouting>
+          <RoleBasedRouting exact path="/displayProducts"><DisplayProducts/></RoleBasedRouting>
 
           <RoleBasedRouting path="/dashboard" exact roles={[usrRoles.CM]}><DashboardComponent/></RoleBasedRouting>
           <RoleBasedRouting path="/landing"><LandingPage handleLangObj={this.handleLangObj} langobj={this.props.langState}/></RoleBasedRouting>
-          <RoleBasedRouting exact path="/"><DisplayProducts langobj={this.props.langState} handleSignObj={this.handleSignObj}/></RoleBasedRouting>
+          <RoleBasedRouting exact path="/"><DisplayProducts/></RoleBasedRouting>
           <RoleBasedRouting><NoMatchComponent signedobj={this.props.signState} /></RoleBasedRouting>
 
-          <RoleBasedRouting exact path="/"><DisplayProducts langobj={this.props.langState} handleSignObj={this.handleSignObj}/></RoleBasedRouting>
+          {/* <RoleBasedRouting exact path="/"><DisplayProducts langobj={this.props.langState} handleSignObj={this.handleSignObj}/></RoleBasedRouting> */}
+          <RoleBasedRouting exact path="/"><DisplayProducts/></RoleBasedRouting>
         </Switch>
         
       </div> 

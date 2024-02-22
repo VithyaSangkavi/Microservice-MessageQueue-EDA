@@ -7,8 +7,8 @@ function Navbar() {
             <ul className="nav-links">
                 <li><a href="/adminoderview">Admin</a></li>
                 <li><a href="#">Home</a></li>
-                <li><a href="#">Products</a></li>
-                <li><a href="#">Orders</a></li>
+                <li><a href="/displayProducts">Products</a></li>
+                <li><a href="/displayOrders">Orders</a></li>
             </ul>
         </nav>
     );
