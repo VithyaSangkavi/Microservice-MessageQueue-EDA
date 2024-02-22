@@ -118,13 +118,12 @@ class App extends React.Component {
           <RoleBasedRouting path="/dashboard" exact roles={[usrRoles.CM]}><DashboardComponent/></RoleBasedRouting>
           <RoleBasedRouting path="/landing"><LandingPage handleLangObj={this.handleLangObj} langobj={this.props.langState}/></RoleBasedRouting>
           <RoleBasedRouting exact path="/"><DisplayProducts/></RoleBasedRouting>
-          <RoleBasedRouting><NoMatchComponent signedobj={this.props.signState} /></RoleBasedRouting>
-
-          {/* <RoleBasedRouting exact path="/"><DisplayProducts langobj={this.props.langState} handleSignObj={this.handleSignObj}/></RoleBasedRouting> */}
-          <RoleBasedRouting exact path="/"><DisplayProducts/></RoleBasedRouting>
           <RoleBasedRouting path="/adminoderview"><AdminOrderView /></RoleBasedRouting>
           <RoleBasedRouting path="/displayproducts"><DisplayProducts /></RoleBasedRouting>
           <RoleBasedRouting path="/displayOrders"><DisplayOrders /></RoleBasedRouting>
+          <RoleBasedRouting><NoMatchComponent signedobj={this.props.signState} /></RoleBasedRouting>
+
+          {/* <RoleBasedRouting exact path="/"><DisplayProducts langobj={this.props.langState} handleSignObj={this.handleSignObj}/></RoleBasedRouting> */}
 
           <RoleBasedRouting path="/dashboard" exact roles={[usrRoles.CM]}><DashboardComponent/></RoleBasedRouting>
          
