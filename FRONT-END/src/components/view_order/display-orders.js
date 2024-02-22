@@ -10,35 +10,18 @@ import { alertService } from '../../_services/alert.service';
 function DisplayOrders() {
 
   const [orders, setOrders] = useState([]);
-  const [orderId, setOrderId] = useState([]);
   const [selectedCustomer, setSelectedCustomer] = useState('');
   const [orderItems, setOrderItems] = useState([]);
   const [isExpanded, setIsExpanded] = useState({});
   const [expandedOrderId, setExpandedOrderId] = useState(null)
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:4001/service/master/order-find-all');
-        console.log('orders -> ', response.data.extra);
-        const orders = response.data.extra;
-        setOrders(orders);
+  useEffect(async () => {
 
-        const orderIds = orders.map(order => order.id);
-        setOrderId(orderIds);
+    const response = await axios.get('http://localhost:4001/service/master/order-find-all');
+    console.log('orders -> ', response.data.extra);
+    setOrders(response.data.extra);
 
-        // Call ViewOrderItems for each order ID
-        orderIds.forEach(orderId => {
-          ViewOrderItems(orderId);
-        });
-      } catch (error) {
-        console.error('Error fetching orders:', error);
-      }
-    };
-
-    fetchData();
   }, []);
-
 
   const filterOrdersByCustomer = (customerName) => {
     setSelectedCustomer(customerName);
@@ -126,7 +109,7 @@ function DisplayOrders() {
             {Array.isArray(orders) && orders.map(order => (
               <div key={order.orderId} className="order-card">
                 <div className="order-details">
-                  <h3> Order Id: {order.orderId}</h3>
+                  <h4> Order Id: {order.orderId}</h4>
                   <span className={`status ${order.orderStatus.toLowerCase()}`}>{order.orderStatus}</span>
                   <p className="price">Total Amount- Rs.{order.total}</p>
                   <p className="price">Created Date - {order.createdDate}</p>
