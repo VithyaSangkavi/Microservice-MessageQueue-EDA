@@ -38,14 +38,18 @@ function DisplayOrders() {
       return;
     }
 
-    try {
-      const response = await axios.post(`http://localhost:4001/service/master/cancelOrder?orderId=${orderId}`);
-      setOrders(response.data.extra);
-      alert('Order canceled successfully.');
-      window.location.reload();
-    } catch (error) {
-      console.error('Error canceling order:', error);
-      alert('Failed to cancel order. Please try again later.');
+    const confirmCancel = window.confirm('Are you sure you want to cancel this order?');
+
+    if (confirmCancel) {
+      try {
+        const response = await axios.post(`http://localhost:4001/service/master/cancelOrder?orderId=${orderId}`);
+        setOrders(response.data.extra);
+        alert('Order canceled successfully.');
+        window.location.reload();
+      } catch (error) {
+        console.error('Error canceling order:', error);
+        alert('Failed to cancel order. Please try again later.');
+      }
     }
   };
 
@@ -114,17 +118,17 @@ function DisplayOrders() {
                   <p className="price">Total Amount- Rs.{order.total}</p>
                   <p className="price">Created Date - {order.createdDate}</p>
 
-                  <button className="view-button" onClick={() => ViewOrderItems(order.orderId)}>View Ordered Items</button> <br/>
+                  <button className="view-button" onClick={() => ViewOrderItems(order.orderId)}>View Ordered Items</button> <br />
 
                   {isExpanded[order.orderId] && (
-                      <div style={{ marginBottom: '3%', marginTop: '3%',  backgroundColor: 'red', padding: '20px', backgroundColor: '#afdbe3', borderRadius: '10px', fontWeight: 'bold' }}>
-                        {orderItems.map((orderItem, index) => (
-                          <div key={index}>
-                            <p style={{ marginBottom: '0.5%' }}>{orderItem.quantity} x {orderItem.name} - Rs. {orderItem.quantity * orderItem.price}</p>
-                          </div>
-                        ))}
-                      </div>
-                    )}
+                    <div style={{ marginBottom: '3%', marginTop: '3%', backgroundColor: 'red', padding: '20px', backgroundColor: '#afdbe3', borderRadius: '10px', fontWeight: 'bold' }}>
+                      {orderItems.map((orderItem, index) => (
+                        <div key={index}>
+                          <p style={{ marginBottom: '0.5%' }}>{orderItem.quantity} x {orderItem.name} - Rs. {orderItem.quantity * orderItem.price}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
 
                   <button className="cancel-button" onClick={() => cancelOrder(order.orderId, order.orderStatus)}>Cancel Order</button>
                   <button className="checkout-button" onClick={() => proceedToCheckout(order.orderId, order.orderStatus)}>Proceed to Checkout</button>

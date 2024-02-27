@@ -114,7 +114,7 @@ export class ProductDaoImpl implements ProductDao {
 
   async productQuantityDecrease(productUuid: string, quantityToDecrease: number): Promise<ProductEntity | null> {
     const productRepo = getConnection().getRepository(ProductEntity);
-    const productModel = await productRepo.findOne({ where: { productUuid: productUuid } });
+    const productModel = await productRepo.findOne({ where: { uuid: productUuid } });
 
     if (productModel) {
       productModel.quantity = productModel.quantity - quantityToDecrease;

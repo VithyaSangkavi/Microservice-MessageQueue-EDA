@@ -3124,3 +3124,159 @@
 [35m[39m
 2024-02-22 10:59:34:5934 [35mhttp[39m: [35mGET /service/master/product-find-by-uuid?uuids=1,2,3 200 260 - 5.945 ms[39m
 [35m[39m
+2024-02-22 11:52:11:5211 [35mhttp[39m: [35mPUT /service/master/product-decrease/1 200 83 - 44.006 ms[39m
+[35m[39m
+2024-02-22 11:52:23:5223 [35mhttp[39m: [35mGET /service/master/product-find-all 200 1353 - 7.222 ms[39m
+[35m[39m
+2024-02-22 11:53:34:5334 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 12.924 ms[39m
+[35m[39m
+2024-02-22 11:53:36:5336 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 5.223 ms[39m
+[35m[39m
+2024-02-22 11:54:07:547 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 2.845 ms[39m
+[35m[39m
+2024-02-22 11:54:22:5422 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 3.068 ms[39m
+[35m[39m
+2024-02-22 11:54:24:5424 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 3.944 ms[39m
+[35m[39m
+2024-02-22 11:54:28:5428 [35mhttp[39m: [35mPUT /service/master/product-decrease/3 200 83 - 30.179 ms[39m
+[35m[39m
+2024-02-22 11:54:32:5432 [35mhttp[39m: [35mGET /service/master/product-find-all 200 1353 - 2.426 ms[39m
+[35m[39m
+2024-02-22 11:54:44:5444 [35mhttp[39m: [35mPUT /service/master/product-increase/1 200 83 - 12.790 ms[39m
+[35m[39m
+2024-02-22 11:54:44:5444 [35mhttp[39m: [35mPUT /service/master/product-increase/2 200 83 - 20.564 ms[39m
+[35m[39m
+2024-02-22 11:54:47:5447 [35mhttp[39m: [35mGET /service/master/product-find-all 200 1353 - 3.102 ms[39m
+[35m[39m
+2024-02-22 11:55:18:5518 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 2.974 ms[39m
+[35m[39m
+2024-02-22 11:55:47:5547 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 2.596 ms[39m
+[35m[39m
+2024-02-22 11:55:51:5551 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 2.939 ms[39m
+[35m[39m
+2024-02-22 11:56:21:5621 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 5.869 ms[39m
+[35m[39m
+2024-02-22 11:56:36:5636 [35mhttp[39m: [35mPUT /service/master/product-increase/1 200 83 - 15.208 ms[39m
+[35m[39m
+2024-02-22 11:56:36:5636 [35mhttp[39m: [35mPUT /service/master/product-increase/2 200 83 - 16.232 ms[39m
+[35m[39m
+2024-02-22 11:56:41:5641 [35mhttp[39m: [35mGET /service/master/product-find-all 200 1353 - 3.321 ms[39m
+[35m[39m
+2024-02-22 11:56:57:5657 [35mhttp[39m: [35mPUT /service/master/product-decrease/3 200 83 - 12.274 ms[39m
+[35m[39m
+2024-02-22 11:57:04:574 [35mhttp[39m: [35mGET /service/master/product-find-all 200 1353 - 6.991 ms[39m
+[35m[39m
+2024-02-22 11:57:35:5735 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 3.209 ms[39m
+[35m[39m
+2024-02-22 11:58:05:585 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 4.537 ms[39m
+[35m[39m
+2024-02-22 11:58:35:5835 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 3.770 ms[39m
+[35m[39m
+2024-02-22 11:59:05:595 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 5.544 ms[39m
+[35m[39m
+2024-02-22 11:59:51:5951 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 2.489 ms[39m
+[35m[39m
+2024-02-22 12:00:04:04 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 3.568 ms[39m
+[35m[39m
+2024-02-22 12:00:06:06 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 2.408 ms[39m
+[35m[39m
+2024-02-22 12:00:13:013 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 3.031 ms[39m
+[35m[39m
+2024-02-22 12:00:34:034 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 7.548 ms[39m
+[35m[39m
+2024-02-22 12:00:36:036 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 2.875 ms[39m
+[35m[39m
+2024-02-22 12:00:40:040 [35mhttp[39m: [35mGET /service/master/product-find-by-uuid?uuids=2,1 200 185 - 17.628 ms[39m
+[35m[39m
+2024-02-22 12:00:43:043 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 3.139 ms[39m
+[35m[39m
+2024-02-22 12:00:43:043 [35mhttp[39m: [35mGET /service/master/product-find-by-uuid?uuids=3 200 120 - 9.784 ms[39m
+[35m[39m
+2024-02-22 12:00:49:049 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 15.318 ms[39m
+[35m[39m
+2024-02-22 12:01:00:10 [35mhttp[39m: [35mPUT /service/master/product-increase/1 200 83 - 31.192 ms[39m
+[35m[39m
+2024-02-22 12:01:00:10 [35mhttp[39m: [35mPUT /service/master/product-increase/2 200 83 - 49.734 ms[39m
+[35m[39m
+2024-02-22 12:01:06:16 [35mhttp[39m: [35mGET /service/master/product-find-all 200 1353 - 7.085 ms[39m
+[35m[39m
+2024-02-22 12:01:18:118 [35mhttp[39m: [35mPUT /service/master/product-decrease/3 200 83 - 20.403 ms[39m
+[35m[39m
+2024-02-22 12:01:25:125 [35mhttp[39m: [35mGET /service/master/product-find-all 200 1353 - 3.100 ms[39m
+[35m[39m
+2024-02-22 12:01:55:155 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 2.348 ms[39m
+[35m[39m
+2024-02-22 12:02:25:225 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 4.062 ms[39m
+[35m[39m
+2024-02-22 12:02:55:255 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 6.497 ms[39m
+[35m[39m
+2024-02-22 12:03:25:325 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 4.545 ms[39m
+[35m[39m
+2024-02-22 12:03:55:355 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 3.633 ms[39m
+[35m[39m
+2024-02-22 12:04:25:425 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 2.951 ms[39m
+[35m[39m
+2024-02-22 12:04:55:455 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 2.912 ms[39m
+[35m[39m
+2024-02-22 12:05:25:525 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 2.565 ms[39m
+[35m[39m
+2024-02-22 12:05:56:556 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 3.826 ms[39m
+[35m[39m
+2024-02-22 12:06:26:626 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 2.352 ms[39m
+[35m[39m
+2024-02-22 12:06:56:656 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 3.677 ms[39m
+[35m[39m
+2024-02-22 12:07:51:751 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 2.991 ms[39m
+[35m[39m
+2024-02-22 12:08:51:851 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 20.044 ms[39m
+[35m[39m
+2024-02-22 12:09:51:951 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 2.625 ms[39m
+[35m[39m
+2024-02-22 12:10:51:1051 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 3.040 ms[39m
+[35m[39m
+2024-02-22 12:11:51:1151 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 3.544 ms[39m
+[35m[39m
+2024-02-22 12:12:51:1251 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 5.626 ms[39m
+[35m[39m
+2024-02-22 12:13:51:1351 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 5.108 ms[39m
+[35m[39m
+2024-02-22 12:14:51:1451 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 3.006 ms[39m
+[35m[39m
+2024-02-22 12:15:51:1551 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 3.339 ms[39m
+[35m[39m
+2024-02-22 12:16:51:1651 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 3.165 ms[39m
+[35m[39m
+2024-02-22 12:17:51:1751 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 11.213 ms[39m
+[35m[39m
+2024-02-22 12:18:51:1851 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 23.245 ms[39m
+[35m[39m
+2024-02-22 12:19:03:193 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 10.849 ms[39m
+[35m[39m
+2024-02-22 12:19:26:1926 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 4.541 ms[39m
+[35m[39m
+2024-02-22 12:19:56:1956 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 3.331 ms[39m
+[35m[39m
+2024-02-22 12:20:51:2051 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 9.264 ms[39m
+[35m[39m
+2024-02-22 12:21:51:2151 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 2.971 ms[39m
+[35m[39m
+2024-02-22 12:22:51:2251 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 3.732 ms[39m
+[35m[39m
+2024-02-22 12:23:51:2351 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 3.244 ms[39m
+[35m[39m
+2024-02-22 12:24:51:2451 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 2.950 ms[39m
+[35m[39m
+2024-02-22 12:25:51:2551 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 10.704 ms[39m
+[35m[39m
+2024-02-22 12:26:51:2651 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 4.481 ms[39m
+[35m[39m
+2024-02-22 12:27:51:2751 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 5.511 ms[39m
+[35m[39m
+2024-02-22 12:28:51:2851 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 7.210 ms[39m
+[35m[39m
+2024-02-22 12:29:51:2951 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 5.560 ms[39m
+[35m[39m
+2024-02-22 12:30:51:3051 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 15.061 ms[39m
+[35m[39m
+2024-02-22 12:31:51:3151 [35mhttp[39m: [35mGET /service/master/product-find-all 304 - - 29.305 ms[39m
+[35m[39m
