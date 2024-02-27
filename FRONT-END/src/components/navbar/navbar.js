@@ -1,15 +1,38 @@
 import React from 'react';
 import './navbar.css';
+import Alerts from '../common_layouts/Alerts';
+import { useState } from 'react';
+import { Nav } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
+
+
+
 
 function Navbar() {
+
+    const [activeKey, setActiveKey] = useState('/');
+
     return (
-        <nav className="navbar">
-            <ul className="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Products</a></li>
-                <li><a href="#">Orders</a></li>
-            </ul>
-        </nav>
+        <>
+            <Alerts />
+
+            <Nav variant='pills' className="navbar custom-pill">
+                <Nav.Item>
+                    <NavLink exact to="/" className="nav-link" activeClassName="active">Home</NavLink>
+                </Nav.Item>
+                <Nav.Item>
+                    <NavLink to="/adminoderview" className="nav-link" activeClassName="active">Admin</NavLink>
+                </Nav.Item>
+                <Nav.Item>
+                    <NavLink to="/displayproducts" className="nav-link" activeClassName="active">Products</NavLink>
+                </Nav.Item>
+                <Nav.Item>
+                    <NavLink to="/displayOrders" className="nav-link" activeClassName="active">Customer</NavLink>
+                </Nav.Item>
+            </Nav>
+
+
+        </>
     );
 }
 

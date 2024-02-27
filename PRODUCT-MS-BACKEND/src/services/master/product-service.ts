@@ -7,8 +7,10 @@ export interface ProductService {
   delete(productDto: ProductDto): Promise<CommonResponse>;
   find(productDto: ProductDto): Promise<CommonResponse>;
   findById(productId: number): Promise<CommonResponse>;
-  decreaseProductQuantity(quantityToReduce: any): Promise<CommonResponse>;
+  findByUuids(uuids: string[]): Promise<CommonResponse>;
   increaseProductQuantity(uuid: string, quantityToAdd: number): Promise<CommonResponse>;
+  decreaseProductQuantity(uuid: string, quantityToDecrease: number): Promise<CommonResponse>;
+  //decreaseProductQuantity(quantityToReduce: any): Promise<CommonResponse>;
   productQueue(channel: any): Promise<CommonResponse>
   emailQueue(channel: any): Promise<CommonResponse>
   // cancelOrdersfromAdmin();

@@ -1,6 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, Table } from "typeorm";
 import { Status } from "../../enum/status";
 import { OrderItemsEntity } from "./order-items-entity";
+import { OrderStatus } from "../../enum/orderStatus";
 
 @Entity({
   name: "order",
@@ -19,6 +20,9 @@ export class OrderEntity {
   address: string;
 
   @Column()
+  email: string;
+
+  @Column()
   createdDate: Date;
 
   @Column()
@@ -30,6 +34,10 @@ export class OrderEntity {
   @Column({ type: "enum" ,enum:Status,default:Status.Online})
   status: Status;
 
+  @Column({ type: "enum", enum:OrderStatus, default: OrderStatus.Pending})
+  orderStatus: OrderStatus
+
   @OneToMany(() => OrderItemsEntity, (orderItems) => orderItems.order)
   orderItems: OrderItemsEntity[];
+  productUuid: any;
 }

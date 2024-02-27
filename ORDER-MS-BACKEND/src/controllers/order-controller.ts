@@ -44,3 +44,65 @@ exports.cancel = async (req: Request, res: Response, next: NextFunction) => {
     next(error);
   }
 };
+
+exports.fetchOrders = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    let cr = await orderService.fetchAllOrders();
+    res.send(cr);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.viewOrderItem = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+
+    let orderId = req.query.orderId;
+
+    let cr = await orderService.viewOrderItem(Number(orderId));
+    res.send(cr);
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+exports.updateOrderStatus = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    let orderId = req.params.orderId;
+
+    let cr = await orderService.updateOrderStatus(Number(orderId));
+
+    res.send(cr);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.confirmOrder = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    let orderId = req.query.orderId;
+
+    let cr = await orderService.confirmOrder(Number(orderId));
+
+    res.send(cr);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.findAll = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    console.log('Reached the /order-find-all endpoint');
+    let orderDto = new OrderDto();
+    let orderItemsDto = new OrderItemsDto();
+    orderDto.filViaRequest(req.body);
+    orderItemsDto.filViaRequest(req.body);
+
+    let cr = await orderService.find(orderDto, orderItemsDto);
+
+    res.send(cr);
+  } catch (error) {
+    next(error);
+  }
+};
